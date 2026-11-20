@@ -1,0 +1,7 @@
+{
+  "total": 600,
+  "text_likely_unverified": 478,
+  "requires_source_check": 88,
+  "source_reference_only": 34,
+  "note": "いずれも実HTML/画像での全面照合は未実施。source_reference_onlyは元サイトを別タブで開いて回答する方式。"
+}
