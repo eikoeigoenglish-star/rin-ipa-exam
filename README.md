@@ -1,23 +1,23 @@
-# IPA高度試験対策 | GitHub Pages 対応 V5.3
+# IPA高度試験対策 | GitHub Pages 対応 V5.4
 
-このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。**共通A-1のみ実装済み（600問）**で、残る4ページは「準備中」です。見た目・既存A-1学習ロジックはV5.2を基本的に維持しています。
+このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。**共通A-1（600問）とSC A-2（500問）**を実装済み。残る3ページは「準備中」です。見た目・既存A-1学習ロジックはV5.2を基本的に維持しています。
 
-## GitHub Pagesへの公開（リポジトリ `ipa-exam`）
+## GitHub Pagesへの公開（リポジトリ `rin-ipa-exam`）
 
-ZIPの**`ipa-exam` フォルダの中身を**、GitHubリポジトリのルート（`main` ブランチ）に配置してください。`ipa-exam/ipa-exam/index.html` のように二重にしないでください。
+ZIPの**`rin-ipa-exam` フォルダの中身を**、GitHubリポジトリのルート（`main` ブランチ）に配置してください。`rin-ipa-exam/rin-ipa-exam/index.html` のように二重にしないでください。
 
 GitHubの **Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)` → Save** を選びます。
 
 公開予定URL（GitHubユーザー名が `eikoeigoenglish-star` の場合）：
 
-- トップ: `https://eikoeigoenglish-star.github.io/ipa-exam/`
-- 共通A-1: `https://eikoeigoenglish-star.github.io/ipa-exam/a1/`
-- SC A-2: `https://eikoeigoenglish-star.github.io/ipa-exam/sc/a2.html`（準備中）
-- SC B: `https://eikoeigoenglish-star.github.io/ipa-exam/sc/b.html`（準備中）
-- PD データ・AI A-2: `https://eikoeigoenglish-star.github.io/ipa-exam/pd/data-ai/a2.html`（準備中）
-- PD データ・AI B: `https://eikoeigoenglish-star.github.io/ipa-exam/pd/data-ai/b.html`（準備中）
+- トップ: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/`
+- 共通A-1: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/a1/`
+- SC A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/a2.html`（500問・利用可能）
+- SC B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/b.html`（準備中）
+- PD データ・AI A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/a2.html`（準備中）
+- PD データ・AI B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/b.html`（準備中）
 
-GitHub Pagesは静的配信のみ。PythonのスクレイパーはPagesでは動作せず、ローカルでのデータ整備用です。**URLを `/ipa-exam/` から始める絶対パスにせず相対パスで記述**しているため、開発時とPagesのサブディレクトリ配信で同じ構成が使えます。
+GitHub Pagesは静的配信のみ。PythonのスクレイパーはPagesでは動作せず、ローカルでのデータ整備用です。**URLを `/rin-ipa-exam/` から始める絶対パスにせず相対パスで記述**しているため、開発時とPagesのサブディレクトリ配信で同じ構成が使えます。
 
 ## ディレクトリ構成
 
@@ -25,7 +25,7 @@ GitHub Pagesは静的配信のみ。PythonのスクレイパーはPagesでは動
 ipa-exam/
 ├── index.html                 # 全試験へのトップ
 ├── a1/index.html              # 共通A-1（完成済み）
-├── sc/a2.html                 # SC A-2（準備中）
+├── sc/a2.html                 # SC A-2（500問）
 ├── sc/b.html                  # SC B（準備中）
 ├── pd/data-ai/a2.html         # PDデータ・AI A-2（準備中）
 ├── pd/data-ai/b.html          # PDデータ・AI B（準備中）
@@ -37,7 +37,7 @@ ipa-exam/
 ├── data/
 │   ├── a1/questions.json      # A-1 20回×30問＝600件
 │   ├── a1/source-manifest.json
-│   ├── sc-a2/                 # 将来の問題置き場
+│   ├── sc-a2/questions.json    # SC A-2 20回×25問＝500問
 │   ├── sc-b/
 │   ├── pd-ai-a2/
 │   └── pd-ai-b/
@@ -96,6 +96,9 @@ node --check assets/app.js
 既存ポータル `rin-webapp-gallery` の CERTIFICATION 欄に、次の項目を追加します。
 
 - 表示名：**IPA高度試験対策**
-- URL：`https://eikoeigoenglish-star.github.io/ipa-exam/`
+- URL：`https://eikoeigoenglish-star.github.io/rin-ipa-exam/`
 
 **本ZIPは既存ポータルのリポジトリを変更しません。**
+
+
+詳細：`README_SC_A2_IMPORTED.md` を参照。

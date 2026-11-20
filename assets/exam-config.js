@@ -6,9 +6,16 @@ window.IPA_EXAM_CONFIG = Object.freeze({
     enabled: true,
     questionUrl: "../data/a1/questions.json",
     expectedQuestionCount: 600,
+    maxQuestionNumber: 30,
+    sourceExamLabel: "高度試験 午前Ⅰ",
     storageKey: "ipa-a1-common-progress-v1" // Keep V5.2 progress intact on the same origin.
   }),
-  scA2: Object.freeze({ enabled: false, dataDirectory: "data/sc-a2/" }),
+  scA2: Object.freeze({
+    title: "SC 科目A-2", enabled: true,
+    questionUrl: "../data/sc-a2/questions.json", expectedQuestionCount: 500,
+    maxQuestionNumber: 25, sourceExamLabel: "SC 午前Ⅱ",
+    storageKey: "ipa-sc-a2-progress-v1"
+  }),
   scB: Object.freeze({ enabled: false, dataDirectory: "data/sc-b/" }),
   pdAiA2: Object.freeze({ enabled: false, dataDirectory: "data/pd-ai-a2/" }),
   pdAiB: Object.freeze({ enabled: false, dataDirectory: "data/pd-ai-b/" })

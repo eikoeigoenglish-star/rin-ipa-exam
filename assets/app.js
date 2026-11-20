@@ -1,10 +1,11 @@
 // Kyoto Kentei training UI: exam/streak/long-press/quiz workflows adapted for IPA.
 // SC and Professional A-1 share one question bank and LocalStorage progress.
 "use strict";
-const A1_CONFIG = window.IPA_EXAM_CONFIG?.a1 || {};
-const STORAGE_KEY = A1_CONFIG.storageKey || "ipa-a1-common-progress-v1";
-const EXPECTED_QUESTION_COUNT = A1_CONFIG.expectedQuestionCount || 600;
-const APP_VERSION = "5.3.0";
+const PAGE_CONFIG = window.IPA_EXAM_CONFIG?.[window.IPA_ACTIVE_EXAM || "a1"] || {};
+const STORAGE_KEY = PAGE_CONFIG.storageKey || "ipa-a1-common-progress-v1";
+const EXPECTED_QUESTION_COUNT = PAGE_CONFIG.expectedQuestionCount || 600;
+const MAX_QUESTION_NUMBER = PAGE_CONFIG.maxQuestionNumber || 30;
+const APP_VERSION = "5.4.0";
 const EXAM_LONG_PRESS_MS = 3000;
 const MARKERS = ["1", "2", "3", "4"];
 const LABELS = ["ア", "イ", "ウ", "エ"];
@@ -45,7 +46,7 @@ function showScreen(id) {
   window.scrollTo(0, 0);
 }
 function examLabel(exam) { return `${exam.slice(0, 4)}年${exam.endsWith("s") ? "春" : "秋"}`; }
-function sourceLabel(q) { return `${q.year}年度 ${q.season === "spring" ? "春期" : "秋期"} 高度試験 午前Ⅰ 問${q.questionNumber}`; }
+function sourceLabel(q) { return `${q.year}年度 ${q.season === "spring" ? "春期" : "秋期"} ${PAGE_CONFIG.sourceExamLabel || "高度試験 午前Ⅰ"} 問${q.questionNumber}`; }
 function questionLabel(q) { return `${examLabel(q.exam)}・問${q.questionNumber}`; }
 function stageCounts(items = state.allQuestions) {
   const counts = {new:0, miss:0, hit:0, double:0, triple:0};
@@ -149,7 +150,7 @@ function updateAvailability() {
   el("start-btn").disabled = state.allQuestions.length === 0;
 }
 // 出題順は選択した年度・期および問題番号・進捗状態で絞り込んだ後に適用する。
-// 同一年の秋→春、各回は問1→問30。未出題のみなら既習問を自然にスキップする。
+// 同一年の秋→春、各回は番号順。未出題のみなら既習問を自然にスキップする。
 function orderQuestionPool(pool, mode) {
   if (mode === "random") return shuffle(pool);
   return [...pool].sort((a, b) =>
@@ -182,6 +183,21 @@ function sourceAnchor(q, label="出典の問題ページを開く") {
   a.textContent=label;
   return a;
 }
+// SCサイトが公開する画像URLを参照します。外部画像が表示できなければ出典リンクから確認します。
+function appendSourceImages(parent, urls, label) {
+  if (!Array.isArray(urls)) return;
+  urls.forEach((url, i) => {
+    if (typeof url !== "string" || !/^https:\/\/www\.sc-siken\.com\/kakomon\//.test(url)) return;
+    const figure = document.createElement("figure"); figure.className = "ipa-source-figure";
+    const img = document.createElement("img"); img.src = url; img.alt = `${label} ${i+1}`;
+    img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+    const errorNote = document.createElement("p"); errorNote.className = "ipa-label-small";
+    errorNote.textContent = "画像の表示に失敗しました。出典ページを確認してください。";
+    errorNote.hidden = true;
+    img.addEventListener("error", () => { img.hidden = true; errorNote.hidden = false; });
+    figure.append(img, errorNote); parent.append(figure);
+  });
+}
 function renderQuestion() {
   const q=state.questions[state.currentIndex];
   el("question-meta").textContent=questionLabel(q);
@@ -202,6 +218,10 @@ function renderQuestion() {
       :"図表・数式・選択肢の一部が再現できていない可能性があります。元の問題を出典で照合してください。";
     review.append(p,sourceAnchor(q));
   }
+  // 図表や表そのものを持つ問題、または全体画像で提供される問題
+  appendSourceImages(review, q.questionImageRefs, "問題図表");
+  appendSourceImages(review, q.unassignedImageRefs, "問題・選択肢の参考画像");
+  if (q.questionImageRefs?.length || q.unassignedImageRefs?.length) review.hidden = false;
   const area=el("answer-area");area.replaceChildren();
   q.displayChoices.forEach((choice,i)=>{
     const button=document.createElement("button");button.type="button";button.className="choice-btn";
@@ -210,7 +230,11 @@ function renderQuestion() {
     const n=document.createElement("span");n.className="choice-marker";
     n.textContent=q.qaTier==="text"?MARKERS[i]:choice.label;
     const body=document.createElement("span");body.className="choice-text";
-    body.textContent=referenceOnly?`出典ページの選択肢 ${choice.label}`:choice.text;
+    const refs = q.choiceImageRefs?.[LABELS.indexOf(choice.label)];
+    const hasPicture = Array.isArray(refs) && refs.length > 0;
+    body.textContent=referenceOnly?`出典ページの選択肢 ${choice.label}`:
+      hasPicture ? `選択肢 ${choice.label}（画像）` : choice.text;
+    if (hasPicture) appendSourceImages(body, refs, `選択肢 ${choice.label}`);
     button.append(n,body);
     if(state.answers[q.id]===choice.label)button.classList.add("is-selected");
     button.addEventListener("click",()=>{
@@ -276,23 +300,27 @@ function showResult() {
 }
 async function init() {
   try {
-    const result=await fetch(A1_CONFIG.questionUrl || "../data/a1/questions.json",{cache:"no-cache"});
+    const result=await fetch(PAGE_CONFIG.questionUrl || "../data/a1/questions.json",{cache:"no-cache"});
     if(!result.ok)throw Error(`HTTP ${result.status}`);
     const questions=await result.json();if(!Array.isArray(questions))throw Error("データ形式が配列ではありません");
-    if (questions.length !== EXPECTED_QUESTION_COUNT) throw Error(`V${APP_VERSION}は600問が必要です。現在${questions.length}問。古いフォルダ/JSONを開いていないか確認してください。`);
+    if (questions.length !== EXPECTED_QUESTION_COUNT) throw Error(`V${APP_VERSION}は${EXPECTED_QUESTION_COUNT}問が必要です。現在${questions.length}問。古いフォルダ/JSONを開いていないか確認してください。`);
     const ids=new Set();
     for(const q of questions){
       const full=Array.isArray(q.choices)&&q.choices.length===4;
       const reference=q.qaTier==="reference";
       const indexed=LABELS.indexOf(q.correctLabel);
       if(!q.id || ids.has(q.id) || !/^\d{4}[sa]$/.test(q.exam)
-          || !Number.isInteger(q.questionNumber)||q.questionNumber<1||q.questionNumber>30
+          || !Number.isInteger(q.questionNumber)||q.questionNumber<1||q.questionNumber>MAX_QUESTION_NUMBER
           || !["text","review","reference"].includes(q.qaTier)
           || indexed<0 || !Array.isArray(q.choices)
           || (reference && (q.choices.length!==0 || q.correct!==""))
           || (!reference && (!q.question||!full||new Set(q.choices).size!==4||q.choices[indexed]!==q.correct))
           || !/^https:\/\/www\.sc-siken\.com\/((s\/)?kakomon)\//.test(q.sourceQuestionUrl))
         throw Error(`データの検証に失敗：${q.id}`);
+      for (const url of [...(q.questionImageRefs || []), ...(q.unassignedImageRefs || []), ...((q.choiceImageRefs || []).flat())]) {
+        if (typeof url !== "string" || !/^https:\/\/www\.sc-siken\.com\/kakomon\//.test(url))
+          throw Error(`画像URL検証に失敗：${q.id}`);
+      }
       ids.add(q.id);
     }
     state.allQuestions=questions;
