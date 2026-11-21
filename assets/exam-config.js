@@ -17,6 +17,21 @@ window.IPA_EXAM_CONFIG = Object.freeze({
     storageKey: "ipa-sc-a2-progress-v1"
   }),
   scB: Object.freeze({ enabled: false, dataDirectory: "data/sc-b/" }),
-  pdAiA2: Object.freeze({ enabled: false, dataDirectory: "data/pd-ai-a2/" }),
+  pdAiA2: Object.freeze({
+    title: "プロフェッショナル（データ・AI） 科目A-2", enabled: true,
+    moduleKind: "original-mock", questionUrl: "../../data/pd-ai-a2/questions.json",
+    expectedQuestionCount: 230, maxQuestionNumber: 23,
+    sourceExamLabel: "オリジナル予想問題", storageKey: "ipa-pd-ai-a2-progress-v2",
+    fields: Object.freeze([
+      {id:"data-management",label:"データマネジメント"},
+      {id:"data-analytics",label:"データ分析・データ利活用"},
+      {id:"ai-application",label:"AI利活用"},
+      {id:"cloud",label:"クラウド"},
+      {id:"database",label:"データベース"},
+      {id:"ai-technology",label:"AI技術"},
+      {id:"algorithms",label:"アルゴリズム・プログラミング"},
+      {id:"privacy",label:"プライバシー関連法規"}
+    ])
+  }),
   pdAiB: Object.freeze({ enabled: false, dataDirectory: "data/pd-ai-b/" })
 });

@@ -1,6 +1,6 @@
-# IPA高度試験対策 | GitHub Pages 対応 V5.4
+# IPA高度試験対策 | GitHub Pages 対応 V5.7
 
-このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。**共通A-1（600問）とSC A-2（500問）**を実装済み。残る3ページは「準備中」です。見た目・既存A-1学習ロジックはV5.2を基本的に維持しています。
+このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。**共通A-1（600問）とSC A-2（500問）**を実装済み。プロフェッショナル（データ・AI）A-2では**8分野選択と模試10回・230問のオリジナル予想問題**を追加しました。残るBの2ページは「準備中」です。見た目・既存A-1学習ロジックはV5.2を基本的に維持しています。
 
 ## GitHub Pagesへの公開（リポジトリ `rin-ipa-exam`）
 
@@ -14,7 +14,7 @@ GitHubの **Settings → Pages → Build and deployment → Deploy from a branch
 - 共通A-1: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/a1/`
 - SC A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/a2.html`（500問・利用可能）
 - SC B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/b.html`（準備中）
-- PD データ・AI A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/a2.html`（準備中）
+- PD データ・AI A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/a2.html`（8分野選択・オリジナル230問（10回×23問））
 - PD データ・AI B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/b.html`（準備中）
 
 GitHub Pagesは静的配信のみ。PythonのスクレイパーはPagesでは動作せず、ローカルでのデータ整備用です。**URLを `/rin-ipa-exam/` から始める絶対パスにせず相対パスで記述**しているため、開発時とPagesのサブディレクトリ配信で同じ構成が使えます。
@@ -22,12 +22,12 @@ GitHub Pagesは静的配信のみ。PythonのスクレイパーはPagesでは動
 ## ディレクトリ構成
 
 ```text
-ipa-exam/
+rin-ipa-exam/
 ├── index.html                 # 全試験へのトップ
 ├── a1/index.html              # 共通A-1（完成済み）
 ├── sc/a2.html                 # SC A-2（500問）
 ├── sc/b.html                  # SC B（準備中）
-├── pd/data-ai/a2.html         # PDデータ・AI A-2（準備中）
+├── pd/data-ai/a2.html         # PDデータ・AI A-2（改修版230問・10回×23問）
 ├── pd/data-ai/b.html          # PDデータ・AI B（準備中）
 ├── assets/
 │   ├── app.js                 # 共通A-1出題エンジン（V5.2から継承）
@@ -39,7 +39,7 @@ ipa-exam/
 │   ├── a1/source-manifest.json
 │   ├── sc-a2/questions.json    # SC A-2 20回×25問＝500問
 │   ├── sc-b/
-│   ├── pd-ai-a2/
+│   ├── pd-ai-a2/questions.json # 8分野・230問（10回×23問）
 │   └── pd-ai-b/
 ├── qa/                        # 600問点検表、要確認122問のリスト
 ├── scripts/                   # ローカルのデータ取得・再生成
@@ -52,7 +52,7 @@ ipa-exam/
 ## ローカルでの動作確認
 
 ```bash
-cd /展開先/ipa-exam
+cd /展開先/rin-ipa-exam
 python3 start_local.py
 ```
 
@@ -101,4 +101,25 @@ node --check assets/app.js
 **本ZIPは既存ポータルのリポジトリを変更しません。**
 
 
-詳細：`README_SC_A2_IMPORTED.md` を参照。
+詳細：`README_SC_A2_IMPORTED.md` と `README_PD_AI_A2.md` を参照。
+
+
+## V5.6（2026-11-21）
+
+- ポータルの固定A-1金色背景を廃止。カードにポインタを重ねたとき／キーボードフォーカス時に金色で強調。
+- PD データ・AI A-2を23問から230問（模試10回×23問）へ拡張。8分野それぞれ28～29問を収録。
+- 問題はすべてオリジナルの**ドラフト**です。正答・解説の技術的な独立査読は完了していません。
+- 当時の確認用CSVはV5.7では廃止し、正本 `qa/pd-ai-a2/source-refined-230.csv` に置換しました。
+- A-1（600問）・SC A-2（500問）と各進捗キーは変更しません。
+
+
+## V5.7（2026-11-21）
+
+- PD データ・AI A-2の問題JSONを、独立査読と再改修を経た `qa/pd-ai-a2/source-refined-230.csv` に完全置換（230問）。
+- 制作側の難易度配分は高度138／応用92／基本0。16問の本文等を改修、50問の難易度表示を適正化。
+- UIに残っていた「未検証ドラフト」表現を更新。ただし最終改修分の**第三者による再査読は未実施**で、問題の正確性を保証するものではありません。
+- PD A-2のみlocalStorageキーをv2に変更。旧版で進捗を記録していた場合でも、書換え済みの問題を学習済みと誤表示しないよう初期状態から開始します。
+- 旧ドラフトbankベースの再生成を廃止し、同梱CSVを正本とした `scripts/build_pd_ai_a2.py` に変更。
+- A-1 600問、SC A-2 500問と両科目の既存進捗はそのまま維持。
+
+**重要**：GitHubに配置する場合はZIPを解凍し、`index.html` がリポジトリ直下にくるよう**展開した中身**をアップロードしてください（ZIPファイル単体をアップロードしてもPagesには展開されません）。

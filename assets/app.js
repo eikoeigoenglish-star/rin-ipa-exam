@@ -5,7 +5,8 @@ const PAGE_CONFIG = window.IPA_EXAM_CONFIG?.[window.IPA_ACTIVE_EXAM || "a1"] || 
 const STORAGE_KEY = PAGE_CONFIG.storageKey || "ipa-a1-common-progress-v1";
 const EXPECTED_QUESTION_COUNT = PAGE_CONFIG.expectedQuestionCount || 600;
 const MAX_QUESTION_NUMBER = PAGE_CONFIG.maxQuestionNumber || 30;
-const APP_VERSION = "5.4.0";
+const APP_VERSION = "5.7.0";
+const IS_ORIGINAL_MOCK = PAGE_CONFIG.moduleKind === "original-mock";
 const EXAM_LONG_PRESS_MS = 3000;
 const MARKERS = ["1", "2", "3", "4"];
 const LABELS = ["ア", "イ", "ウ", "エ"];
@@ -45,9 +46,15 @@ function showScreen(id) {
   ["screen-start", "screen-quiz", "screen-result"].forEach(name => { el(name).hidden = id !== name; });
   window.scrollTo(0, 0);
 }
-function examLabel(exam) { return `${exam.slice(0, 4)}年${exam.endsWith("s") ? "春" : "秋"}`; }
-function sourceLabel(q) { return `${q.year}年度 ${q.season === "spring" ? "春期" : "秋期"} ${PAGE_CONFIG.sourceExamLabel || "高度試験 午前Ⅰ"} 問${q.questionNumber}`; }
-function questionLabel(q) { return `${examLabel(q.exam)}・問${q.questionNumber}`; }
+function examLabel(exam) {
+  if(IS_ORIGINAL_MOCK) return `模試 第${Number(exam.replace("mock", ""))}回`;
+  return `${exam.slice(0,4)}年${exam.endsWith("s") ? "春" : "秋"}`;
+}
+function sourceLabel(q) {
+  return IS_ORIGINAL_MOCK ? `オリジナル予想問題 ${examLabel(q.exam)} 問${q.questionNumber}` :
+    `${q.year}年度 ${q.season === "spring" ? "春期" : "秋期"} ${PAGE_CONFIG.sourceExamLabel || "高度試験 午前Ⅰ"} 問${q.questionNumber}`;
+}
+function questionLabel(q) { return `${examLabel(q.exam)}・問${q.questionNumber}${IS_ORIGINAL_MOCK?` / ${q.field}`:""}`; }
 function stageCounts(items = state.allQuestions) {
   const counts = {new:0, miss:0, hit:0, double:0, triple:0};
   items.forEach(q => { ++counts[stageOf(q.id)]; });
@@ -80,6 +87,7 @@ function resetExam(exam) {
 }
 // 年度は新しい順、同一年は秋期(A)→春期(S)。文字列逆順では春が先になる。
 function sortExamKeys(keys) {
+  if (IS_ORIGINAL_MOCK) return [...keys].sort((a,b)=>Number(a.slice(4))-Number(b.slice(4)));
   return [...keys].sort((a, b) =>
     Number(b.slice(0, 4)) - Number(a.slice(0, 4)) ||
     (a.endsWith("a") ? -1 : 1)
@@ -103,6 +111,21 @@ function renderExams() {
   el("exam-toggle-btn").disabled = !keys.length;
   if (!keys.length) { const p=document.createElement("p");p.className="ipa-empty";p.textContent="確認済みの問題を追加すると、ここに年度が表示されます。";area.append(p); }
   installExamLongPressReset();
+}
+function renderFields() {
+  const area = el("field-options");
+  if (!area || !IS_ORIGINAL_MOCK) return;
+  area.replaceChildren();
+  PAGE_CONFIG.fields.forEach(field => {
+    const input = document.createElement("input");
+    input.type="checkbox"; input.id=`field-${field.id}`; input.name="field";
+    input.value=field.id; input.checked=true;
+    const label = document.createElement("label");
+    label.className="chip"; label.htmlFor=input.id;
+    const count = state.allQuestions.filter(q=>q.fieldId===field.id).length;
+    label.textContent=`${field.label}（${count}問）`;
+    area.append(input,label);
+  });
 }
 // The original Kyoto app's pointer-based 3-second reset, adapted for string exam IDs.
 function installExamLongPressReset() {
@@ -137,7 +160,9 @@ function filteredQuestions() {
   const exams = new Set(byName("exam"));
   const ranges = byName("range").map(s => s.split("-").map(Number));
   const stages = new Set(byName("stage"));
+  const fields = IS_ORIGINAL_MOCK ? new Set(byName("field")) : null;
   return state.allQuestions.filter(q => exams.has(q.exam)
+    && (!fields || fields.has(q.fieldId))
     && ranges.some(([lo,hi]) => q.questionNumber >= lo && q.questionNumber <= hi)
     && stages.has(stageOf(q.id)));
 }
@@ -153,12 +178,29 @@ function updateAvailability() {
 // 同一年の秋→春、各回は番号順。未出題のみなら既習問を自然にスキップする。
 function orderQuestionPool(pool, mode) {
   if (mode === "random") return shuffle(pool);
+  if (IS_ORIGINAL_MOCK) return [...pool].sort((a,b)=>Number(a.exam.slice(4))-Number(b.exam.slice(4)) || a.questionNumber-b.questionNumber);
   return [...pool].sort((a, b) =>
     b.year - a.year ||
     (a.season === "autumn" ? 0 : 1) - (b.season === "autumn" ? 0 : 1) ||
     a.questionNumber - b.questionNumber ||
     a.id.localeCompare(b.id)
   );
+}
+// Professional A-2: interleave selected fields instead of allowing one field to dominate.
+// At each pass, take at most one question from each field. The next 23-question
+// segment rotates its starting field naturally; small pools remain usable.
+function balancedQuestionPool(pool, mode) {
+  const fields = PAGE_CONFIG.fields.map(f=>f.id).filter(id=>pool.some(q=>q.fieldId===id));
+  const ordered = orderQuestionPool(pool, mode);
+  const buckets = new Map(fields.map(id=>[id,ordered.filter(q=>q.fieldId===id)]));
+  const result=[];
+  while(result.length<pool.length) {
+    for(const id of fields) {
+      const bucket=buckets.get(id);
+      if(bucket.length) result.push(bucket.shift());
+    }
+  }
+  return result;
 }
 function startExam() {
   hideError();
@@ -168,7 +210,8 @@ function startExam() {
   const size=count==="all"?pool.length:Number(count);
   if (!size || pool.length<size){showError("対象問題数より少ない出題数を選んでください。");return;}
   const order = byName("order")[0] || "sequential";
-  state.questions=orderQuestionPool(pool, order).slice(0,size).map(q=>{
+  const orderedPool=IS_ORIGINAL_MOCK ? balancedQuestionPool(pool,order) : orderQuestionPool(pool,order);
+  state.questions=orderedPool.slice(0,size).map(q=>{
     // 出典照合モードでは原文のア〜エ順を維持する。
     const pairs=LABELS.map((label,i)=>({label,text:q.choices[i]??""}));
     return {...q, displayChoices:q.qaTier==="text"?shuffle(pairs):pairs};
@@ -177,7 +220,7 @@ function startExam() {
 }
 function sourceAnchor(q, label="出典の問題ページを開く") {
   const a=document.createElement("a");
-  a.href=q.sourceQuestionUrl;
+  a.href=IS_ORIGINAL_MOCK ? q.referenceUrl : q.sourceQuestionUrl;
   a.rel="noopener noreferrer";
   a.target="_blank";
   a.textContent=label;
@@ -257,11 +300,12 @@ function choiceName(q, label) {
   return q.choices.length===4 && i>=0 ? `${label}：${q.choices[i]}` : `${label}（原文は出典ページ参照）`;
 }
 function copyPrompt(q,answer) {
-  const lines=["IPA情報処理技術者試験の次の問題を解説してください。",`出典：${sourceLabel(q)}`,
-    `URL：${q.sourceQuestionUrl}`, "【問題】",q.question||"出典の問題ページを確認してください。",
+  const lines=["IPA情報処理技術者試験の次の問題を解説してください。",`問題：${sourceLabel(q)}`,
+    `参照資料：${IS_ORIGINAL_MOCK?q.referenceUrl:q.sourceQuestionUrl}`, "【問題】",q.question||"出典の問題ページを確認してください。",
     "【原文の選択肢】",...(q.choices.length===4?q.choices.map((text,i)=>`${LABELS[i]} ${text}`):["原文の画像等を出典で確認してください。"]),
     `【正解】${choiceName(q,q.correctLabel)}`,`【私の回答】${choiceName(q,answer)}`,
     "正答の根拠、全選択肢の誤り、背景知識と類題への対応を説明してください。"];
+  if(IS_ORIGINAL_MOCK)lines.push(`【作成時の解説（参考）】${q.explanation}`,"この問題は非公式オリジナル予想問題です。改修箇所の再査読は未実施のため、必要に応じて根拠を確認してください。");
   if(q.qaTier!=="text")lines.push("注意：この問題は図表・数式・画像の再現が未検証です。出典と照合してください。");
   return lines.join("\n");
 }
@@ -279,8 +323,13 @@ function showResult() {
     const correct=document.createElement("p");correct.className="ipa-choice-correct";correct.textContent=`正解：${choiceName(q,q.correctLabel)}`;
     const submitted=document.createElement("p");submitted.className=hit?"":"ipa-choice-wrong";submitted.textContent=`回答：${choiceName(q,answer)}`;
     const citation=document.createElement("p");citation.className="ipa-source";
-    citation.append(sourceAnchor(q,`出典：${sourceLabel(q)}（SCドットコム）`));
+    citation.append(sourceAnchor(q, IS_ORIGINAL_MOCK ? "参考：IPAシラバス案（設問はオリジナル）" : `出典：${sourceLabel(q)}（SCドットコム）`));
     li.append(heading,question,correct,submitted,citation);
+    if(IS_ORIGINAL_MOCK) {
+      const explanation=document.createElement("p");
+      explanation.textContent=`解説（オリジナル問題）：${q.explanation}`;
+      li.append(explanation);
+    }
     if(q.qaTier!=="text"){
       const caveat=document.createElement("p");caveat.className="ipa-label-small";
       caveat.textContent=q.qaTier==="reference"
@@ -295,7 +344,9 @@ function showResult() {
   saveProgress();
   el("score").textContent=`${score} / ${state.questions.length}問 正解`;
   el("score-percent").textContent=`正答率 ${Math.round(100*score/state.questions.length)}%`;
-  el("score-sub").textContent="今回の結果を進捗に記録しました。出典確認が必要な問題は元ページと照合してください。";
+  el("score-sub").textContent=IS_ORIGINAL_MOCK
+    ? "今回の結果を進捗に記録しました。非公式の予想問題です。最終改修分の独立再査読は未実施です。"
+    : "今回の結果を進捗に記録しました。出典確認が必要な問題は元ページと照合してください。";
   showScreen("screen-result");
 }
 async function init() {
@@ -309,13 +360,15 @@ async function init() {
       const full=Array.isArray(q.choices)&&q.choices.length===4;
       const reference=q.qaTier==="reference";
       const indexed=LABELS.indexOf(q.correctLabel);
-      if(!q.id || ids.has(q.id) || !/^\d{4}[sa]$/.test(q.exam)
+      if(!q.id || ids.has(q.id) || !(IS_ORIGINAL_MOCK ? /^mock\d{2}$/.test(q.exam) : /^\d{4}[sa]$/.test(q.exam))
           || !Number.isInteger(q.questionNumber)||q.questionNumber<1||q.questionNumber>MAX_QUESTION_NUMBER
           || !["text","review","reference"].includes(q.qaTier)
           || indexed<0 || !Array.isArray(q.choices)
           || (reference && (q.choices.length!==0 || q.correct!==""))
           || (!reference && (!q.question||!full||new Set(q.choices).size!==4||q.choices[indexed]!==q.correct))
-          || !/^https:\/\/www\.sc-siken\.com\/((s\/)?kakomon)\//.test(q.sourceQuestionUrl))
+          || (IS_ORIGINAL_MOCK
+              ? (!PAGE_CONFIG.fields.some(f=>f.id===q.fieldId)||!q.explanation||!/^https:\/\//.test(q.referenceUrl))
+              : !/^https:\/\/www\.sc-siken\.com\/((s\/)?kakomon)\//.test(q.sourceQuestionUrl)))
         throw Error(`データの検証に失敗：${q.id}`);
       for (const url of [...(q.questionImageRefs || []), ...(q.unassignedImageRefs || []), ...((q.choiceImageRefs || []).flat())]) {
         if (typeof url !== "string" || !/^https:\/\/www\.sc-siken\.com\/kakomon\//.test(url))
@@ -324,16 +377,24 @@ async function init() {
       ids.add(q.id);
     }
     state.allQuestions=questions;
-    el("data-summary").textContent=`収録 ${questions.length}問（要出典照合 ${questions.filter(q=>q.qaTier==="review").length}問・本文/選択肢未取得 ${questions.filter(q=>q.qaTier==="reference").length}問）。`;
+    el("data-summary").textContent=IS_ORIGINAL_MOCK
+      ? `オリジナル予想問題 ${questions.length}問を収録（独立査読後に改修。最終改修分の再査読は未実施）。`
+      : `収録 ${questions.length}問（要出典照合 ${questions.filter(q=>q.qaTier==="review").length}問・本文/選択肢未取得 ${questions.filter(q=>q.qaTier==="reference").length}問）。`;
     state.progress=loadProgress();
-    renderExams();renderMastery();updateAvailability();
+    renderExams();renderFields();renderMastery();updateAvailability();
   } catch(error){showError(`問題を読み込めませんでした：${error.message}`);el("start-btn").disabled=true;}
   el("start-btn").addEventListener("click",startExam);
   el("next-btn").addEventListener("click",next);
   el("back-to-start-btn").addEventListener("click",()=>{showScreen("screen-start");renderMastery();updateAvailability();});
   el("reset-progress-btn").addEventListener("click",resetAll);
   el("exam-toggle-btn").addEventListener("click",()=>{const inputs=[...document.querySelectorAll('input[name="exam"]')];const all=inputs.every(e=>e.checked);inputs.forEach(e=>e.checked=!all);updateAvailability();});
-  document.addEventListener("change",event=>{if(event.target.matches('input[name="exam"],input[name="range"],input[name="stage"]'))updateAvailability();});
+  if(IS_ORIGINAL_MOCK) el("field-toggle-btn").addEventListener("click",()=>{
+    const inputs=[...document.querySelectorAll('input[name="field"]')];
+    const all=inputs.every(e=>e.checked);
+    inputs.forEach(e=>e.checked=!all);
+    updateAvailability();
+  });
+  document.addEventListener("change",event=>{if(event.target.matches('input[name="exam"],input[name="range"],input[name="stage"],input[name="field"]'))updateAvailability();});
   document.addEventListener("keydown",event=>{
     if(el("screen-quiz").hidden || event.altKey || event.ctrlKey || event.metaKey || event.target.closest("input,textarea"))return;
     if(MARKERS.includes(event.key)){const btn=el("answer-area").querySelectorAll(".choice-btn")[Number(event.key)-1];btn?.click();event.preventDefault();}

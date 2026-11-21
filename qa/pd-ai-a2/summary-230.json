@@ -1,0 +1,38 @@
+{
+  "total": 230,
+  "byExam": {
+    "mock01": 23,
+    "mock02": 23,
+    "mock03": 23,
+    "mock04": 23,
+    "mock05": 23,
+    "mock06": 23,
+    "mock07": 23,
+    "mock08": 23,
+    "mock09": 23,
+    "mock10": 23
+  },
+  "byField": {
+    "ai-application": 29,
+    "ai-technology": 29,
+    "algorithms": 28,
+    "cloud": 29,
+    "data-analytics": 29,
+    "data-management": 29,
+    "database": 29,
+    "privacy": 28
+  },
+  "byDifficulty": {
+    "応用情報相当": 92,
+    "高度専門相当": 138
+  },
+  "correctLabels": {
+    "ア": 60,
+    "イ": 60,
+    "ウ": 60,
+    "エ": 50
+  },
+  "syllabusItemCount": 62,
+  "status": "Original mock questions. Independent review completed on an earlier version; later revisions not independently re-reviewed.",
+  "source": "qa/pd-ai-a2/source-refined-230.csv"
+}

@@ -1,0 +1,10 @@
+{
+  "target_count": 500,
+  "received_count": 500,
+  "extracted_needs_spotcheck": 439,
+  "review_required": 61,
+  "incomplete_count": 20,
+  "fetch_errors": 0,
+  "errors": [],
+  "note": "A-2午前Ⅱの取得結果。候補は全て未検証。サイト固有解説は収集しない。図表・数式・画像選択肢は要確認。"
+}

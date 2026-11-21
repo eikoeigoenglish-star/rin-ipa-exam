@@ -1343,3 +1343,11 @@ body {
 .site-back-link { display: inline-block; margin: 0 0 10px; color: var(--text-dim); font-size: .85rem; text-decoration: none; }
 .site-back-link:hover { color: var(--gold-bright); text-decoration: underline; }
 .site-back-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+
+/* V5.7: preserve SQL, pseudocode and calculation layout in original PD mock questions only. */
+.pd-ai-a2-page .question-text,
+.pd-ai-a2-page .choice-text,
+.pd-ai-a2-page .ipa-result-entry > p {
+  white-space: pre-wrap;
+  tab-size: 4;
+}

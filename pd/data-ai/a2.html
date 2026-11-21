@@ -1,7 +1,136 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101014"><link rel="stylesheet" href="../../assets/portal.css"><title>データ・AI 科目A-2 | IPA高度試験対策</title></head>
-<body><div class="wrap"><a class="back" href="../../index.html">← IPA試験対策トップ</a>
-<p class="eyebrow">PROFESSIONAL / DATA & AI / A-2</p>
-<h1>データ・AI 科目A-2</h1>
-<section class="detail"><span class="status">準備中 / 未実装</span><p>この科目のページ構成だけを用意しました。問題データや出題・採点機能はまだ収録していません。</p><p>共通の科目A-1（600問）は現在利用できます。</p></section>
-<div class="actions"><a class="action" href="../../a1/">共通A-1を学習する</a><a class="action secondary" href="../../index.html">トップに戻る</a></div><footer>IPA非公式学習サイト。問題の出典・権利については各問題を参照してください。</footer></div></body></html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#101014">
+  <title>データ・AI 科目A-2 模擬試験トレーニング</title>
+  <link rel="stylesheet" href="../../assets/style.css?v=0.5.7">
+  <style>
+    .ipa-note{font-size:.9rem;line-height:1.7;color:#bcbcc5;margin:12px 0}
+    .ipa-notice{border-left:3px solid #d3aa71;padding:10px 14px;background:#2d2925;border-radius:4px;line-height:1.7}
+    .ipa-source{font-size:.85rem;color:#bfbfc6;margin-top:16px}
+    .ipa-source a{color:#c1b0ed;text-decoration:underline;overflow-wrap:anywhere}
+    .ipa-result-entry{border:1px solid #41414b;background:#1a1a21;padding:18px;border-radius:12px;margin-bottom:13px;line-height:1.7}
+    .ipa-result-entry h3{font-size:1rem;margin:0 0 12px}
+    .ipa-result-entry p{margin:6px 0}
+    .ipa-result-entry button{margin-top:12px}
+    .ipa-raw-choice{white-space:pre-wrap;overflow-wrap:anywhere}
+    .ipa-label-small{font-size:.76rem;color:#aeb0b8}
+    .ipa-empty{font-size:.95rem;line-height:1.7}
+    .ipa-choice-wrong{color:#e6a2a7}
+    .ipa-choice-correct{color:#a8dbba}
+    .ipa-review-message{margin:12px 0 20px;color:#e2d9c8} .ipa-review-message p{margin:0 0 6px} .ipa-review-message a{color:#d5b0ff;text-decoration:underline} .ipa-action{padding:10px 15px;border-radius:8px;border:1px solid #888;background:#262635;color:#fff;cursor:pointer}
+    .ipa-source-figure{margin:10px 0 16px;max-width:100%}
+    .ipa-source-figure img{display:block;max-width:100%;height:auto;background:#fff;border-radius:6px}
+    .ipa-source-figure img[hidden]{display:none}
+    .ipa-source-figure p{line-height:1.4}
+    .choice-text .ipa-source-figure{margin:8px 0 2px}
+  </style>
+</head>
+<body class="pd-ai-a2-page">
+<div class="app">
+ <a class="site-back-link" href="../../index.html">← IPA試験対策トップ</a>
+ <main id="screen-start" class="screen">
+  <header class="app-header">
+   <p class="app-eyebrow">IPA EXAM • PD DATA & AI A-2 • V5.7 / 230Q</p>
+   <h1 class="app-title">プロフェッショナル 科目A-2<span class="app-title-sub">データ・AI / オリジナル模試</span></h1>
+   <p class="app-lead">IPAシラバス案Ver.0.1を参考にした非公式オリジナル予想問題。8分野を選択して演習できます。10回×23問の230問を収録。独立査読を踏まえて改修したオリジナル問題集です。</p>
+  </header>
+  <section class="panel mastery-panel" aria-labelledby="mastery-heading">
+   <div class="panel-head">
+    <h2 id="mastery-heading" class="panel-title">進捗</h2>
+    <p id="mastery-headline" class="mastery-headline"></p>
+    <button type="button" id="reset-progress-btn" class="btn-ghost btn-small">進捗を消す</button>
+   </div>
+   <div class="mastery-bar" id="mastery-bar" role="progressbar" aria-label="トリプル到達率" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+    <span class="mastery-seg seg-triple" id="seg-triple"></span>
+    <span class="mastery-seg seg-double" id="seg-double"></span>
+    <span class="mastery-seg seg-hit" id="seg-hit"></span>
+    <span class="mastery-seg seg-miss" id="seg-miss"></span>
+    <span class="mastery-seg seg-new" id="seg-new"></span>
+   </div>
+   <ul class="mastery-legend">
+    <li><span class="dot dot-triple"></span>トリプル<b id="count-triple">0</b></li>
+    <li><span class="dot dot-double"></span>ダブル<b id="count-double">0</b></li>
+    <li><span class="dot dot-hit"></span>ヒット<b id="count-hit">0</b></li>
+    <li><span class="dot dot-miss"></span>ミス<b id="count-miss">0</b></li>
+    <li><span class="dot dot-new"></span>未出題<b id="count-new">0</b></li>
+   </ul>
+   <p id="mastery-note" class="panel-desc mastery-note">3回連続正解でトリプル。誤答するとミスに戻ります。</p>
+  </section>
+  <section class="panel" aria-labelledby="field-heading">
+   <div class="panel-head"><h2 id="field-heading" class="panel-title">分野を選択</h2><p class="panel-note">複数選択可</p><button class="btn-ghost btn-small" id="field-toggle-btn" type="button">全選択 / 全解除</button></div>
+   <p class="panel-desc">初期状態では8分野すべてを選択しています。出題時には選択分野からできるだけ均等に選びます。</p>
+   <div id="field-options" class="chip-group" role="group" aria-labelledby="field-heading"></div>
+  </section>
+  <section class="panel" aria-labelledby="exam-heading">
+   <div class="panel-head"><h2 id="exam-heading" class="panel-title">模試の回</h2><p class="panel-note">複数選択可</p><button class="btn-ghost btn-small" id="exam-toggle-btn" type="button">すべて解除</button></div>
+   <p class="panel-desc">3秒長押しすると、その模試回だけの進捗をリセットします。</p>
+   <div id="exam-options" class="chip-group" role="group" aria-labelledby="exam-heading"></div>
+  </section>
+  <section class="panel" aria-labelledby="range-heading">
+   <div class="panel-head"><h2 id="range-heading" class="panel-title">問題番号</h2><p class="panel-note">複数選択可</p></div>
+   <div class="chip-group" role="group" aria-labelledby="range-heading">
+    <input type="checkbox" id="range-1" name="range" value="1-10" checked><label class="chip" for="range-1">1〜10</label>
+    <input type="checkbox" id="range-2" name="range" value="11-20" checked><label class="chip" for="range-2">11〜20</label>
+    <input type="checkbox" id="range-3" name="range" value="21-23" checked><label class="chip" for="range-3">21〜23</label>
+   </div>
+  </section>
+  <section class="panel" aria-labelledby="stage-heading">
+   <div class="panel-head"><h2 id="stage-heading" class="panel-title">出題状態</h2><p class="panel-note">複数選択可</p></div>
+   <div class="chip-group" role="group" aria-labelledby="stage-heading">
+    <input type="checkbox" id="stage-new" name="stage" value="new" checked><label class="chip" for="stage-new">未出題<span class="chip-count" id="chip-count-new">0</span></label>
+    <input type="checkbox" id="stage-miss" name="stage" value="miss" checked><label class="chip" for="stage-miss">ミス<span class="chip-count" id="chip-count-miss">0</span></label>
+    <input type="checkbox" id="stage-hit" name="stage" value="hit" checked><label class="chip" for="stage-hit">ヒット<span class="chip-count" id="chip-count-hit">0</span></label>
+    <input type="checkbox" id="stage-double" name="stage" value="double" checked><label class="chip" for="stage-double">ダブル<span class="chip-count" id="chip-count-double">0</span></label>
+    <input type="checkbox" id="stage-triple" name="stage" value="triple" checked><label class="chip" for="stage-triple">トリプル<span class="chip-count" id="chip-count-triple">0</span></label>
+   </div>
+  </section>
+  <section class="panel" aria-labelledby="count-heading">
+   <div class="panel-head"><h2 id="count-heading" class="panel-title">出題問数</h2><p class="panel-note" id="count-availability"></p></div>
+   <div class="chip-group" role="radiogroup" aria-labelledby="count-heading">
+    <input type="radio" name="count" id="count-all" value="all"><label class="chip chip-wide" for="count-all">すべて<span class="chip-count" id="count-all-num">0</span></label>
+    <input type="radio" name="count" id="count-23" value="23" checked><label class="chip" for="count-23">23問</label>
+    <input type="radio" name="count" id="count-20" value="20"><label class="chip" for="count-20">20問</label>
+    <input type="radio" name="count" id="count-10" value="10"><label class="chip" for="count-10">10問</label>
+    <input type="radio" name="count" id="count-5" value="5"><label class="chip" for="count-5">5問</label>
+    <input type="radio" name="count" id="count-1" value="1"><label class="chip" for="count-1">1問</label>
+   </div>
+  </section>
+  <section class="panel" aria-labelledby="order-heading">
+   <div class="panel-head"><h2 id="order-heading" class="panel-title">出題順</h2><p class="panel-note">1つ選択</p></div>
+   <div class="order-options" role="radiogroup" aria-labelledby="order-heading">
+    <input type="radio" id="order-sequential" name="order" value="sequential" checked><label class="order-choice" for="order-sequential">順番に出題</label>
+    <input type="radio" id="order-random" name="order" value="random"><label class="order-choice" for="order-random">ランダムに出題</label>
+   </div>
+   <p class="order-help">選択した分野をなるべく均等に出題します。「順番」は各分野の問題番号順、「ランダム」は各分野内で無作為に選びます。</p>
+  </section>
+  <div id="start-error" class="alert" role="alert" hidden></div>
+  <button type="button" id="start-btn" class="btn-primary btn-block">開始する</button>
+  <p class="ipa-note ipa-notice"><span id="data-summary">オリジナル模擬問題230問（10回×23問）を収録。</span> 本試験の過去問ではありません。独立査読後に一部改修しており、最終改修分の第三者再査読は未実施です。</p>
+ </main>
+ <main id="screen-quiz" class="screen" hidden>
+  <div class="quiz-top"><p class="quiz-meta"><span id="question-meta"></span><span id="question-stage" class="stage-tag"></span></p><p id="question-counter" class="quiz-counter"></p></div>
+  <div class="progress" id="progress-bar" role="progressbar" aria-label="進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+  <article class="panel quiz-panel">
+   <h2 id="question-text" class="question-text" tabindex="-1"></h2>
+   <div id="question-review" class="ipa-notice ipa-review-message" hidden></div>
+   <div id="answer-area" class="answer-area"></div>
+   <p class="quiz-hint" aria-hidden="true">キー1〜4で選択 / Enterで次へ</p>
+   <button id="next-btn" type="button" class="btn-primary btn-block">次へ</button>
+  </article>
+ </main>
+ <main id="screen-result" class="screen" hidden>
+  <header class="result-head"><p class="app-eyebrow">RESULT</p><h2 class="panel-title-lg">結果</h2></header>
+  <section class="panel score-panel" aria-label="採点結果"><p id="score" class="score-line"></p><p id="score-percent" class="score-percent"></p><p id="score-sub" class="score-sub"></p></section>
+  <section aria-label="各問題の結果"><ol id="result-list" class="result-list"></ol></section>
+  <button id="back-to-start-btn" type="button" class="btn-secondary btn-block">スタート画面に戻る</button>
+ </main>
+ <footer class="app-footer"><p>データ・AI 科目A-2 / V5.7 / 230問 • IPA非公式</p><p>独自作成のオリジナル予想問題です。独立査読の指摘を反映しましたが、修正箇所の再査読と一次資料の一部照合は未完了です。IPA公式問題ではありません。</p></footer>
+</div>
+<script src="../../assets/exam-config.js?v=0.5.7"></script>
+<script>window.IPA_ACTIVE_EXAM = "pdAiA2";</script>
+<script src="../../assets/app.js?v=0.5.7"></script>
+</body></html>
