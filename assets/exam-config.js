@@ -16,7 +16,7 @@ window.IPA_EXAM_CONFIG = Object.freeze({
     maxQuestionNumber: 25, sourceExamLabel: "SC 午前Ⅱ",
     storageKey: "ipa-sc-a2-progress-v1"
   }),
-  scB: Object.freeze({ enabled: false, dataDirectory: "data/sc-b/" }),
+  scB: Object.freeze({ enabled: true, moduleKind: "case-mock", dataDirectory: "data/sc-b/", storageKey: "ipa-sc-b-progress-v1" }),
   pdAiA2: Object.freeze({
     title: "プロフェッショナル（データ・AI） 科目A-2", enabled: true,
     moduleKind: "original-mock", questionUrl: "../../data/pd-ai-a2/questions.json",

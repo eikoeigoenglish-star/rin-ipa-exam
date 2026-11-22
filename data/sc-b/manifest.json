@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "course": "sc-b",
+  "plannedMockCount": 10,
+  "plannedQuestionCount": 200,
+  "available": [
+    {
+      "id": "mock01",
+      "label": "模試 第1回",
+      "casesUrl": "mock01/cases.json",
+      "questionsUrl": "mock01/questions.json",
+      "expectedCases": 12,
+      "expectedQuestions": 20
+    }
+  ]
+}

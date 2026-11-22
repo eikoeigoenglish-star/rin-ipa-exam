@@ -1,10 +1,10 @@
-# IPA高度試験対策 | GitHub Pages 対応 V5.7
+# IPA高度試験対策 | GitHub Pages 対応 V5.8
 
-このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。**共通A-1（600問）とSC A-2（500問）**を実装済み。プロフェッショナル（データ・AI）A-2では**8分野選択と模試10回・230問のオリジナル予想問題**を追加しました。残るBの2ページは「準備中」です。見た目・既存A-1学習ロジックはV5.2を基本的に維持しています。
+このリポジトリは、SCとプロフェッショナル（データ・AI）のA-1/A-2/B学習サイトです。共通A-1（600問）、SC A-2（500問）、データ・AI A-2（230問）を実装済み。**SC科目Bはオリジナル模試第1回（12大問・20設問）を追加**しました。全10回・200設問は制作計画であり、第2〜10回の問題データは未収録です。データ・AI科目Bは準備中です。既存A-1/A-2の学習ロジック・データ・進捗キーは維持しています。
 
 ## GitHub Pagesへの公開（リポジトリ `rin-ipa-exam`）
 
-ZIPの**`rin-ipa-exam` フォルダの中身を**、GitHubリポジトリのルート（`main` ブランチ）に配置してください。`rin-ipa-exam/rin-ipa-exam/index.html` のように二重にしないでください。
+ZIPを展開し、**`index.html` が直下にある展開後の中身を**GitHubリポジトリのルート（`main` ブランチ）に配置してください。フォルダ階層を二重にせず、ZIPファイルそのものではなく展開したファイルをアップロードしてください。
 
 GitHubの **Settings → Pages → Build and deployment → Deploy from a branch → `main` / `(root)` → Save** を選びます。
 
@@ -13,7 +13,7 @@ GitHubの **Settings → Pages → Build and deployment → Deploy from a branch
 - トップ: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/`
 - 共通A-1: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/a1/`
 - SC A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/a2.html`（500問・利用可能）
-- SC B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/b.html`（準備中）
+- SC B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/sc/b.html`（オリジナル模試 第1回・20設問 利用可能）
 - PD データ・AI A-2: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/a2.html`（8分野選択・オリジナル230問（10回×23問））
 - PD データ・AI B: `https://eikoeigoenglish-star.github.io/rin-ipa-exam/pd/data-ai/b.html`（準備中）
 
@@ -26,19 +26,23 @@ rin-ipa-exam/
 ├── index.html                 # 全試験へのトップ
 ├── a1/index.html              # 共通A-1（完成済み）
 ├── sc/a2.html                 # SC A-2（500問）
-├── sc/b.html                  # SC B（準備中）
+├── sc/b.html                  # SC B（第1回・20設問）
 ├── pd/data-ai/a2.html         # PDデータ・AI A-2（改修版230問・10回×23問）
 ├── pd/data-ai/b.html          # PDデータ・AI B（準備中）
 ├── assets/
 │   ├── app.js                 # 共通A-1出題エンジン（V5.2から継承）
 │   ├── style.css              # A-1画面の既存デザイン
 │   ├── portal.css             # ポータル・準備中ページ用
+│   ├── sc-b.js                # SC B専用の事例表示・出題・採点・進捗管理
+│   ├── sc-b.css               # SC B専用のレスポンシブ表示
 │   └── exam-config.js         # 科目設定、問題JSONと学習進捗キー
 ├── data/
 │   ├── a1/questions.json      # A-1 20回×30問＝600件
 │   ├── a1/source-manifest.json
 │   ├── sc-a2/questions.json    # SC A-2 20回×25問＝500問
-│   ├── sc-b/
+│   ├── sc-b/manifest.json     # 収録回の一覧（現在mock01のみ）
+│   ├── sc-b/mock01/cases.json # 第1回の共通事例12本
+│   ├── sc-b/mock01/questions.json # 第1回の独立設問20問
 │   ├── pd-ai-a2/questions.json # 8分野・230問（10回×23問）
 │   └── pd-ai-b/
 ├── qa/                        # 600問点検表、要確認122問のリスト
@@ -64,14 +68,10 @@ python3 start_local.py
 
 ## 学習履歴の扱い
 
-- 進捗保存キーはV5.2と同じ `ipa-a1-common-progress-v1` に固定しました。
+- 共通A-1の進捗保存キーはV5.2と同じ `ipa-a1-common-progress-v1` に固定しました。SC Bは新しい専用キー `ipa-sc-b-progress-v1` を使用します。
 - ブラウザの `localStorage` は**オリジン（スキーム＋ドメイン＋ポート）ごと**です。
 - ローカルで以前と同じ `http://localhost:8000` を利用する場合、移動先が `/a1/` になっても履歴を共有できます。
 - 新しくGitHub Pages上で開く場合、ローカルの学習履歴は自動では移りません。
-
-## 過去問題の出典表示
-
-共通A-1およびSC A-2で扱う公開過去問題の**原典はIPA**です。画面の出典表示はIPAを明示しています。図表や選択肢が一部未収録の設問を含むため、原文確認用として外部掲載ページへのリンクは保持しています。これらのリンクはIPA以外を問題の原著作者として示すものではありません。取得元の追跡に必要なURL・メタデータは問題JSONやスクレイパーに残しています。
 
 ## 600問の品質状態
 
@@ -127,3 +127,18 @@ node --check assets/app.js
 - A-1 600問、SC A-2 500問と両科目の既存進捗はそのまま維持。
 
 **重要**：GitHubに配置する場合はZIPを解凍し、`index.html` がリポジトリ直下にくるよう**展開した中身**をアップロードしてください（ZIPファイル単体をアップロードしてもPagesには展開されません）。
+
+
+## V5.8（2026-11-22） SC科目B 第1回
+
+- SC Bを「準備中」から利用可能に更新。`sc/b.html` から模試第1回（1問1答8大問＋1問3答4大問、全20独立設問）を演習できます。
+- 「1問1答」「1問3答」のチェックボックスは独立に選択可能。分野フィルターは設けていません。
+- 1問3答の設問は独立採点・個別進捗管理。毎問、共通事例とその表・コード・図を再表示します。
+- 進捗は未出題／ミス／ヒット／ダブル／トリプル、模試回ボタンの3秒長押しリセットに対応。
+- 出題順は順番／ランダム、出題数は1・5・10・20・すべて。択一問題の選択肢は4〜9個で可変です。
+- 表・コード・ネットワーク図はブラウザで再現。資料単位で折り畳み可能。横幅の広い表やコードはスマホでは資料内スクロールとなります。
+- 事例・設問の出典は**非公式オリジナル問題**。IPAが公開した科目Bサンプルを構成上の参考にしましたが、IPA公式問題ではありません。
+- `qa/sc-b/` に制作者の品質レポート、独立査読レポート、指摘一覧、局所修正内容を収録。指摘013（GitHub Actions）と014（pip）を局所修正済み。ただし**修正後の第三者による再査読は未実施**です。GitHub Actionsなどの仕様は変更されるため、公開前の再照合を推奨します。
+- 第2〜10回は**未収録**。将来の追加は `data/sc-b/mockNN/` に事例・設問JSONを置き、`manifest.json` に追記する設計です。
+
+`sc/b.html` はJavaScriptでJSONを取得するので、ファイルを直接ダブルクリックして `file://` で開かず、GitHub PagesやHTTPサーバ上でご利用ください。

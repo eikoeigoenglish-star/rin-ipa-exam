@@ -1,7 +1,104 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101014"><link rel="stylesheet" href="../assets/portal.css"><title>SC 科目B | IPA高度試験対策</title></head>
-<body><div class="wrap"><a class="back" href="../index.html">← IPA試験対策トップ</a>
-<p class="eyebrow">SECURITY / SUBJECT B</p>
-<h1>SC 科目B</h1>
-<section class="detail"><span class="status">準備中 / 未実装</span><p>この科目のページ構成だけを用意しました。問題データや出題・採点機能はまだ収録していません。</p><p>共通の科目A-1（600問）は現在利用できます。</p></section>
-<div class="actions"><a class="action" href="../a1/">共通A-1を学習する</a><a class="action secondary" href="../index.html">トップに戻る</a></div><footer>IPA非公式学習サイト。問題の出典・権利については各問題を参照してください。</footer></div></body></html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#101014">
+<title>SC 科目B｜事例分析・択一トレーニング</title>
+<link rel="stylesheet" href="../assets/style.css?v=5.8.0">
+<link rel="stylesheet" href="../assets/sc-b.css?v=5.8.0">
+</head>
+<body class="scb-page">
+<div class="app">
+ <a class="site-back-link" href="../index.html">← IPA試験対策トップ</a>
+ <main id="screen-start" class="screen">
+  <header class="app-header">
+   <p class="app-eyebrow">IPA EXAM • SC SUBJECT B • ORIGINAL MOCK</p>
+   <h1 class="app-title">SC 科目B<span class="app-title-sub">事例分析・択一トレーニング</span></h1>
+   <p class="app-lead">2027年度以降の形式を想定したオリジナル模擬問題。1問1答・1問3答の各設問を独立して演習します。</p>
+   <p class="scb-availability" id="data-status" aria-live="polite">問題データを読み込んでいます…</p>
+  </header>
+  <section class="panel mastery-panel" aria-labelledby="mastery-heading">
+   <div class="panel-head"><h2 class="panel-title" id="mastery-heading">進捗</h2><p id="mastery-headline" class="mastery-headline">0 / 0問</p><button type="button" id="reset-all" class="btn-ghost btn-small">進捗を消す</button></div>
+   <div class="mastery-bar" id="mastery-bar" role="progressbar" aria-label="トリプル到達率" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="mastery-seg seg-triple" id="seg-triple"></span><span class="mastery-seg seg-double" id="seg-double"></span><span class="mastery-seg seg-hit" id="seg-hit"></span><span class="mastery-seg seg-miss" id="seg-miss"></span><span class="mastery-seg seg-new" id="seg-new"></span></div>
+   <ul class="mastery-legend">
+    <li><span class="dot dot-triple"></span>トリプル<b id="count-triple">0</b></li>
+    <li><span class="dot dot-double"></span>ダブル<b id="count-double">0</b></li>
+    <li><span class="dot dot-hit"></span>ヒット<b id="count-hit">0</b></li>
+    <li><span class="dot dot-miss"></span>ミス<b id="count-miss">0</b></li>
+    <li><span class="dot dot-new"></span>未出題<b id="count-new">0</b></li>
+   </ul>
+   <p id="mastery-note" class="panel-desc mastery-note">正解を3回連続させるとトリプル。誤答・未回答はミスに戻ります。進捗はこのブラウザに保存します。</p>
+  </section>
+  <section class="panel" aria-labelledby="exam-heading">
+   <div class="panel-head"><h2 id="exam-heading" class="panel-title">模試回</h2><p class="panel-note">複数選択可</p><button type="button" id="toggle-exams" class="btn-ghost btn-small">すべて解除</button></div>
+   <p class="panel-desc">回次ボタンを3秒長押しすると、その回だけの進捗をリセットします。</p>
+   <div class="chip-group" id="exam-options" role="group" aria-labelledby="exam-heading"></div>
+  </section>
+  <section class="panel" aria-labelledby="format-heading">
+   <div class="panel-head"><h2 id="format-heading" class="panel-title">出題形式</h2><p class="panel-note">複数選択可</p></div>
+   <div class="chip-group" role="group" aria-labelledby="format-heading">
+    <input id="format-single" type="checkbox" name="format" value="single" checked><label for="format-single" class="chip">1問1答</label>
+    <input id="format-multi" type="checkbox" name="format" value="multi" checked><label for="format-multi" class="chip">1問3答</label>
+   </div>
+   <p class="panel-desc scb-format-note">1問3答も設問ごとに独立出題・採点。どの設問にも共通事例を表示します。</p>
+  </section>
+  <section class="panel" aria-labelledby="stage-heading">
+   <div class="panel-head"><h2 id="stage-heading" class="panel-title">出題状態</h2><p class="panel-note">複数選択可</p></div>
+   <div class="chip-group" role="group" aria-labelledby="stage-heading">
+    <input type="checkbox" id="stage-new" name="stage" value="new" checked><label class="chip" for="stage-new">未出題<span class="chip-count" id="chip-count-new">0</span></label>
+    <input type="checkbox" id="stage-miss" name="stage" value="miss" checked><label class="chip" for="stage-miss">ミス<span class="chip-count" id="chip-count-miss">0</span></label>
+    <input type="checkbox" id="stage-hit" name="stage" value="hit" checked><label class="chip" for="stage-hit">ヒット<span class="chip-count" id="chip-count-hit">0</span></label>
+    <input type="checkbox" id="stage-double" name="stage" value="double" checked><label class="chip" for="stage-double">ダブル<span class="chip-count" id="chip-count-double">0</span></label>
+    <input type="checkbox" id="stage-triple" name="stage" value="triple" checked><label class="chip" for="stage-triple">トリプル<span class="chip-count" id="chip-count-triple">0</span></label>
+   </div>
+  </section>
+  <section class="panel" aria-labelledby="count-heading">
+   <div class="panel-head"><h2 id="count-heading" class="panel-title">出題問数</h2><p class="panel-note" id="count-availability">対象 0問</p></div>
+   <div class="chip-group" role="radiogroup" aria-labelledby="count-heading">
+    <input type="radio" name="count" id="count-all" value="all"><label class="chip chip-wide" for="count-all">すべて<span class="chip-count" id="count-all-num">0</span></label>
+    <input type="radio" name="count" id="count-20" value="20"><label class="chip" for="count-20">20問</label>
+    <input type="radio" name="count" id="count-10" value="10"><label class="chip" for="count-10">10問</label>
+    <input type="radio" name="count" id="count-5" value="5"><label class="chip" for="count-5">5問</label>
+    <input type="radio" name="count" id="count-1" value="1" checked><label class="chip" for="count-1">1問</label>
+   </div>
+  </section>
+  <section class="panel" aria-labelledby="order-heading">
+   <div class="panel-head"><h2 id="order-heading" class="panel-title">出題順</h2></div>
+   <div class="order-options" role="radiogroup" aria-labelledby="order-heading">
+    <input type="radio" name="order" id="order-sequential" value="sequential" checked><label class="order-choice" for="order-sequential">順番に出題</label>
+    <input type="radio" name="order" id="order-random" value="random"><label class="order-choice" for="order-random">ランダムに出題</label>
+   </div>
+   <p class="panel-desc scb-order-help">「未出題」を選ぶと続きから学習できます。ランダムでは1問3答の設問も個別抽選します。</p>
+  </section>
+  <div id="start-error" class="scb-alert" role="alert" hidden></div>
+  <button type="button" class="btn-primary btn-block" id="start-btn" disabled>開始する</button>
+  <p class="scb-disclaimer">※ IPA非公式のオリジナル問題です。現在は第1回のみ収録。第2〜10回は今後追加します。査読指摘の013・014は局所修正済みですが、修正後の再査読は未実施です。</p>
+ </main>
+ <main id="screen-quiz" class="screen" hidden>
+  <div class="scb-quiz-header"><div class="quiz-top"><p class="quiz-meta"><span id="question-meta"></span><span id="question-stage" class="stage-tag"></span></p><p id="question-counter" class="quiz-counter"></p></div><button type="button" id="exit-quiz" class="btn-ghost btn-small">中断して戻る</button></div>
+  <div class="progress" id="progress-bar" role="progressbar" aria-label="解答進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+  <section class="panel scb-case-panel" aria-label="共通事例">
+   <details id="case-details" open><summary id="case-title">事例文・図表・設定資料</summary><div id="case-body" class="scb-case-body"></div></details>
+  </section>
+  <article class="panel quiz-panel">
+   <p class="scb-question-eyebrow" id="question-section-label"></p>
+   <h2 id="question-text" tabindex="-1" class="question-text"></h2>
+   <div id="question-extra" class="scb-question-extra"></div>
+   <div id="answer-area" class="answer-area"></div>
+   <p class="quiz-hint">選択肢の記号をクリックして回答。未回答のまま次へ進むと不正解扱いです。</p>
+   <button type="button" id="next-btn" class="btn-primary btn-block">次へ</button>
+  </article>
+ </main>
+ <main id="screen-result" class="screen" hidden>
+  <header class="result-head"><p class="app-eyebrow">RESULT</p><h2 class="panel-title-lg">採点結果</h2></header>
+  <section class="panel score-panel" aria-label="採点結果"><p id="score" class="score-line"></p><p id="score-percent" class="score-percent"></p><p id="score-sub" class="score-sub"></p></section>
+  <section aria-label="各設問の結果"><ol id="result-list" class="result-list scb-result-list"></ol></section>
+  <button type="button" id="back-to-start" class="btn-secondary btn-block">スタート画面に戻る</button>
+ </main>
+ <footer class="app-footer"><p>SC 科目B オリジナル模試 • 非公式学習アプリ</p><p>IPA公表サンプルを参考に独自制作した事例分析問題です。IPA公式問題ではありません。</p></footer>
+</div>
+<script src="../assets/sc-b.js?v=5.8.0" defer></script>
+</body>
+</html>

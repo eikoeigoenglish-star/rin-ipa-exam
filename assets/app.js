@@ -218,7 +218,7 @@ function startExam() {
   });
   state.answers={};state.currentIndex=0;showScreen("screen-quiz");renderQuestion();
 }
-function sourceAnchor(q, label="原文・図表を確認（外部掲載ページ）") {
+function sourceAnchor(q, label="出典の問題ページを開く") {
   const a=document.createElement("a");
   a.href=IS_ORIGINAL_MOCK ? q.referenceUrl : q.sourceQuestionUrl;
   a.rel="noopener noreferrer";
@@ -301,12 +301,12 @@ function choiceName(q, label) {
 }
 function copyPrompt(q,answer) {
   const lines=["IPA情報処理技術者試験の次の問題を解説してください。",`問題：${sourceLabel(q)}`,
-    IS_ORIGINAL_MOCK ? `参照資料：${q.referenceUrl}` : `出典：IPA ${sourceLabel(q)}`, "【問題】",q.question||"出典の問題ページを確認してください。",
+    `参照資料：${IS_ORIGINAL_MOCK?q.referenceUrl:q.sourceQuestionUrl}`, "【問題】",q.question||"出典の問題ページを確認してください。",
     "【原文の選択肢】",...(q.choices.length===4?q.choices.map((text,i)=>`${LABELS[i]} ${text}`):["原文の画像等を出典で確認してください。"]),
     `【正解】${choiceName(q,q.correctLabel)}`,`【私の回答】${choiceName(q,answer)}`,
     "正答の根拠、全選択肢の誤り、背景知識と類題への対応を説明してください。"];
   if(IS_ORIGINAL_MOCK)lines.push(`【作成時の解説（参考）】${q.explanation}`,"この問題は非公式オリジナル予想問題です。改修箇所の再査読は未実施のため、必要に応じて根拠を確認してください。");
-  if(q.qaTier!=="text")lines.push("注意：この問題は図表・数式・画像の再現が未検証です。出典と照合してください。",`原文確認用の外部掲載ページ：${q.sourceQuestionUrl}`);
+  if(q.qaTier!=="text")lines.push("注意：この問題は図表・数式・画像の再現が未検証です。出典と照合してください。");
   return lines.join("\n");
 }
 function showResult() {
@@ -323,16 +323,7 @@ function showResult() {
     const correct=document.createElement("p");correct.className="ipa-choice-correct";correct.textContent=`正解：${choiceName(q,q.correctLabel)}`;
     const submitted=document.createElement("p");submitted.className=hit?"":"ipa-choice-wrong";submitted.textContent=`回答：${choiceName(q,answer)}`;
     const citation=document.createElement("p");citation.className="ipa-source";
-    if (IS_ORIGINAL_MOCK) {
-      citation.append(sourceAnchor(q, "参考：IPAシラバス案（設問はオリジナル）"));
-    } else {
-      const ipaLink=document.createElement("a");
-      ipaLink.href="https://www.ipa.go.jp/shiken/mondai-kaiotu/";
-      ipaLink.rel="noopener noreferrer";
-      ipaLink.target="_blank";
-      ipaLink.textContent=`出典：IPA ${sourceLabel(q)}`;
-      citation.append(ipaLink," ／ ",sourceAnchor(q,"原文・図表を確認（外部掲載ページ）"));
-    }
+    citation.append(sourceAnchor(q, IS_ORIGINAL_MOCK ? "参考：IPAシラバス案（設問はオリジナル）" : `出典：${sourceLabel(q)}（SCドットコム）`));
     li.append(heading,question,correct,submitted,citation);
     if(IS_ORIGINAL_MOCK) {
       const explanation=document.createElement("p");
