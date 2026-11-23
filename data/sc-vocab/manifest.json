@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "module": "sc-vocab-writing",
+  "totalQuestions": 200,
+  "sets": [
+    {"setNo":1,"id":"sc-vocab-set01","label":"第1回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set01.json"},
+    {"setNo":2,"id":"sc-vocab-set02","label":"第2回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set02.json"},
+    {"setNo":3,"id":"sc-vocab-set03","label":"第3回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set03.json"},
+    {"setNo":4,"id":"sc-vocab-set04","label":"第4回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set04.json"}
+  ],
+  "relatedAnswersUrl": "sc-vocab-related-answer-policy.json"
+}

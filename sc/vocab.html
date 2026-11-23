@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#101014">
+<title>SC用語記述｜専門用語200問トレーニング</title>
+<link rel="stylesheet" href="../assets/style.css?v=5.9.0">
+<link rel="stylesheet" href="../assets/sc-vocab.css?v=5.9.0">
+</head>
+<body class="scv-page">
+<div class="app">
+  <a class="site-back-link" href="../index.html">← IPA試験対策トップ</a>
+  <main id="screen-start" class="screen">
+    <header class="app-header">
+      <p class="app-eyebrow">IPA EXAM • SC • VOCABULARY WRITING</p>
+      <h1 class="app-title">SC用語記述<span class="app-title-sub">専門用語トレーニング 200問</span></h1>
+      <p class="app-lead">説明文を読み、該当するセキュリティ用語をキーボードで入力します。4回×50問。正答の別表記にも対応し、関連回答は自分で判定できます。</p>
+      <p id="data-status" class="scv-status" aria-live="polite">問題データを読み込んでいます…</p>
+    </header>
+    <section class="panel mastery-panel" aria-labelledby="mastery-heading">
+      <div class="panel-head"><h2 class="panel-title" id="mastery-heading">全200問の進捗</h2><p id="mastery-headline" class="mastery-headline">0 / 200問</p><button type="button" id="reset-all" class="btn-ghost btn-small">全進捗を消す</button></div>
+      <div class="mastery-bar" id="mastery-bar" role="progressbar" aria-label="トリプル到達率" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <span class="mastery-seg seg-triple" id="seg-triple"></span><span class="mastery-seg seg-double" id="seg-double"></span><span class="mastery-seg seg-hit" id="seg-hit"></span><span class="mastery-seg seg-miss" id="seg-miss"></span><span class="mastery-seg seg-new" id="seg-new"></span>
+      </div>
+      <ul class="mastery-legend">
+        <li><span class="dot dot-triple"></span>トリプル <b id="count-triple">0</b></li>
+        <li><span class="dot dot-double"></span>ダブル <b id="count-double">0</b></li>
+        <li><span class="dot dot-hit"></span>ヒット <b id="count-hit">0</b></li>
+        <li><span class="dot dot-miss"></span>ミス <b id="count-miss">0</b></li>
+        <li><span class="dot dot-new"></span>未出題 <b id="count-new">200</b></li>
+      </ul>
+      <p class="panel-desc mastery-note" id="mastery-note">同じ設問で3回連続正解するとトリプル。誤答・スキップはミスに戻ります。記録はこのブラウザ内に保存します。</p>
+    </section>
+    <section class="panel" aria-labelledby="set-heading">
+      <div class="panel-head"><h2 class="panel-title" id="set-heading">出題回</h2><p class="panel-note">複数選択可</p><button type="button" id="toggle-sets" class="btn-ghost btn-small">すべて選択</button></div>
+      <p class="panel-desc">各回50問。回次ボタンを<strong>3秒長押し</strong>すると、その回の進捗だけをリセットできます。</p>
+      <div class="chip-group" id="set-options" role="group" aria-labelledby="set-heading"></div>
+    </section>
+    <section class="panel" aria-labelledby="stage-heading">
+      <div class="panel-head"><h2 class="panel-title" id="stage-heading">出題状態</h2><p class="panel-note">複数選択可</p></div>
+      <div class="chip-group" role="group" aria-labelledby="stage-heading">
+        <input type="checkbox" name="stage" id="stage-new" value="new" checked><label class="chip" for="stage-new">未出題<span class="chip-count" id="chip-count-new">200</span></label>
+        <input type="checkbox" name="stage" id="stage-miss" value="miss" checked><label class="chip" for="stage-miss">ミス<span class="chip-count" id="chip-count-miss">0</span></label>
+        <input type="checkbox" name="stage" id="stage-hit" value="hit" checked><label class="chip" for="stage-hit">ヒット<span class="chip-count" id="chip-count-hit">0</span></label>
+        <input type="checkbox" name="stage" id="stage-double" value="double" checked><label class="chip" for="stage-double">ダブル<span class="chip-count" id="chip-count-double">0</span></label>
+        <input type="checkbox" name="stage" id="stage-triple" value="triple" checked><label class="chip" for="stage-triple">トリプル<span class="chip-count" id="chip-count-triple">0</span></label>
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="difficulty-heading">
+      <div class="panel-head"><h2 class="panel-title" id="difficulty-heading">難易度</h2><p class="panel-note">複数選択可</p></div>
+      <div class="chip-group" role="group" aria-labelledby="difficulty-heading">
+        <input type="checkbox" name="difficulty" id="diff-basic" value="basic" checked><label class="chip" for="diff-basic">基礎</label>
+        <input type="checkbox" name="difficulty" id="diff-standard" value="standard" checked><label class="chip" for="diff-standard">標準</label>
+        <input type="checkbox" name="difficulty" id="diff-advanced" value="advanced" checked><label class="chip" for="diff-advanced">高度</label>
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="count-heading">
+      <div class="panel-head"><h2 class="panel-title" id="count-heading">出題問数</h2><p class="panel-note" id="count-availability">対象 0問</p></div>
+      <div class="chip-group" role="radiogroup" aria-labelledby="count-heading">
+        <input type="radio" name="count" id="count-all" value="all" checked><label class="chip chip-wide" for="count-all">対象すべて<span class="chip-count" id="count-all-num">0</span></label>
+        <input type="radio" name="count" id="count-50" value="50"><label class="chip" for="count-50">50問</label>
+        <input type="radio" name="count" id="count-20" value="20"><label class="chip" for="count-20">20問</label>
+        <input type="radio" name="count" id="count-10" value="10"><label class="chip" for="count-10">10問</label>
+        <input type="radio" name="count" id="count-5" value="5"><label class="chip" for="count-5">5問</label>
+        <input type="radio" name="count" id="count-1" value="1"><label class="chip" for="count-1">1問</label>
+      </div>
+    </section>
+    <section class="panel" aria-labelledby="order-heading">
+      <div class="panel-head"><h2 class="panel-title" id="order-heading">出題順</h2></div>
+      <div class="order-options" role="radiogroup" aria-labelledby="order-heading">
+        <input type="radio" name="order" id="order-sequential" value="sequential" checked><label class="order-choice" for="order-sequential">順番に出題</label>
+        <input type="radio" name="order" id="order-random" value="random"><label class="order-choice" for="order-random">ランダムに出題</label>
+      </div>
+    </section>
+    <div id="start-error" class="scv-alert" role="alert" hidden></div>
+    <button type="button" class="btn-primary btn-block" id="start-btn" disabled>演習を開始する</button>
+    <p class="scv-disclaimer">IPA非公式のオリジナル問題です。独立査読を経たRC1教材を使用していますが、参考URLの一部は未検証です。問題文の対象範囲に合わない関連語を自動正解にはしません。</p>
+  </main>
+  <main id="screen-quiz" class="screen" hidden>
+    <div class="scv-quiz-top"><div><p class="quiz-meta"><span id="question-meta"></span><span id="question-stage" class="stage-tag"></span></p><p id="question-counter" class="quiz-counter"></p></div><button type="button" id="exit-quiz" class="btn-ghost btn-small">中断して戻る</button></div>
+    <div class="progress" id="progress-bar" role="progressbar" aria-label="今回の演習進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+    <article class="panel quiz-panel">
+      <p class="scv-eyebrow" id="question-label"></p>
+      <h2 id="question-text" tabindex="-1" class="question-text"></h2>
+      <form id="answer-form" autocomplete="off">
+        <label for="answer-input" class="scv-input-label">用語を入力してください</label>
+        <input id="answer-input" class="scv-answer-input" type="text" maxlength="160" inputmode="text" enterkeyhint="done" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="例：専門用語・略称・英語名">
+        <p class="quiz-hint">大文字・小文字、全角・半角、空白や記号の違いは採点時に吸収します。入力してEnter、または「解答する」を押してください。</p>
+        <div class="scv-action-row"><button type="submit" id="submit-answer" class="btn-primary">解答する</button><button type="button" id="skip-answer" class="btn-secondary">わからない・スキップ</button></div>
+      </form>
+      <section id="feedback" class="scv-feedback" aria-live="polite" hidden>
+        <h3 id="feedback-heading"></h3>
+        <p id="feedback-your-answer"></p>
+        <p id="feedback-correct-answer"></p>
+        <div id="related-decision" class="scv-related-decision" hidden>
+          <p>関連する用語です。設問の指定と解説を確認して、今回の回答を自己判定してください。</p>
+          <div class="scv-action-row"><button type="button" class="btn-secondary" id="related-accept">正解として記録</button><button type="button" class="btn-secondary" id="related-reject">ミスとして記録</button></div>
+        </div>
+        <div class="scv-explanation"><h4>解説</h4><p id="feedback-explanation"></p></div>
+        <details class="scv-sources"><summary>参考資料</summary><ul id="feedback-sources"></ul></details>
+      </section>
+      <button type="button" id="next-btn" class="btn-primary btn-block scv-next" hidden>次の問題へ</button>
+    </article>
+  </main>
+  <main id="screen-result" class="screen" hidden>
+    <header class="result-head"><p class="app-eyebrow">RESULT</p><h2 class="panel-title-lg">演習結果</h2></header>
+    <section class="panel score-panel"><p id="score" class="score-line"></p><p id="score-percent" class="score-percent"></p><p id="score-sub" class="score-sub"></p></section>
+    <section aria-label="設問ごとの結果"><ol class="result-list scv-results" id="result-list"></ol></section>
+    <button type="button" class="btn-secondary btn-block" id="back-to-start">スタート画面に戻る</button>
+  </main>
+  <footer class="app-footer"><p>SC専門用語200問 • 記述式トレーニング</p><p>非公式教材。誤りや曖昧な用語を発見した場合は参考資料をご確認ください。</p></footer>
+</div>
+<script src="../assets/sc-vocab.js?v=5.9.0" defer></script>
+</body>
+</html>

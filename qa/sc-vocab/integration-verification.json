@@ -1,0 +1,45 @@
+{
+  "package": "rin-ipa-exam-v5.9-sc-vocab-200-github-pages-complete",
+  "basedOn": "rin-ipa-exam-v5.8-sc-b-mock01-github-pages-complete.zip",
+  "changedExistingFiles": [
+    "index.html",
+    "README.md"
+  ],
+  "unchangedExistingFileCount": 70,
+  "addedFiles": [
+    "README_SC_VOCAB.md",
+    "assets/sc-vocab.css",
+    "assets/sc-vocab.js",
+    "data/sc-vocab/manifest.json",
+    "data/sc-vocab/sc-vocab-questions-set01.json",
+    "data/sc-vocab/sc-vocab-questions-set02.json",
+    "data/sc-vocab/sc-vocab-questions-set03.json",
+    "data/sc-vocab/sc-vocab-questions-set04.json",
+    "data/sc-vocab/sc-vocab-related-answer-policy.json",
+    "qa/sc-vocab/integration-verification.json",
+    "qa/sc-vocab/sc-vocab-alias-policy.csv",
+    "qa/sc-vocab/sc-vocab-master.json",
+    "qa/sc-vocab/validation-summary.json",
+    "sc/vocab.html",
+    "tests/test_sc_vocab.py"
+  ],
+  "vocab": {
+    "sets": 4,
+    "questionsPerSet": 50,
+    "totalQuestions": 200,
+    "dataset": "RC1 (v2 adopted patches only)",
+    "progressStorageKey": "ipa-sc-vocab-progress-v1"
+  },
+  "tests": {
+    "existingPytest": "37 passed",
+    "newUnittest": "6 passed",
+    "javascriptSyntax": "passed",
+    "browserSimulated": "8 passed",
+    "browserURLNavigation": "not run: execution environment blocks local URL navigation"
+  },
+  "caveats": [
+    "124/163 referenceUrls not independently checked by Claude",
+    "q196 dynamic heuristic alias pending book confirmation",
+    "q147 directive text URL addition pending"
+  ]
+}

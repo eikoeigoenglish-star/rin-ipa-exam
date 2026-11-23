@@ -1,0 +1,2280 @@
+{
+  "schemaVersion": "1.0",
+  "note": "関連回答は自動正解ではなく自己判定の候補。疑義ある語は自動正解へ移さない。",
+  "items": [
+    {
+      "questionId": "sc-vocab-q001",
+      "termId": "sc-vocab-003",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "KDC",
+        "RADIUS",
+        "NTLM"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q002",
+      "termId": "sc-vocab-031",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OSコマンドインジェクション",
+        "静的プレースホルダ",
+        "XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q003",
+      "termId": "sc-vocab-005",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Kerberos",
+        "TACACS+",
+        "IEEE 802.1X"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q004",
+      "termId": "sc-vocab-048",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CORS",
+        "HSTS",
+        "SRI"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q005",
+      "termId": "sc-vocab-006",
+      "relatedAnswers": [
+        "ポートベース認証"
+      ],
+      "incorrectAnswers": [
+        "EAP",
+        "RADIUS",
+        "NAC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q006",
+      "termId": "sc-vocab-057",
+      "relatedAnswers": [
+        "パケットフィルタリング"
+      ],
+      "incorrectAnswers": [
+        "WAF",
+        "IDS",
+        "IPS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q007",
+      "termId": "sc-vocab-045",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Secure属性",
+        "SameSite属性",
+        "XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q008",
+      "termId": "sc-vocab-001",
+      "relatedAnswers": [
+        "二要素認証",
+        "2FA"
+      ],
+      "incorrectAnswers": [
+        "多段階認証",
+        "リスクベース認証"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q009",
+      "termId": "sc-vocab-058",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "パケットフィルタリング",
+        "WAF"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q010",
+      "termId": "sc-vocab-082",
+      "relatedAnswers": [
+        "秘密鍵暗号方式"
+      ],
+      "incorrectAnswers": [
+        "公開鍵暗号",
+        "AES",
+        "ハイブリッド暗号"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q011",
+      "termId": "sc-vocab-133",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "EPP",
+        "XDR",
+        "NDR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q012",
+      "termId": "sc-vocab-106",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ワイパー",
+        "二重恐喝",
+        "標的型攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q013",
+      "termId": "sc-vocab-085",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "楕円曲線暗号",
+        "AES",
+        "耐量子計算機暗号"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q014",
+      "termId": "sc-vocab-120",
+      "relatedAnswers": [
+        "リアルタイムフィッシング",
+        "AiTM"
+      ],
+      "incorrectAnswers": [
+        "中間者攻撃",
+        "フィッシング",
+        "MFA疲労攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q015",
+      "termId": "sc-vocab-158",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CASB",
+        "CWPP",
+        "IaC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q016",
+      "termId": "sc-vocab-136",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSIRT",
+        "PSIRT",
+        "MSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q017",
+      "termId": "sc-vocab-186",
+      "relatedAnswers": [
+        "リスク基準"
+      ],
+      "incorrectAnswers": [
+        "リスク選好",
+        "残留リスク",
+        "リスクアセスメント"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q018",
+      "termId": "sc-vocab-160",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "IAMポリシー",
+        "最小権限の原則",
+        "RBAC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q019",
+      "termId": "sc-vocab-007",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "PEAP",
+        "EAP-TTLS",
+        "IEEE 802.1X"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q020",
+      "termId": "sc-vocab-181",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "情報セキュリティポリシー",
+        "JIS Q 27002",
+        "ISMAP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q021",
+      "termId": "sc-vocab-046",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Secure属性",
+        "HttpOnly属性",
+        "CSRF"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q022",
+      "termId": "sc-vocab-002",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SAML",
+        "OpenID Connect",
+        "IdP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q023",
+      "termId": "sc-vocab-070",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SPF",
+        "DKIM",
+        "BIMI"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q024",
+      "termId": "sc-vocab-004",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Kerberos",
+        "TGS",
+        "認証局"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q025",
+      "termId": "sc-vocab-086",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "RSA",
+        "耐量子計算機暗号"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q026",
+      "termId": "sc-vocab-032",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSRF",
+        "反射型XSS",
+        "格納型XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q027",
+      "termId": "sc-vocab-109",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "バックドア",
+        "ブートキット",
+        "トロイの木馬"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q028",
+      "termId": "sc-vocab-049",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "同一オリジンポリシー",
+        "CSP",
+        "CSRF"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q029",
+      "termId": "sc-vocab-135",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SIEM",
+        "XDR",
+        "CSIRT"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q030",
+      "termId": "sc-vocab-059",
+      "relatedAnswers": [
+        "スクリーンドサブネット"
+      ],
+      "incorrectAnswers": [
+        "ファイアウォール",
+        "マイクロセグメンテーション"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q031",
+      "termId": "sc-vocab-159",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "HSM",
+        "エンベロープ暗号化",
+        "シークレット管理"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q032",
+      "termId": "sc-vocab-073",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DNS over HTTPS",
+        "DNSキャッシュポイズニング",
+        "TSIG"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q033",
+      "termId": "sc-vocab-187",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "詳細リスク分析",
+        "組合せアプローチ",
+        "非形式的アプローチ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q034",
+      "termId": "sc-vocab-083",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "共通鍵暗号",
+        "RSA",
+        "デジタル署名"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q035",
+      "termId": "sc-vocab-009",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "オーセンティケータ",
+        "認証サーバ",
+        "IEEE 802.1X"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q036",
+      "termId": "sc-vocab-101",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Diffie-Hellman鍵交換",
+        "TLS",
+        "危殆化"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q037",
+      "termId": "sc-vocab-050",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSRF",
+        "IMDS",
+        "オープンリダイレクト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q038",
+      "termId": "sc-vocab-107",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "APT",
+        "スピアフィッシング",
+        "水飲み場攻撃",
+        "BEC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q039",
+      "termId": "sc-vocab-076",
+      "relatedAnswers": [
+        "SDP"
+      ],
+      "incorrectAnswers": [
+        "SSL-VPN",
+        "SASE",
+        "ゼロトラスト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q040",
+      "termId": "sc-vocab-126",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Pass-the-Ticket",
+        "ラテラルムーブメント",
+        "DCSync"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q041",
+      "termId": "sc-vocab-094",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "認証局",
+        "発行局"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q042",
+      "termId": "sc-vocab-137",
+      "relatedAnswers": [
+        "インシデント対応チーム"
+      ],
+      "incorrectAnswers": [
+        "SOC",
+        "PSIRT",
+        "JPCERT/CC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q043",
+      "termId": "sc-vocab-121",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ファーミング",
+        "DNSSEC",
+        "DNS水責め攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q044",
+      "termId": "sc-vocab-134",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "EDR",
+        "SIEM",
+        "NDR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q045",
+      "termId": "sc-vocab-156",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SLA",
+        "CSPM",
+        "IaaS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q046",
+      "termId": "sc-vocab-138",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSIRT",
+        "SOC",
+        "脆弱性開示ポリシー"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q047",
+      "termId": "sc-vocab-161",
+      "relatedAnswers": [
+        "IMDSv2"
+      ],
+      "incorrectAnswers": [
+        "SSRF",
+        "KMS",
+        "IAMロール"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q048",
+      "termId": "sc-vocab-182",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "リスク対応",
+        "リスクマネジメント",
+        "BIA"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q049",
+      "termId": "sc-vocab-162",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ISMS",
+        "CSマーク",
+        "JC-STAR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q050",
+      "termId": "sc-vocab-193",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "助言型監査",
+        "システム監査",
+        "内部監査"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q051",
+      "termId": "sc-vocab-021",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OAuth 2.0",
+        "SAML",
+        "JWT"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q052",
+      "termId": "sc-vocab-108",
+      "relatedAnswers": [
+        "ゼロデイ"
+      ],
+      "incorrectAnswers": [
+        "Nデイ攻撃",
+        "KEV",
+        "エクスプロイトコード"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q053",
+      "termId": "sc-vocab-063",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "AH",
+        "IKE",
+        "IPsec"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q054",
+      "termId": "sc-vocab-010",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CHAP",
+        "ワンタイムパスワード",
+        "PAP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q055",
+      "termId": "sc-vocab-033",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "格納型XSS",
+        "DOMベースXSS",
+        "XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q056",
+      "termId": "sc-vocab-060",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "IPS",
+        "ファイアウォール",
+        "SIEM"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q057",
+      "termId": "sc-vocab-023",
+      "relatedAnswers": [
+        "JWS"
+      ],
+      "incorrectAnswers": [
+        "ID トークン",
+        "JWE",
+        "SAMLアサーション"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q058",
+      "termId": "sc-vocab-036",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "XSS",
+        "SSRF",
+        "クリックジャッキング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q059",
+      "termId": "sc-vocab-064",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "トランスポートモード",
+        "IPsec",
+        "ESP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q060",
+      "termId": "sc-vocab-035",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "反射型XSS",
+        "格納型XSS",
+        "XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q061",
+      "termId": "sc-vocab-095",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OCSP",
+        "OCSPステープリング",
+        "認証局"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q062",
+      "termId": "sc-vocab-113",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "フィッシング",
+        "ショルダーハッキング",
+        "スキャベンジング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q063",
+      "termId": "sc-vocab-141",
+      "relatedAnswers": [
+        "パターンマッチング方式"
+      ],
+      "incorrectAnswers": [
+        "アノマリ型検知",
+        "パターンマッチング",
+        "ヒューリスティック法"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q064",
+      "termId": "sc-vocab-084",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DES",
+        "RSA",
+        "ChaCha20"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q065",
+      "termId": "sc-vocab-111",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ドライブバイダウンロード",
+        "標的型攻撃",
+        "ファーミング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q066",
+      "termId": "sc-vocab-144",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "証拠保全",
+        "デジタルフォレンジックス",
+        "監査証跡",
+        "ハッシュ関数"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q067",
+      "termId": "sc-vocab-157",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSPM",
+        "SASE",
+        "DLP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q068",
+      "termId": "sc-vocab-183",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "リスク回避",
+        "リスク低減",
+        "リスク保有"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q069",
+      "termId": "sc-vocab-024",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "FIDO2",
+        "WebAuthn",
+        "生体認証"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q070",
+      "termId": "sc-vocab-164",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SBOM",
+        "コード署名",
+        "サプライチェーン攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q071",
+      "termId": "sc-vocab-054",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CSRF",
+        "X-Frame-Options",
+        "CSP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q072",
+      "termId": "sc-vocab-029",
+      "relatedAnswers": [
+        "JITアクセス"
+      ],
+      "incorrectAnswers": [
+        "職務分掌",
+        "Need to Know",
+        "PAM"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q073",
+      "termId": "sc-vocab-065",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "IPsec",
+        "IP-VPN",
+        "ZTNA"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q074",
+      "termId": "sc-vocab-022",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "stateパラメータ",
+        "OAuth 2.0",
+        "nonce"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q075",
+      "termId": "sc-vocab-096",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CRL",
+        "OCSPステープリング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q076",
+      "termId": "sc-vocab-037",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "セッションフィクセーション",
+        "中間者攻撃",
+        "AitMフィッシング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q077",
+      "termId": "sc-vocab-116",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ブルートフォース攻撃",
+        "パスワードリスト攻撃",
+        "辞書攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q078",
+      "termId": "sc-vocab-040",
+      "relatedAnswers": [
+        "CRLFインジェクション"
+      ],
+      "incorrectAnswers": [
+        "XSS",
+        "オープンリダイレクト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q079",
+      "termId": "sc-vocab-142",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "シグネチャ型検知",
+        "UEBA",
+        "ビヘイビア法"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q080",
+      "termId": "sc-vocab-061",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "IDS",
+        "WAF",
+        "ファイアウォール"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q081",
+      "termId": "sc-vocab-172",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "HSM",
+        "セキュアブート",
+        "耐タンパ性"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q082",
+      "termId": "sc-vocab-087",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "HMAC",
+        "メッセージダイジェスト",
+        "SHA-2"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q083",
+      "termId": "sc-vocab-191",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "リスクアセスメント",
+        "BCP",
+        "RTO"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q084",
+      "termId": "sc-vocab-103",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "量子暗号",
+        "RSA",
+        "暗号アジリティ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q085",
+      "termId": "sc-vocab-025",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "WebAuthn",
+        "CTAP",
+        "パスキー"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q086",
+      "termId": "sc-vocab-114",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "辞書攻撃",
+        "パスワードスプレー攻撃",
+        "パスワードリスト攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q087",
+      "termId": "sc-vocab-056",
+      "relatedAnswers": [
+        "間接プロンプトインジェクション"
+      ],
+      "incorrectAnswers": [
+        "データポイズニング",
+        "ジェイルブレイク",
+        "SQLインジェクション"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q088",
+      "termId": "sc-vocab-123",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DRDoS",
+        "DNSキャッシュポイズニング",
+        "オープンリゾルバ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q089",
+      "termId": "sc-vocab-067",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SMTPS",
+        "TLS",
+        "ダウングレード攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q090",
+      "termId": "sc-vocab-132",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SOAR",
+        "XDR",
+        "syslog"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q091",
+      "termId": "sc-vocab-097",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "PKI",
+        "PKCS",
+        "CRL"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q092",
+      "termId": "sc-vocab-146",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TAXII",
+        "TLP",
+        "IoC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q093",
+      "termId": "sc-vocab-117",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ソルト",
+        "ブルートフォース攻撃",
+        "辞書攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q094",
+      "termId": "sc-vocab-174",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CWE",
+        "CVSS",
+        "JVN"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q095",
+      "termId": "sc-vocab-145",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TTP",
+        "STIX",
+        "脅威インテリジェンス"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q096",
+      "termId": "sc-vocab-166",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "サプライチェーン攻撃",
+        "タイポスクワッティング",
+        "SBOM"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q097",
+      "termId": "sc-vocab-184",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "リスク低減",
+        "リスク移転",
+        "残留リスク"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q098",
+      "termId": "sc-vocab-176",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CVE",
+        "CVSS",
+        "OWASP Top 10"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q099",
+      "termId": "sc-vocab-197",
+      "relatedAnswers": [
+        "不正指令電磁的記録に関する罪"
+      ],
+      "incorrectAnswers": [
+        "不正指令電磁的記録取得等罪",
+        "不正アクセス禁止法",
+        "電子計算機損壊等業務妨害罪"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q100",
+      "termId": "sc-vocab-198",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "NIST CSF 1.1",
+        "CSF 1.1",
+        "NIST SP 800-53",
+        "ISMS",
+        "CIS Controls"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q101",
+      "termId": "sc-vocab-011",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "PAP",
+        "チャレンジレスポンス認証",
+        "MS-CHAPv2"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q102",
+      "termId": "sc-vocab-185",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "リスク保有",
+        "リスク受容基準",
+        "固有リスク"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q103",
+      "termId": "sc-vocab-013",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "HOTP",
+        "ワンタイムパスワード",
+        "チャレンジレスポンス認証"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q104",
+      "termId": "sc-vocab-039",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SQLインジェクション",
+        "ディレクトリトラバーサル"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q105",
+      "termId": "sc-vocab-147",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TLP 1.0",
+        "STIX",
+        "TAXII",
+        "情報共有"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q106",
+      "termId": "sc-vocab-012",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TOTP",
+        "HOTP",
+        "S/KEY"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q107",
+      "termId": "sc-vocab-068",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DKIM",
+        "DMARC",
+        "S/MIME"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q108",
+      "termId": "sc-vocab-051",
+      "relatedAnswers": [
+        "IDOR",
+        "Insecure Direct Object Reference"
+      ],
+      "incorrectAnswers": [
+        "BFLA",
+        "認証の不備",
+        "ディレクトリトラバーサル"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q109",
+      "termId": "sc-vocab-015",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "他人受容率",
+        "等価エラー率"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q110",
+      "termId": "sc-vocab-062",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TLS",
+        "SSL-VPN",
+        "ESP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q111",
+      "termId": "sc-vocab-098",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "デジタル署名",
+        "時刻認証局",
+        "ブロックチェーン"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q112",
+      "termId": "sc-vocab-110",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ボットネット",
+        "踏み台",
+        "DNSトンネリング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q113",
+      "termId": "sc-vocab-148",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "サイバーキルチェーン",
+        "TTP",
+        "IoC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q114",
+      "termId": "sc-vocab-089",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SHA-256",
+        "SHA-1",
+        "SHA-3",
+        "MD5"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q115",
+      "termId": "sc-vocab-118",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "AitMフィッシング",
+        "ソーシャルエンジニアリング",
+        "多要素認証"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q116",
+      "termId": "sc-vocab-170",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "特権コンテナ",
+        "VMエスケープ",
+        "サンドボックス"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q117",
+      "termId": "sc-vocab-016",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "本人拒否率",
+        "等価エラー率"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q118",
+      "termId": "sc-vocab-127",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ゴールデンチケット",
+        "Pass-the-Hash",
+        "Kerberoasting"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q119",
+      "termId": "sc-vocab-163",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SLSA",
+        "SCA",
+        "依存関係かく乱攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q120",
+      "termId": "sc-vocab-188",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "BCM",
+        "BIA",
+        "RTO"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q121",
+      "termId": "sc-vocab-034",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "反射型XSS",
+        "DOMベースXSS",
+        "XSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q122",
+      "termId": "sc-vocab-014",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "本人拒否率",
+        "他人受容率",
+        "パスキー"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q123",
+      "termId": "sc-vocab-069",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SPF",
+        "DMARC",
+        "S/MIME"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q124",
+      "termId": "sc-vocab-008",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "EAP-TLS",
+        "EAP-TTLS",
+        "EAP-MD5"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q125",
+      "termId": "sc-vocab-099",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ストレッチング",
+        "ペッパー",
+        "レインボーテーブル攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q126",
+      "termId": "sc-vocab-041",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OSコマンドインジェクション",
+        "LFI"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q127",
+      "termId": "sc-vocab-122",
+      "relatedAnswers": [
+        "アンプ攻撃",
+        "DNSアンプ攻撃",
+        "リフレクション攻撃"
+      ],
+      "incorrectAnswers": [
+        "DDoS攻撃",
+        "オープンリゾルバ",
+        "SYNフラッド攻撃"
+      ],
+      "pendingCandidates": [
+        "リフレクション攻撃（保留。推奨：自己判定）"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q128",
+      "termId": "sc-vocab-055",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SSRF",
+        "ディレクトリトラバーサル"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q129",
+      "termId": "sc-vocab-152",
+      "relatedAnswers": [
+        "ハニーネット"
+      ],
+      "incorrectAnswers": [
+        "サンドボックス",
+        "ダークネット",
+        "ハニートークン"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q130",
+      "termId": "sc-vocab-066",
+      "relatedAnswers": [
+        "TLS 1.3",
+        "TLS 1.2"
+      ],
+      "incorrectAnswers": [
+        "SSL",
+        "SSL 3.0",
+        "IPsec",
+        "STARTTLS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q131",
+      "termId": "sc-vocab-167",
+      "relatedAnswers": [
+        "静的解析"
+      ],
+      "incorrectAnswers": [
+        "DAST",
+        "SCA",
+        "コードレビュー"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q132",
+      "termId": "sc-vocab-077",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ZTNA",
+        "CASB",
+        "SD-WAN"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q133",
+      "termId": "sc-vocab-194",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "保証型監査",
+        "システム監査"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q134",
+      "termId": "sc-vocab-090",
+      "relatedAnswers": [
+        "電子署名"
+      ],
+      "incorrectAnswers": [
+        "HMAC",
+        "タイムスタンプ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q135",
+      "termId": "sc-vocab-017",
+      "relatedAnswers": [
+        "適応型認証"
+      ],
+      "incorrectAnswers": [
+        "多要素認証",
+        "UEBA"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q136",
+      "termId": "sc-vocab-105",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OCSP",
+        "CRL",
+        "認証局"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q137",
+      "termId": "sc-vocab-038",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "セッションハイジャック",
+        "CSRF"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q138",
+      "termId": "sc-vocab-119",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "AitMフィッシング",
+        "盗聴",
+        "セッションハイジャック"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q139",
+      "termId": "sc-vocab-071",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "サブミッションポート",
+        "SMTP-AUTH",
+        "IP25B"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q140",
+      "termId": "sc-vocab-128",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ゴールデンチケット",
+        "AS-REP Roasting",
+        "DCSync"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q141",
+      "termId": "sc-vocab-104",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "電子政府推奨暗号リスト",
+        "FIPS 140",
+        "JCMVP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q142",
+      "termId": "sc-vocab-139",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "フォールスネガティブ",
+        "シグネチャ型検知",
+        "アノマリ型検知"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q143",
+      "termId": "sc-vocab-130",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "権限昇格",
+        "Pass-the-Hash",
+        "マイクロセグメンテーション"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q144",
+      "termId": "sc-vocab-153",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "アノマリ型検知",
+        "SIEM",
+        "リスクベース認証"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q145",
+      "termId": "sc-vocab-175",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CVSS v3.1",
+        "CVSS v3.0",
+        "CVSS v3",
+        "CVSS v2",
+        "CVE",
+        "CWE",
+        "EPSS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q146",
+      "termId": "sc-vocab-154",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "根絶",
+        "復旧",
+        "トリアージ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q147",
+      "termId": "sc-vocab-177",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "EPSS",
+        "CVSS",
+        "SSVC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q148",
+      "termId": "sc-vocab-189",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "MTPD",
+        "最大許容停止時間",
+        "RPO",
+        "BCP",
+        "MTD"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q149",
+      "termId": "sc-vocab-168",
+      "relatedAnswers": [
+        "ブラックボックス診断"
+      ],
+      "incorrectAnswers": [
+        "SAST",
+        "ペネトレーションテスト",
+        "ファジング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q150",
+      "termId": "sc-vocab-200",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "セキュアバイデフォルト",
+        "シフトレフト",
+        "プライバシーバイデザイン"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q151",
+      "termId": "sc-vocab-018",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OpenID Connect",
+        "シングルサインオン",
+        "IdP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q152",
+      "termId": "sc-vocab-190",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "RTO",
+        "バックアップ",
+        "BCP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q153",
+      "termId": "sc-vocab-072",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OP25B",
+        "SMTP-AUTH",
+        "SMTPS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q154",
+      "termId": "sc-vocab-026",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "FIDO2",
+        "CTAP",
+        "パスキー"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q155",
+      "termId": "sc-vocab-169",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DAST",
+        "SAST",
+        "ペネトレーションテスト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q156",
+      "termId": "sc-vocab-043",
+      "relatedAnswers": [
+        "サニタイジング",
+        "HTMLエスケープ"
+      ],
+      "incorrectAnswers": [
+        "入力値検証",
+        "静的プレースホルダ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q157",
+      "termId": "sc-vocab-020",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "OpenID Connect",
+        "SAML",
+        "JWT"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q158",
+      "termId": "sc-vocab-079",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "プロキシサーバ",
+        "WAF",
+        "ロードバランサ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q159",
+      "termId": "sc-vocab-044",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "HttpOnly属性",
+        "SameSite属性",
+        "HSTS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q160",
+      "termId": "sc-vocab-092",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "認証局",
+        "登録局",
+        "X.509"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q161",
+      "termId": "sc-vocab-074",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "DRDoS",
+        "権威DNSサーバ",
+        "DNSキャッシュポイズニング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q162",
+      "termId": "sc-vocab-112",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "フィッシング",
+        "標的型攻撃",
+        "ソーシャルエンジニアリング"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q163",
+      "termId": "sc-vocab-091",
+      "relatedAnswers": [
+        "MAC",
+        "メッセージ認証コード"
+      ],
+      "incorrectAnswers": [
+        "デジタル署名",
+        "ハッシュ関数",
+        "MACアドレス"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q164",
+      "termId": "sc-vocab-129",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "シルバーチケット",
+        "DCSync",
+        "Kerberos"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q165",
+      "termId": "sc-vocab-143",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Chain of Custody",
+        "インシデントレスポンス",
+        "監査証跡"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q166",
+      "termId": "sc-vocab-178",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "CVSS",
+        "KEV",
+        "SSVC"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q167",
+      "termId": "sc-vocab-027",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ABAC",
+        "任意アクセス制御",
+        "強制アクセス制御"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q168",
+      "termId": "sc-vocab-140",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "フォールスポジティブ",
+        "ゼロデイ攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q169",
+      "termId": "sc-vocab-171",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TPM",
+        "メジャードブート",
+        "ブートキット"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q170",
+      "termId": "sc-vocab-192",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "状況的犯罪予防",
+        "内部不正",
+        "職務分掌"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q171",
+      "termId": "sc-vocab-047",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Secure属性",
+        "HTTPS",
+        "CSP"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q172",
+      "termId": "sc-vocab-019",
+      "relatedAnswers": [
+        "OP",
+        "OpenID Provider"
+      ],
+      "incorrectAnswers": [
+        "SP（サービスプロバイダ）",
+        "認可サーバ",
+        "SAML"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q173",
+      "termId": "sc-vocab-075",
+      "relatedAnswers": [
+        "WPA3-Personal"
+      ],
+      "incorrectAnswers": [
+        "SAE",
+        "WPA2",
+        "WEP",
+        "IEEE 802.1X"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q174",
+      "termId": "sc-vocab-028",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "RBAC",
+        "リスクベース認証",
+        "ゼロトラスト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q175",
+      "termId": "sc-vocab-100",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ソルト",
+        "ブルートフォース攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q176",
+      "termId": "sc-vocab-052",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ファイアウォール",
+        "IPS",
+        "ポジティブモデル"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q177",
+      "termId": "sc-vocab-124",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "Connection Flood",
+        "UDP Flood",
+        "DRDoS"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q178",
+      "termId": "sc-vocab-042",
+      "relatedAnswers": [
+        "プリペアドステートメント",
+        "バインド機構"
+      ],
+      "incorrectAnswers": [
+        "動的プレースホルダ",
+        "エスケープ処理"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q179",
+      "termId": "sc-vocab-149",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "MITRE ATT&CK",
+        "多層防御"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q180",
+      "termId": "sc-vocab-081",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "境界防御",
+        "ZTNA",
+        "マイクロセグメンテーション"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q181",
+      "termId": "sc-vocab-173",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "デジタル署名",
+        "SLSA",
+        "セキュアブート"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q182",
+      "termId": "sc-vocab-080",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "VLAN",
+        "DMZ",
+        "ゼロトラスト"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q183",
+      "termId": "sc-vocab-195",
+      "relatedAnswers": [
+        "監査ログ"
+      ],
+      "incorrectAnswers": [
+        "監査証拠",
+        "Chain of Custody",
+        "ログ"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q184",
+      "termId": "sc-vocab-093",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "登録局",
+        "PKI",
+        "時刻認証局"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q185",
+      "termId": "sc-vocab-030",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "IAM",
+        "最小権限の原則",
+        "Pluggable Authentication Modules"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q186",
+      "termId": "sc-vocab-088",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "原像計算困難性",
+        "第二原像計算困難性",
+        "ハッシュ関数"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q187",
+      "termId": "sc-vocab-053",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ネガティブモデル",
+        "シグネチャ型検知",
+        "アノマリ型検知"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q188",
+      "termId": "sc-vocab-115",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ブルートフォース攻撃",
+        "パスワードスプレー攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q189",
+      "termId": "sc-vocab-078",
+      "relatedAnswers": [
+        "検疫ネットワーク"
+      ],
+      "incorrectAnswers": [
+        "IEEE 802.1X",
+        "ZTNA"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q190",
+      "termId": "sc-vocab-131",
+      "relatedAnswers": [
+        "ファイルレス攻撃",
+        "ファイルレスマルウェア"
+      ],
+      "incorrectAnswers": [
+        "LOLBins",
+        "EDR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q191",
+      "termId": "sc-vocab-102",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "TPM",
+        "KMS",
+        "耐タンパ性"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q192",
+      "termId": "sc-vocab-150",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ハニーポット",
+        "ビヘイビア法",
+        "EDR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q193",
+      "termId": "sc-vocab-125",
+      "relatedAnswers": [
+        "スタックオーバーフロー"
+      ],
+      "incorrectAnswers": [
+        "整数オーバーフロー",
+        "ヒープ攻撃",
+        "ASLR"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q194",
+      "termId": "sc-vocab-155",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "SOC",
+        "IoC",
+        "MITRE ATT&CK"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q195",
+      "termId": "sc-vocab-165",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "依存関係かく乱攻撃",
+        "水飲み場攻撃",
+        "SBOM"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q196",
+      "termId": "sc-vocab-151",
+      "relatedAnswers": [
+        "動的ヒューリスティック法"
+      ],
+      "incorrectAnswers": [
+        "パターンマッチング",
+        "静的ヒューリスティック法",
+        "サンドボックス"
+      ],
+      "pendingCandidates": [
+        "動的ヒューリスティック法（参考書本文で同義性を確認するまで自動受理しない）"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q197",
+      "termId": "sc-vocab-179",
+      "relatedAnswers": [
+        "TOCTOU"
+      ],
+      "incorrectAnswers": [
+        "デッドロック",
+        "シンボリックリンク攻撃"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q198",
+      "termId": "sc-vocab-196",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "不正指令電磁的記録作成罪",
+        "電子計算機使用詐欺罪"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q199",
+      "termId": "sc-vocab-180",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "脆弱性診断",
+        "レッドチーム演習",
+        "DAST"
+      ],
+      "pendingCandidates": []
+    },
+    {
+      "questionId": "sc-vocab-q200",
+      "termId": "sc-vocab-199",
+      "relatedAnswers": [],
+      "incorrectAnswers": [
+        "ISMS",
+        "トークナイゼーション"
+      ],
+      "pendingCandidates": []
+    }
+  ]
+}

@@ -1,0 +1,945 @@
+{
+  "schemaVersion": "1.0",
+  "module": "sc-vocab-writing",
+  "setNo": 2,
+  "setId": "sc-vocab-set02",
+  "questions": [
+    {
+      "questionId": "sc-vocab-q051",
+      "order": 1,
+      "termId": "sc-vocab-021",
+      "prompt": "認可の仕組みである OAuth 2.0 を拡張して認証の機能を加えた ID 連携の仕様は何か。利用者を認証したプロバイダが、その結果を JWT 形式の「ID トークン」として連携先のアプリケーションに渡す点が特徴である。",
+      "answer": "OpenID Connect",
+      "acceptedAnswers": [
+        "OpenID Connect",
+        "OIDC"
+      ],
+      "explanation": "OpenID Connect（OIDC）は、OAuth 2.0 のフローに ID トークンを加えることで、「誰が認証されたか」を連携先に伝えられるようにした仕様である。OAuth 2.0 単体はリソースへのアクセス権限を委譲する認可の仕組みであり、ID トークンを持たない。SAML も ID 連携の仕様だが、XML 形式のアサーションを用いる点で異なる。JWT はトークンの形式の名称であり、仕様全体の名称ではない。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://openid.net/specs/openid-connect-core-1_0.html",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q052",
+      "order": 2,
+      "termId": "sc-vocab-108",
+      "prompt": "ソフトウェアの脆弱性が見つかってから、開発元が修正プログラムを提供するまで（または脆弱性情報が公表されるまで）の、対策が存在しない期間に、その脆弱性を突いて行われる攻撃を何というか。",
+      "answer": "ゼロデイ攻撃",
+      "acceptedAnswers": [
+        "ゼロデイ攻撃",
+        "Zero-day攻撃",
+        "ゼロデイアタック"
+      ],
+      "explanation": "ゼロデイ攻撃は、修正プログラムが提供される前に行われるため、パッチの適用では防げない。被害の緩和には、EDR などによる挙動の監視や多層防御が重要となる。修正プログラムの公開後に、未適用のシステムを狙う攻撃は N デイ攻撃と呼ばれ、区別される。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "basic",
+      "referenceUrls": []
+    },
+    {
+      "questionId": "sc-vocab-q053",
+      "order": 3,
+      "termId": "sc-vocab-063",
+      "prompt": "IPsec を構成するプロトコルのうち、IP パケットのペイロードを暗号化して秘匿するとともに、完全性の検証と送信元の認証も提供するものは何か。暗号化を行わず認証と完全性の確保だけを提供するプロトコルと対比される。",
+      "answer": "ESP",
+      "acceptedAnswers": [
+        "ESP",
+        "Encapsulating Security Payload"
+      ],
+      "explanation": "ESP（Encapsulating Security Payload）は、暗号化・完全性・送信元認証を提供する IPsec のプロトコルで、現在の IPsec-VPN では主にこちらが使われる。AH は暗号化を行わず完全性と認証だけを提供し、IP ヘッダも認証の対象に含むため NAT と組み合わせにくい。IKE は IPsec で用いる鍵を交換するためのプロトコルであり、データの保護そのものは行わない。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc4303"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q054",
+      "order": 4,
+      "termId": "sc-vocab-010",
+      "prompt": "サーバが認証のたびに異なる乱数を送り、クライアントはその乱数とパスワードなどの秘密情報から計算した値を返し、サーバも同じ計算をして照合することで、秘密情報そのものをネットワークに流さずに本人を確認する認証方式を何というか。",
+      "answer": "チャレンジレスポンス認証",
+      "acceptedAnswers": [
+        "チャレンジレスポンス認証",
+        "チャレンジレスポンス方式",
+        "Challenge-Response認証"
+      ],
+      "explanation": "チャレンジレスポンス認証では、送られる値が毎回変わるため、通信を盗聴されても同じ値を使い回すリプレイ攻撃が成立しにくい。CHAP はこの方式を PPP 向けに具体化したプロトコルであり、方式そのものの名称ではない。PAP はパスワードを平文のまま送る方式であり、対照的である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc1994"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q055",
+      "order": 5,
+      "termId": "sc-vocab-033",
+      "prompt": "XSS の類型のうち、攻撃者が細工した URL のパラメータなどに含まれるスクリプトを、Web アプリケーションがサーバに保存することなく即座にレスポンスの HTML に埋め込んで返してしまい、その URL にアクセスした利用者のブラウザでだけスクリプトが動作するものを何というか。",
+      "answer": "反射型XSS",
+      "acceptedAnswers": [
+        "反射型XSS",
+        "Reflected XSS",
+        "反射型クロスサイトスクリプティング",
+        "非持続型XSS",
+        "Non-persistent XSS"
+      ],
+      "explanation": "反射型 XSS は、リクエストに含まれた値がそのままレスポンスに反映されることで成立し、攻撃者は細工したリンクを利用者に踏ませる必要がある。格納型 XSS は、スクリプトが掲示板の投稿などとしてサーバに保存され、そのページを閲覧したすべての利用者に影響する点で異なる。DOM ベース XSS は、サーバの出力ではなくブラウザ側の JavaScript の処理が原因となる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/79.html",
+        "https://owasp.org/www-community/attacks/xss/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q056",
+      "order": 6,
+      "termId": "sc-vocab-060",
+      "prompt": "ネットワークを流れる通信やホスト上の挙動を監視し、不正アクセスや攻撃の兆候を見つけて管理者に通知する仕組みで、通常は通信の遮断までは行わないものを何というか。",
+      "answer": "IDS",
+      "acceptedAnswers": [
+        "IDS",
+        "侵入検知システム",
+        "Intrusion Detection System"
+      ],
+      "explanation": "IDS（Intrusion Detection System）は検知と通知を役割とし、遮断は基本的に行わない。IPS は通信経路上にインラインで配置され、不正と判断した通信を自動的に遮断する点で異なる。ネットワーク型（NIDS）とホスト型（HIDS）は IDS の下位分類であり、設問はその総称を問うている。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-94"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q057",
+      "order": 7,
+      "termId": "sc-vocab-023",
+      "prompt": "ヘッダ、クレームを格納するペイロード、署名の3つの部分をそれぞれ Base64URL でエンコードし、ドットで連結した、URL にも安全に載せられる JSON ベースのトークン形式は何か。署名や MAC によって内容の改ざんを検知できるが、それだけでは内容は秘匿されない。",
+      "answer": "JWT",
+      "acceptedAnswers": [
+        "JWT",
+        "JSON Web Token",
+        "ジョット"
+      ],
+      "explanation": "JWT（JSON Web Token）は形式の名称であり、OpenID Connect の ID トークンや、OAuth 2.0 のアクセストークンとして利用される。署名付きの JWT（JWS）はペイロードを Base64URL でエンコードしているだけなので、誰でも内容を読める。内容を秘匿したい場合は暗号化の形式である JWE を用いる。なお JWT は JWE（暗号化、5つの部分）として表すこともでき、本設問の3部構成は署名付き（JWS 形式）の JWT を指す。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc7519",
+        "https://www.rfc-editor.org/rfc/rfc8725"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q058",
+      "order": 8,
+      "termId": "sc-vocab-036",
+      "prompt": "正規サイトにログインしたままの利用者に罠サイトを閲覧させ、利用者のブラウザから正規サイトへ、送金や設定変更など利用者が意図していない処理のリクエストを Cookie 付きで送らせる攻撃（またはその脆弱性）を何というか。",
+      "answer": "CSRF",
+      "acceptedAnswers": [
+        "CSRF",
+        "クロスサイトリクエストフォージェリ",
+        "Cross-Site Request Forgery",
+        "XSRF",
+        "CSRF攻撃",
+        "クロスサイトリクエストフォージェリ攻撃"
+      ],
+      "explanation": "CSRF（Cross-Site Request Forgery）は、正規サイトがリクエストの送信元を確認しないことを悪用する。対策には、推測困難なトークンの埋め込みによる確認や、SameSite 属性の付与がある。XSS はスクリプトをブラウザ上で実行させる攻撃、SSRF はサーバ自身に意図しないリクエストを送らせる攻撃であり、CSRF は「利用者のブラウザ」に送らせる点で異なる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/352.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q059",
+      "order": 9,
+      "termId": "sc-vocab-064",
+      "prompt": "IPsec の2つの通信モードのうち、元の IP ヘッダを含めた IP パケット全体を暗号化してカプセル化し、新しい IP ヘッダを付けて送るモードは何か。主に拠点間 VPN で、VPN ゲートウェイ同士の通信に用いられる。",
+      "answer": "トンネルモード",
+      "acceptedAnswers": [
+        "トンネルモード",
+        "Tunnel Mode"
+      ],
+      "explanation": "トンネルモードでは元の IP ヘッダも保護されるため、経路上からは本来の送信元・宛先の端末のアドレスが見えない。トランスポートモードは元の IP ヘッダを残してペイロードだけを保護するモードで、主に端末同士の直接の通信に使われる。ESP や AH はプロトコルの名称であり、どちらもいずれのモードでも使用できる。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc4301"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q060",
+      "order": 10,
+      "termId": "sc-vocab-035",
+      "prompt": "XSS の類型のうち、サーバから返る HTML 自体には問題がないのに、ページ内の JavaScript が URL のフラグメント（# 以降）などの値を innerHTML のような安全でない方法でページに書き込むために、クライアント側の処理だけでスクリプトが実行されてしまうものを何というか。",
+      "answer": "DOMベースXSS",
+      "acceptedAnswers": [
+        "DOMベースXSS",
+        "DOM based XSS",
+        "DOM-based XSS",
+        "DOM型XSS"
+      ],
+      "explanation": "DOM ベース XSS は、原因がクライアント側の JavaScript にあり、フラグメントはサーバに送信されないため、サーバ側のログに痕跡が残らない場合がある。反射型 XSS と格納型 XSS は、サーバが出力する HTML にスクリプトが含まれてしまう点で異なる。対策として、textContent などの安全な API の利用や、Trusted Types の導入がある。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/79.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q061",
+      "order": 11,
+      "termId": "sc-vocab-095",
+      "prompt": "有効期限が来る前に効力を取り消した証明書について、認証局がそのシリアル番号や取消しの日時を並べて署名し、定期的に発行・公開するものは何か。利用者はこれを入手し、検証したい証明書が含まれていないかを自分で照合する。",
+      "answer": "CRL",
+      "acceptedAnswers": [
+        "CRL",
+        "証明書失効リスト",
+        "Certificate Revocation List"
+      ],
+      "explanation": "CRL（Certificate Revocation List）は一覧全体を取得する方式のため、失効した証明書が多いとサイズが大きくなり、次の発行までは最新の失効状態が反映されない。OCSP は、個々の証明書の失効状態をレスポンダにオンラインで問い合わせるプロトコルである。OCSP ステープリングは、Web サーバが取得した OCSP 応答を TLS ハンドシェイクの中でクライアントに提示する方式である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc5280"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q062",
+      "order": 12,
+      "termId": "sc-vocab-113",
+      "prompt": "肩越しにパスワード入力をのぞき見る、システム管理者を装って電話でパスワードを聞き出す、ごみ箱から機密書類を探す、といった手口の総称で、人間の心理的な隙や行動のミスにつけ込み、技術的な手段によらずに機密情報を入手するものを何というか。",
+      "answer": "ソーシャルエンジニアリング",
+      "acceptedAnswers": [
+        "ソーシャルエンジニアリング",
+        "Social Engineering"
+      ],
+      "explanation": "ソーシャルエンジニアリングは、人を対象とする攻撃手法の総称である。設問の例はそれぞれ、ショルダーハッキング、なりすましによる聞き出し、スキャベンジング（ごみあさり）と呼ばれる具体的な手口である。フィッシングもソーシャルエンジニアリングの要素を持つが、偽のメールや偽サイトを用いた個別の手口の名称であり、総称ではない。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "basic",
+      "referenceUrls": []
+    },
+    {
+      "questionId": "sc-vocab-q063",
+      "order": 13,
+      "termId": "sc-vocab-141",
+      "prompt": "IDS などの検知方式のうち、既知の攻撃や不正の特徴をパターンとしてあらかじめ定義しておき、監視対象の通信や挙動がそれと一致した場合に攻撃と判定する方式を何というか。既知の攻撃は高い精度で検知できるが、パターンが用意されていない未知の攻撃は検知できない。",
+      "answer": "シグネチャ型検知",
+      "acceptedAnswers": [
+        "シグネチャ型検知",
+        "シグネチャ型",
+        "ミスユース検知",
+        "Misuse検知法",
+        "不正検出",
+        "シグネチャ検知"
+      ],
+      "explanation": "シグネチャ型検知（ミスユース検知）は、攻撃パターンとの一致によって判定するため、誤検知は比較的少ないが、パターンの更新が欠かせない。アノマリ型検知は正常な状態を定義し、そこから逸脱したものを検知するため、未知の攻撃も検知しうる一方、誤検知が増えやすい。ウイルス対策ソフトの「パターンマッチング」も考え方は近いが、本設問では IDS などの検知方式の分類名を問うている。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-94"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q064",
+      "order": 14,
+      "termId": "sc-vocab-084",
+      "prompt": "DES に代わる標準として米国 NIST が公募を経て制定した共通鍵のブロック暗号は何か。ブロック長は 128 ビットで、鍵長は 128・192・256 ビットから選択できる。",
+      "answer": "AES",
+      "acceptedAnswers": [
+        "AES",
+        "Advanced Encryption Standard"
+      ],
+      "explanation": "AES（Advanced Encryption Standard）は、公募によって選定された Rijndael を基に標準化されたブロック暗号で、現在、最も広く使われている共通鍵暗号である。DES や 3DES は旧世代の共通鍵暗号で、現在は新規の利用が推奨されない。ChaCha20 は TLS などで AES の代替として使われるストリーム暗号である。RSA は公開鍵暗号であり、分類が異なる。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.FIPS.197-upd1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q065",
+      "order": 15,
+      "termId": "sc-vocab-111",
+      "prompt": "標的とする組織の従業員が日ごろよく閲覧する業界団体のサイトなどを改ざんしてマルウェアを仕込み、その組織のネットワークからアクセスした場合にだけ感染させるなどして、標的が訪れるのを待ち伏せる攻撃を何というか。",
+      "answer": "水飲み場攻撃",
+      "acceptedAnswers": [
+        "水飲み場攻撃",
+        "Watering Hole攻撃",
+        "ウォーターホール攻撃",
+        "水飲み場型攻撃"
+      ],
+      "explanation": "水飲み場攻撃は、標的が訪れるサイトをあらかじめ選んで改ざんする点が特徴で、標的型攻撃の手段の一つである。ドライブバイダウンロードは、Web サイトを閲覧しただけでマルウェアをダウンロード・実行させる手法の総称で、閲覧者を限定しない。ファーミングは DNS の改ざんなどによって利用者を偽サイトへ誘導する手法である。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1189/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q066",
+      "order": 16,
+      "termId": "sc-vocab-144",
+      "prompt": "デジタルフォレンジックスで、証拠を収集してから保管、移送、解析を経て法廷などに提出するまで、どの時点で誰がどう扱ったかを切れ目なく記録し、証拠が途中ですり替えや改ざんを受けていないことを示せるようにすること（またはその記録）を何というか（英語の名称でもよい）。",
+      "answer": "Chain of Custody",
+      "acceptedAnswers": [
+        "Chain of Custody",
+        "証拠保全の管理記録",
+        "管理の連鎖",
+        "証拠の保管の連続性"
+      ],
+      "explanation": "Chain of Custody は、証拠の取扱いの経緯全体を連続して記録することで、証拠能力を担保するものである。証拠のハッシュ値を記録することは、取得時のデータとの同一性を示す技術的な手段であり、Chain of Custody を構成する要素の一つである。監査証跡はシステムの操作履歴の記録であり、証拠の取扱いの経緯の記録とは異なる。略語の CoC は Code of Conduct（行動規範）などと衝突するため、正答に含めていない。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-86"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q067",
+      "order": 17,
+      "termId": "sc-vocab-157",
+      "prompt": "利用者とクラウドサービスの間に配置し、従業員が利用しているクラウドサービスを可視化して、組織が把握していないシャドー IT を発見するとともに、クラウドサービスに対するアクセス制御、データ保護、脅威防御を一元的に行う仕組みを何というか。",
+      "answer": "CASB",
+      "acceptedAnswers": [
+        "CASB",
+        "キャスビー",
+        "Cloud Access Security Broker"
+      ],
+      "explanation": "CASB（Cloud Access Security Broker）は、クラウドサービスの「利用」を可視化・制御する仕組みである。CSPM は、組織が利用する IaaS・PaaS 環境の「設定」の不備を検出する仕組みであり、対象が異なる。SASE は、CASB などのセキュリティ機能とネットワーク機能をクラウドから統合して提供する、より広い枠組みである。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q068",
+      "order": 18,
+      "termId": "sc-vocab-183",
+      "prompt": "リスク対応の選択肢のうち、サイバー保険への加入や業務の外部委託などによって、リスクが顕在化した場合の損失の負担の全部または一部を他者と分け合うことを何というか。",
+      "answer": "リスク移転",
+      "acceptedAnswers": [
+        "リスク移転",
+        "リスクの移転",
+        "リスク共有",
+        "リスクの共有"
+      ],
+      "explanation": "リスク移転（ISO/IEC 27005 などでは「リスク共有」）は、損失の負担を他者と分担する対応である。ただし、外部委託しても情報漏えいなどが起きた場合の組織としての説明責任までは移らない点に注意が必要である。リスク回避はリスクの原因となる活動自体をやめること、リスク低減は対策によって発生確率や影響を下げること、リスク保有は特段の対策を講じずに受け入れることである。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-30r1",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q069",
+      "order": 19,
+      "termId": "sc-vocab-024",
+      "prompt": "FIDO 認証で使う資格情報（公開鍵暗号の鍵ペア）を、OS やパスワードマネージャの機能を通じて利用者の複数の端末間で同期・利用できるようにしたもので、パスワードに代わるログイン手段として普及しているものを、利用者向けの名称で何というか。",
+      "answer": "パスキー",
+      "acceptedAnswers": [
+        "パスキー",
+        "passkey",
+        "パスキー認証"
+      ],
+      "explanation": "パスキーは、サイトごとに鍵ペアが作られ、正規のサイト（オリジン）に結び付けて使われるため、フィッシングに強い。FIDO2 は WebAuthn と CTAP からなる技術仕様の総称、WebAuthn はブラウザ側の API 仕様であり、パスキーはそれらによって使われる資格情報を指す利用者向けの名称である。なお、セキュリティキーなどに保存されて同期されない「デバイス固定型」のパスキーもある。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://fidoalliance.org/passkeys/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q070",
+      "order": 20,
+      "termId": "sc-vocab-164",
+      "prompt": "ソフトウェアのサプライチェーンセキュリティの枠組みで、ビルド工程が改ざんされていないことと、配布物がどのソースコードからどの手順でビルドされたかを示す来歴（provenance）の生成・検証について、要件を段階的なレベルとして定めたものは何か。",
+      "answer": "SLSA",
+      "acceptedAnswers": [
+        "SLSA",
+        "Supply-chain Levels for Software Artifacts",
+        "サルサ"
+      ],
+      "explanation": "SLSA（Supply-chain Levels for Software Artifacts、「サルサ」）は、ビルドの完全性と来歴の検証可能性をレベル別に高めていくための枠組みである。SBOM はソフトウェアを構成する部品（コンポーネント）の一覧であり、何が含まれているかを示すものである点で異なる。コード署名は配布物の発行元と完全性を示す個別の技術である。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://slsa.dev/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q071",
+      "order": 21,
+      "termId": "sc-vocab-054",
+      "prompt": "正規サイトのページを透明にした iframe などで罠ページの上に重ねて表示し、利用者には罠ページのボタンを押しているように見せかけて、実際には正規サイト上で意図しない操作をクリックさせる攻撃を何というか。",
+      "answer": "クリックジャッキング",
+      "acceptedAnswers": [
+        "クリックジャッキング",
+        "Clickjacking",
+        "UIリドレス攻撃",
+        "クリックジャッキング攻撃"
+      ],
+      "explanation": "クリックジャッキングは、利用者自身に実際のクリック操作をさせる点が特徴である。対策は、X-Frame-Options ヘッダや CSP の frame-ancestors ディレクティブによって、他サイトのフレーム内での表示を禁止することである。CSRF は利用者の操作を介さずにリクエストを偽造して送らせる攻撃であり、仕組みが異なる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/1021.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Clickjacking_Defense_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q072",
+      "order": 22,
+      "termId": "sc-vocab-029",
+      "prompt": "利用者、プロセス、サービスアカウントなどに対し、業務やタスクの遂行に必要な範囲の権限だけを、必要な期間に限って与えるべきだとするセキュリティ設計上の原則を何というか。",
+      "answer": "最小権限の原則",
+      "acceptedAnswers": [
+        "最小権限の原則",
+        "最小特権の原則",
+        "Principle of Least Privilege",
+        "PoLP"
+      ],
+      "explanation": "最小権限の原則に従うと、アカウントが乗っ取られたりプログラムに脆弱性があったりした場合の被害範囲を限定できる。職務分掌は一人に権限や業務が集中しないよう役割を分ける原則であり、権限の量を絞る最小権限の原則とは観点が異なる。Need to Know は情報へのアクセスを知る必要のある者に限る原則で、近い考え方だが対象が情報に限られる。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-53r5"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q073",
+      "order": 23,
+      "termId": "sc-vocab-065",
+      "prompt": "HTTPS と同じ暗号化プロトコルを用いて、Web ブラウザや専用のクライアントソフトから社内ネットワークに暗号化した経路で接続できるようにするリモートアクセス用の VPN は何か。IP 層で暗号化する方式の VPN とは異なり、TCP の 443 番ポートを使うため、ファイアウォールを通過させやすい。",
+      "answer": "SSL-VPN",
+      "acceptedAnswers": [
+        "SSL-VPN",
+        "SSLVPN",
+        "TLS-VPN",
+        "SSL/TLS-VPN"
+      ],
+      "explanation": "SSL-VPN は、名称に SSL を含むが、現在の製品は TLS を用いている。IPsec-VPN は IP 層で暗号化する方式、IP-VPN は通信事業者の閉域網を使う方式であり、仕組みが異なる。SSL-VPN 装置は外部に公開されるため、その脆弱性は近年のランサムウェア被害などで侵入経路として頻繁に悪用されている。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-113"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q074",
+      "order": 24,
+      "termId": "sc-vocab-022",
+      "prompt": "OAuth 2.0 の認可コードフローで、クライアントがランダムな秘密の値（code_verifier）を生成し、そのハッシュ値（code_challenge）を認可要求の際に送り、トークン要求の際に元の値を提示させることで、途中で横取りされた認可コードを第三者が使えないようにする拡張仕様は何か。",
+      "answer": "PKCE",
+      "acceptedAnswers": [
+        "PKCE",
+        "Proof Key for Code Exchange",
+        "ピクシー"
+      ],
+      "explanation": "PKCE（Proof Key for Code Exchange）は、元々はクライアントシークレットを安全に保持できないスマートフォンアプリなどのために策定されたが、現在は OAuth 2.0 のセキュリティのベストプラクティス（RFC 9700）で、それ以外のクライアントにも利用が推奨されている。state パラメータは、認可レスポンスを自分が開始したフローと結び付けて CSRF を防ぐための値であり、認可コードの横取り対策である PKCE とは目的が異なる。OpenID Connect の nonce は ID トークンのリプレイを防ぐための値である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc7636",
+        "https://www.rfc-editor.org/rfc/rfc9700"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q075",
+      "order": 25,
+      "termId": "sc-vocab-096",
+      "prompt": "デジタル証明書が失効していないかを確かめるため、クライアントがレスポンダと呼ばれるサーバに証明書ごとにオンラインで照会し、「有効」「失効」「不明」のいずれかの応答を得るプロトコルは何か。",
+      "answer": "OCSP",
+      "acceptedAnswers": [
+        "OCSP",
+        "Online Certificate Status Protocol"
+      ],
+      "explanation": "OCSP（Online Certificate Status Protocol）は、証明書ごとに最新の状態を問い合わせられる。CRL は、失効した証明書の一覧全体を取得して自分で照合する方式である。OCSP ステープリングは、Web サーバがあらかじめ取得した OCSP 応答を TLS ハンドシェイクの中で提示する方式で、クライアントからレスポンダへの問合せが不要になる。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc6960"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q076",
+      "order": 26,
+      "termId": "sc-vocab-037",
+      "prompt": "通信の盗聴、規則性からの推測、XSS による窃取などの手段で、正規の利用者がログイン中に使っているセッション ID を不正に入手し、その利用者になりすまして処理を行う攻撃の総称を何というか。",
+      "answer": "セッションハイジャック",
+      "acceptedAnswers": [
+        "セッションハイジャック",
+        "セッションハイジャッキング",
+        "Session Hijacking",
+        "セッションハイジャック攻撃"
+      ],
+      "explanation": "セッションハイジャックは、セッション ID の入手手段を問わない総称である。セッションフィクセーションは、攻撃者があらかじめ用意したセッション ID を利用者に使わせ、ログイン後にその ID で乗っ取る攻撃であり、ID を「奪う」のではなく「固定させる」点が異なる。対策として、推測困難なセッション ID の生成、HTTPS の利用、ログイン時のセッション ID の再発行などがある。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q077",
+      "order": 27,
+      "termId": "sc-vocab-116",
+      "prompt": "「Password1」のようによく使われるパスワードを一つに決め、それを多数のアカウントに対して一つずつ試すことで、各アカウントでのログイン失敗の回数を少なく抑え、アカウントロックにかからないようにする攻撃を何というか。",
+      "answer": "パスワードスプレー攻撃",
+      "acceptedAnswers": [
+        "パスワードスプレー攻撃",
+        "パスワードスプレー",
+        "Password Spraying",
+        "リバースブルートフォース攻撃",
+        "リバースブルートフォース"
+      ],
+      "explanation": "パスワードスプレー攻撃は、アカウントごとの失敗回数が少ないため、アカウントロックの仕組みでは防ぎにくい。ブルートフォース攻撃は1つのアカウントに多数のパスワードを試すため、アカウントロックにかかりやすい。パスワードリスト攻撃は、他のサービスから漏えいした ID とパスワードの組合せを使い回して試す攻撃である。パスワードを固定して ID を変えながら試す点から、リバースブルートフォース攻撃とも呼ばれる。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1110/003/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q078",
+      "order": 28,
+      "termId": "sc-vocab-040",
+      "prompt": "Web アプリケーションが利用者の入力値を HTTP のレスポンスヘッダ（Location や Set-Cookie など）に出力する際に改行コード（CR・LF）を取り除かないことを悪用し、任意のヘッダを追加したり、レスポンスボディを偽造したりする攻撃（またはその脆弱性）を何というか。",
+      "answer": "HTTPヘッダインジェクション",
+      "acceptedAnswers": [
+        "HTTPヘッダインジェクション",
+        "HTTP Header Injection",
+        "HTTPレスポンス分割",
+        "HTTPヘッダインジェクション攻撃"
+      ],
+      "explanation": "HTTP ヘッダインジェクションでは、改行コードによってヘッダの区切りを偽装できるため、不正な Cookie の発行やレスポンスの分割（HTTP レスポンス分割）が可能になる。XSS は HTML 中にスクリプトを挿入する攻撃であり、挿入先が異なる。対策は、ヘッダの出力に専用の API を使うことや、入力値に含まれる改行コードを許可しないことである。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/113.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q079",
+      "order": 29,
+      "termId": "sc-vocab-142",
+      "prompt": "IDS などの検知方式のうち、通信量やプロトコルの使われ方など平常時の状態をベースラインとしてあらかじめ定義または学習しておき、そこから大きく外れた挙動を不審なものとして検知する方式を何というか。",
+      "answer": "アノマリ型検知",
+      "acceptedAnswers": [
+        "アノマリ型検知",
+        "アノマリ型",
+        "アノマリ検知",
+        "Anomaly検知法",
+        "異常検知"
+      ],
+      "explanation": "アノマリ型検知は、正常な状態からの逸脱を検知するため、パターンが存在しない未知の攻撃も検知しうるが、正常な通信を誤って不正と判定するフォールスポジティブが多くなりやすい。シグネチャ型検知は、既知の攻撃パターンとの一致によって判定する方式である。UEBA は、利用者や機器の振る舞いを分析して異常を検知する製品分野の名称である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-94"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q080",
+      "order": 30,
+      "termId": "sc-vocab-061",
+      "prompt": "通信経路上にインラインで配置され、ネットワーク通信を監視して不正な通信を検知すると、その通信を自動的に遮断する仕組みを何というか。",
+      "answer": "IPS",
+      "acceptedAnswers": [
+        "IPS",
+        "侵入防止システム",
+        "侵入防御システム",
+        "Intrusion Prevention System"
+      ],
+      "explanation": "IPS（Intrusion Prevention System）は、検知に加えて遮断まで行うため、誤検知が正常な業務通信の遮断に直結する。そのため、導入時のチューニングが重要となる。IDS は検知と通知が中心で、遮断は基本的に行わない。WAF は Web アプリケーションへの HTTP 通信に特化して検査・遮断する仕組みである。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-94"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q081",
+      "order": 31,
+      "termId": "sc-vocab-172",
+      "prompt": "PC などのマザーボードに搭載される耐タンパ性を持つ小型のセキュリティチップで、暗号鍵の生成・保管、起動時のソフトウェア構成の計測値の記録、ディスク暗号化の鍵の保護などを行うものは何か。",
+      "answer": "TPM",
+      "acceptedAnswers": [
+        "TPM",
+        "Trusted Platform Module"
+      ],
+      "explanation": "TPM（Trusted Platform Module）は、個々の端末に組み込まれるチップであり、BitLocker などのディスク暗号化や、起動の完全性の確認（計測ブート）に使われる。HSM は、サーバ用途で大量の暗号処理や鍵の保護を行う高性能な専用装置であり、規模と用途が異なる。セキュアブートは、署名を検証して正規のソフトウェアだけを起動させる仕組みの名称である。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://trustedcomputinggroup.org/resource/tpm-library-specification/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q082",
+      "order": 32,
+      "termId": "sc-vocab-087",
+      "prompt": "任意の長さのデータから固定長の値を算出する関数で、暗号用途では、出力値から元のデータを求めることや、同じ出力値になる別のデータを見つけることが計算上困難であることが求められるものを何というか。",
+      "answer": "ハッシュ関数",
+      "acceptedAnswers": [
+        "ハッシュ関数",
+        "暗号学的ハッシュ関数",
+        "Hash Function"
+      ],
+      "explanation": "ハッシュ関数（暗号学的ハッシュ関数）は、改ざんの検知やパスワードの保存、デジタル署名などに用いられる。出力される値はハッシュ値またはメッセージダイジェストと呼ばれ、関数そのものの名称とは区別する。HMAC はハッシュ関数と秘密鍵を組み合わせた仕組みで、改ざんの検知に加えて送信者の確認もできる点が異なる。SHA-2 はハッシュ関数の具体的なアルゴリズムの名称である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.FIPS.180-4"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q083",
+      "order": 33,
+      "termId": "sc-vocab-191",
+      "prompt": "事業継続計画の策定の基礎として、業務が中断した場合の影響を業務ごとに分析し、優先して復旧すべき重要業務の特定や、最大許容停止時間、目標復旧時間などの決定を行う分析を何というか。",
+      "answer": "BIA",
+      "acceptedAnswers": [
+        "BIA",
+        "事業影響度分析",
+        "ビジネスインパクト分析",
+        "Business Impact Analysis"
+      ],
+      "explanation": "BIA（Business Impact Analysis）は、中断の原因を問わず、業務が止まった場合の「影響」に着目する分析である。リスクアセスメントは、脅威の発生可能性と影響を評価してリスクの大きさを判断するもので、着眼点が異なる。BCP は BIA などの結果を基に策定される計画そのものであり、RTO は BIA で決定する指標の一つである。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-34r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q084",
+      "order": 34,
+      "termId": "sc-vocab-103",
+      "prompt": "大規模な量子計算機が実現しても解読が困難と考えられている格子問題などの数学的問題に基づく暗号方式の総称は何か。従来の計算機で実行でき、NIST は鍵カプセル化方式の ML-KEM や署名方式の ML-DSA などを標準化している。",
+      "answer": "耐量子計算機暗号",
+      "acceptedAnswers": [
+        "耐量子計算機暗号",
+        "PQC",
+        "Post-Quantum Cryptography",
+        "ポスト量子暗号",
+        "耐量子暗号"
+      ],
+      "explanation": "耐量子計算機暗号（PQC）は、量子計算機によって解読されるおそれのある RSA や楕円曲線暗号を置き換えるための数学的な暗号方式である。NIST は 2024年8月に、ML-KEM を FIPS 203、ML-DSA を FIPS 204 として標準化した。量子暗号（量子鍵配送）は、量子力学の性質を利用して鍵を共有する物理的な技術であり、PQC とは別物である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.FIPS.203",
+        "https://doi.org/10.6028/NIST.FIPS.204",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q085",
+      "order": 35,
+      "termId": "sc-vocab-025",
+      "prompt": "パスワードを使わずに公開鍵暗号でログインするための、FIDO Alliance と W3C による仕様群は何か。ブラウザ側の API である WebAuthn と、セキュリティキーなどの認証器と端末との通信プロトコルである CTAP から構成される。",
+      "answer": "FIDO2",
+      "acceptedAnswers": [
+        "FIDO2"
+      ],
+      "explanation": "FIDO2 は WebAuthn と CTAP をあわせた仕様群の名称である。WebAuthn は、そのうちブラウザ（Web）側の API 仕様だけを指す。パスキーは、FIDO の仕組みで使われる資格情報を指す利用者向けの名称であり、仕様の名称ではない。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://fidoalliance.org/fido2/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q086",
+      "order": 36,
+      "termId": "sc-vocab-114",
+      "prompt": "特定のアカウントに対し、パスワードとして考えられるすべての文字の組合せを順番に試していき、正しいパスワードを見つけ出そうとする攻撃を何というか。",
+      "answer": "ブルートフォース攻撃",
+      "acceptedAnswers": [
+        "ブルートフォース攻撃",
+        "ブルートフォースアタック",
+        "総当たり攻撃",
+        "Brute Force Attack"
+      ],
+      "explanation": "ブルートフォース攻撃は、時間さえかければいずれ正解に到達するため、パスワードを長く複雑にし、アカウントロックや試行回数の制限を設けることが対策となる。辞書攻撃は、すべての組合せではなく辞書の単語などパスワードによく使われる文字列に絞って試す攻撃である。パスワードスプレー攻撃は、アカウントを固定せず、よく使われるパスワードを多数のアカウントに試す攻撃である。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1110/001/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q087",
+      "order": 37,
+      "termId": "sc-vocab-056",
+      "prompt": "大規模言語モデル（LLM）を組み込んだアプリケーションに対し、利用者の入力文や、LLM が読み込む Web ページ・文書の中に悪意ある指示を紛れ込ませ、開発者が設定した本来の指示を無視させて、情報漏えいや不正な操作を行わせる攻撃を何というか。",
+      "answer": "プロンプトインジェクション",
+      "acceptedAnswers": [
+        "プロンプトインジェクション",
+        "Prompt Injection",
+        "プロンプトインジェクション攻撃"
+      ],
+      "explanation": "プロンプトインジェクションには、利用者が直接入力する直接型と、LLM が参照する外部のコンテンツに指示を埋め込む間接型がある。データポイズニングは、学習データを汚染してモデル自体の振る舞いを歪める攻撃であり、推論時の入力で振る舞いを操作するプロンプトインジェクションとは異なる。SQL インジェクションは、データベースへの問合せ文を不正に実行させる攻撃である。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://genai.owasp.org/llmrisk/llm01-prompt-injection/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q088",
+      "order": 38,
+      "termId": "sc-vocab-123",
+      "prompt": "攻撃対象のドメインに存在しない、でたらめな文字列のサブドメイン名の名前解決要求を、オープンリゾルバやボットを経由して大量に発生させ、キャッシュで応答できない問合せが権威 DNS サーバに押し寄せるようにして、そのサーバを応答不能に陥らせる DoS 攻撃を何というか。",
+      "answer": "DNS水責め攻撃",
+      "acceptedAnswers": [
+        "DNS水責め攻撃",
+        "ランダムサブドメイン攻撃",
+        "DNS Water Torture",
+        "Water Torture攻撃"
+      ],
+      "explanation": "DNS 水責め攻撃（ランダムサブドメイン攻撃）では、毎回異なるサブドメイン名が問い合わせられるため、キャッシュ DNS サーバのキャッシュが効かず、すべての問合せが権威 DNS サーバに転送される。DNS リフレクション攻撃（DRDoS の一種）は、送信元を偽装して DNS の応答を第三者に反射・増幅させる攻撃であり、標的が異なる。DNS キャッシュポイズニングは偽の情報をキャッシュさせる攻撃で、DoS ではない。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "advanced",
+      "referenceUrls": []
+    },
+    {
+      "questionId": "sc-vocab-q089",
+      "order": 39,
+      "termId": "sc-vocab-067",
+      "prompt": "SMTP、POP3、IMAP などのプロトコルで、暗号化しない状態で接続を開始した後、拡張コマンドを送ることで、同じ接続を維持したまま TLS による暗号化通信に移行させる仕組みは何か。",
+      "answer": "STARTTLS",
+      "acceptedAnswers": [
+        "STARTTLS"
+      ],
+      "explanation": "STARTTLS は、切替え前の段階が平文であるため、中間者が切替えのコマンドを削除して暗号化を妨げるダウングレード攻撃の余地がある。SMTPS や POP3S、IMAPS は、接続の開始時から TLS で通信する方式であり、切替えを行わない点で異なる。メールの送信経路での暗号化を強制する仕組みとしては、MTA-STS や DANE がある。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc3207"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q090",
+      "order": 40,
+      "termId": "sc-vocab-132",
+      "prompt": "ファイアウォール、サーバ、端末などベンダーも種類も異なる機器のログを一か所に集めて形式をそろえて保管し、複数のログを突き合わせる相関分析によって、セキュリティ上の脅威やインシデントの兆候を検知・通知する仕組みを何というか。",
+      "answer": "SIEM",
+      "acceptedAnswers": [
+        "SIEM",
+        "Security Information and Event Management",
+        "シーム"
+      ],
+      "explanation": "SIEM（Security Information and Event Management）は、ベンダーを問わず多様なログを集約して分析する基盤である。SOAR は、検知後の対応手順をプレイブックとして自動化する仕組みであり、検知を中心とする SIEM とは役割が異なる。XDR は、主に特定ベンダーの複数のセキュリティ製品のデータを統合して検知・対応する仕組みである。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-92",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q091",
+      "order": 41,
+      "termId": "sc-vocab-097",
+      "prompt": "ITU-T が勧告として定めた、公開鍵証明書と証明書失効リストの形式に関する標準規格は何か。インターネットでの利用については RFC 5280 でプロファイルが規定され、TLS のサーバ証明書などに用いられている。",
+      "answer": "X.509",
+      "acceptedAnswers": [
+        "X.509",
+        "X509"
+      ],
+      "explanation": "X.509 は、証明書に含める発行者、主体者、公開鍵、有効期間、拡張領域などの形式を定めた規格であり、現在使われているのはバージョン3の証明書である。PKCS #12 は、秘密鍵と証明書をまとめて1つのファイルに格納するための形式であり、証明書そのものの形式とは異なる。PKI は証明書を用いた信頼の基盤全体の名称である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc5280"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q092",
+      "order": 42,
+      "termId": "sc-vocab-146",
+      "prompt": "攻撃者、攻撃手法、マルウェア、侵害の痕跡など、サイバー脅威に関する情報を機械が読み取れる形式で記述・共有するために OASIS が標準化した言語は何か。この形式の情報を交換するための通信プロトコルとは別の規格である。",
+      "answer": "STIX",
+      "acceptedAnswers": [
+        "STIX",
+        "Structured Threat Information eXpression"
+      ],
+      "explanation": "STIX（Structured Threat Information eXpression）は、脅威情報を JSON 形式のオブジェクトとその関係として記述する言語である。TAXII は、STIX で記述された脅威情報を HTTPS 上で交換するためのプロトコルであり、STIX と組み合わせて使われる。TLP は、情報をどの範囲まで共有してよいかを色で示す指定である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://oasis-open.github.io/cti-documentation/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q093",
+      "order": 43,
+      "termId": "sc-vocab-117",
+      "prompt": "平文のパスワードとハッシュ値の対応を、還元関数を用いたチェーン構造によって効率よく圧縮して事前に計算しておいた表を使い、窃取したハッシュ値から元のパスワードを高速に求める攻撃を何というか。",
+      "answer": "レインボーテーブル攻撃",
+      "acceptedAnswers": [
+        "レインボーテーブル攻撃",
+        "レインボーテーブル",
+        "Rainbow Table攻撃"
+      ],
+      "explanation": "レインボーテーブル攻撃は、事前計算によって、ハッシュ値から平文を求める時間と表の保存容量を両立させる手法である。パスワードごとに異なるランダムな値（ソルト）を加えてハッシュ化すると、事前計算した表が使えなくなるため、有効な対策となる。ブルートフォース攻撃はその場で候補を順に試す攻撃であり、事前計算した表は用いない。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q094",
+      "order": 44,
+      "termId": "sc-vocab-174",
+      "prompt": "公開された個々の脆弱性に対し、西暦と連番から成る一意の番号を付与して管理する仕組みは何か。この番号を使うことで、異なる組織やツールの間で同じ脆弱性を確実に参照できる。",
+      "answer": "CVE",
+      "acceptedAnswers": [
+        "CVE",
+        "共通脆弱性識別子",
+        "Common Vulnerabilities and Exposures"
+      ],
+      "explanation": "CVE（Common Vulnerabilities and Exposures）は、個々の具体的な脆弱性を識別するための仕組みで、MITRE が運営し、CNA と呼ばれる採番機関が番号を割り当てる。CWE は脆弱性の種類（原因）を分類したもの、CVSS は脆弱性の深刻度を評価する基準であり、役割が異なる。JVN は日本の脆弱性対策情報ポータルサイトの名称である。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.cve.org/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q095",
+      "order": 45,
+      "termId": "sc-vocab-145",
+      "prompt": "通信先となった C&C サーバの IP アドレスやドメイン名、マルウェア本体のハッシュ値、マルウェアが作成するファイルの名前やレジストリキーのように、システムが攻撃者に侵害されたと判断する手掛かりとなる技術的な情報を何というか。",
+      "answer": "IoC",
+      "acceptedAnswers": [
+        "IoC",
+        "Indicator of Compromise",
+        "侵害指標",
+        "侵害の痕跡"
+      ],
+      "explanation": "IoC（Indicator of Compromise）は、ログや端末の調査で照合することで、侵害の有無の判定や影響範囲の特定に用いられる。ただし、IP アドレスやハッシュ値は攻撃者が容易に変更できる。TTP は攻撃者の戦術・技術・手順という振る舞いの情報で、IoC よりも変更されにくい。STIX は IoC などの脅威情報を記述するための形式である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-150"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q096",
+      "order": 46,
+      "termId": "sc-vocab-166",
+      "prompt": "組織が内部でのみ使用しているプライベートパッケージと同じ名前で、より大きいバージョン番号を付けた悪意あるパッケージを誰でも登録できる公開リポジトリに置き、パッケージ管理ツールが内部のものではなく公開側を取得・導入してしまうように仕向ける攻撃を何というか。",
+      "answer": "依存関係かく乱攻撃",
+      "acceptedAnswers": [
+        "依存関係かく乱攻撃",
+        "Dependency Confusion",
+        "依存関係混乱攻撃",
+        "依存関係の混乱"
+      ],
+      "explanation": "依存関係かく乱攻撃（Dependency Confusion）は、パッケージ管理ツールが同名のパッケージのうち新しいバージョンを優先して取得する設定を悪用する。対策として、内部パッケージの名前空間（スコープ）の確保や、取得元リポジトリの固定がある。タイポスクワッティングは、人気パッケージに似た綴りの名前で登録して入力ミスを狙う攻撃であり、同名による取違えを狙う依存関係かく乱攻撃とは異なる。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1195/001/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q097",
+      "order": 47,
+      "termId": "sc-vocab-184",
+      "prompt": "リスク対応の選択肢のうち、リスクの大きさが組織の受け入れられる水準に収まっている場合などに、特段の対策を講じずにそのまま受け入れ、損失が発生した場合は自ら負担することを何というか。",
+      "answer": "リスク保有",
+      "acceptedAnswers": [
+        "リスク保有",
+        "リスクの保有",
+        "リスク受容"
+      ],
+      "explanation": "リスク保有（リスク受容）は、意思決定として対策を講じないことを選ぶ対応であり、リスクを放置することとは異なる。リスク低減は、対策によって発生確率や影響を下げること、リスク移転は、保険や外部委託などで損失の負担を他者と分担することである。残留リスクは、リスク対応を行った後になお残るリスクそのものを指す。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-30r1",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q098",
+      "order": 48,
+      "termId": "sc-vocab-176",
+      "prompt": "バッファオーバーフローや SQL インジェクションのように、脆弱性を生む原因となるソフトウェアの弱点を「種類」ごとに体系立てて分類し、番号付きの識別子を付けて整理したものは何か。",
+      "answer": "CWE",
+      "acceptedAnswers": [
+        "CWE",
+        "共通脆弱性タイプ一覧",
+        "Common Weakness Enumeration"
+      ],
+      "explanation": "CWE（Common Weakness Enumeration）は、脆弱性の種類を分類したもので、例えば SQL インジェクションは CWE-89 として識別される。CVE は個々の具体的な脆弱性に付ける識別番号であり、CWE とは粒度が異なる。CVSS は脆弱性の深刻度を評価する基準である。OWASP Top 10 は Web アプリケーションの重大なリスクを10項目に整理したリストで、網羅的な分類体系ではない。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://cwe.mitre.org/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q099",
+      "order": 49,
+      "termId": "sc-vocab-197",
+      "prompt": "正当な理由がないのに、他人のコンピュータで実行させる目的で、使用者の意図に沿う動作をさせない、または意図に反する動作をさせる不正なプログラム（コンピュータウイルスなど）を作成したり提供したりする行為を処罰する、刑法上の罪を何というか。",
+      "answer": "不正指令電磁的記録作成罪",
+      "acceptedAnswers": [
+        "不正指令電磁的記録作成罪",
+        "ウイルス作成罪",
+        "不正指令電磁的記録作成等の罪",
+        "不正指令電磁的記録作成等罪"
+      ],
+      "explanation": "不正指令電磁的記録作成罪（ウイルス作成罪）は、刑法第十九章の二「不正指令電磁的記録に関する罪」のうち168条の2（見出しは「不正指令電磁的記録作成等」）に定める罪で、同条は作成・提供（1項）と供用（2項）を処罰する。取得・保管は別の条文である168条の3（不正指令電磁的記録取得等）で処罰される。「正当な理由がないのに」という要件があるため、ウイルス対策ソフトの開発・試験のような正当な目的での作成は、処罰の対象から外れうる。不正アクセス禁止法は他人の ID・パスワードの無断使用などによるアクセス制御の突破を処罰し、電子計算機損壊等業務妨害罪はコンピュータを損壊するなどして業務を妨害する行為を処罰する点で異なる。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://laws.e-gov.go.jp/law/140AC0000000045"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q100",
+      "order": 50,
+      "termId": "sc-vocab-198",
+      "prompt": "米国 NIST が公開している、組織がサイバーセキュリティのリスクを管理するための枠組みは何か。バージョン 2.0 では、Govern（統治）、Identify（識別）、Protect（防御）、Detect（検知）、Respond（対応）、Recover（復旧）の6つの機能で構成される。",
+      "answer": "NIST CSF",
+      "acceptedAnswers": [
+        "NIST CSF",
+        "CSF",
+        "サイバーセキュリティフレームワーク",
+        "NISTサイバーセキュリティフレームワーク",
+        "Cybersecurity Framework",
+        "CSF 2.0",
+        "NIST CSF 2.0",
+        "NISTサイバーセキュリティフレームワーク2.0"
+      ],
+      "explanation": "NIST CSF（サイバーセキュリティフレームワーク）は、バージョン 1.1 では5つの機能で構成されていたが、2.0 で「統治」が追加されて6つの機能となった。NIST SP 800-53 は、具体的なセキュリティ管理策を網羅したカタログであり、リスク管理の全体像を整理する CSF よりも詳細な文書である。CIS Controls は、優先度を付けた具体的な対策の一覧である。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.CSWP.29",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    }
+  ]
+}
