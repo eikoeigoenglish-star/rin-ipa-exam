@@ -163,3 +163,10 @@ node --check assets/app.js
 - 変更箇所はSC用語画面・SC用語専用JS/CSS・同モジュールの10セットJSONとmanifest、トップページの表示、ドキュメント、テストのみ。A-1、SC A-2、SC B、PD A-2の実装・データは変更なし。
 
 詳細は `README_SC_VOCAB.md` を参照してください。GitHub Pagesへ配置するときは、ZIPを展開した中身をリポジトリ直下へ配置してください。
+
+
+### V5.11 追加：SC用語解説
+
+- `sc/vocab-guide.html` で200語の定義・詳細解説・類似語との違いを閲覧（20語×10ページ）。
+- 出題順はSC用語記述と一致。問題データ・採点・進捗はV5.10から変更しません。
+- 詳細は `README_SC_VOCAB.md` を参照してください。
