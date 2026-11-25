@@ -1,0 +1,385 @@
+{
+  "schemaVersion": "1.0",
+  "module": "sc-vocab-writing",
+  "setNo": 8,
+  "setId": "sc-vocab-set08",
+  "questions": [
+    {
+      "questionId": "sc-vocab-q141",
+      "order": 1,
+      "termId": "sc-vocab-104",
+      "prompt": "総務省と経済産業省が中心となって運営する日本の暗号技術評価プロジェクトが、安全性と実装性能を評価して選定した暗号技術の一覧で、電子政府推奨暗号リスト、推奨候補暗号リスト、運用監視暗号リストの3つから構成されるものは何か。",
+      "answer": "CRYPTREC暗号リスト",
+      "acceptedAnswers": [
+        "CRYPTREC暗号リスト",
+        "CRYPTRECリスト",
+        "電子政府における調達のために参照すべき暗号のリスト"
+      ],
+      "explanation": "CRYPTREC 暗号リストは、政府機関などが調達・利用する暗号技術を選ぶ際の指針となる。電子政府推奨暗号リストはその構成要素の一つであり、リスト全体の名称ではないため正答に含めていない。FIPS 140 は米国の暗号モジュールのセキュリティ要件に関する規格であり、暗号アルゴリズムの推奨リストではない。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.cryptrec.go.jp/list.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q142",
+      "order": 2,
+      "termId": "sc-vocab-139",
+      "prompt": "IDS やマルウェア対策ソフトなどが、実際には問題のない正常な通信やファイルを、攻撃や不正なものとして誤って判定してしまうことを何というか。",
+      "answer": "フォールスポジティブ",
+      "acceptedAnswers": [
+        "フォールスポジティブ",
+        "False Positive",
+        "誤検知",
+        "偽陽性"
+      ],
+      "explanation": "フォールスポジティブ（誤検知）が多いと、運用担当者が多数のアラートの確認に追われ、本当の攻撃を見落とす原因にもなる。対概念のフォールスネガティブは、攻撃や不正を見逃して検知できないことであり、被害に直結する。一般に、アノマリ型検知はシグネチャ型検知よりもフォールスポジティブが多くなりやすい。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-94"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q143",
+      "order": 3,
+      "termId": "sc-vocab-130",
+      "prompt": "組織のネットワークに侵入した攻撃者が、最初に侵害した端末を足掛かりに、窃取した認証情報などを使って組織内の他の端末やサーバへと侵害範囲を広げていく行動を何というか。",
+      "answer": "ラテラルムーブメント",
+      "acceptedAnswers": [
+        "ラテラルムーブメント",
+        "Lateral Movement",
+        "横展開",
+        "水平展開",
+        "横移動"
+      ],
+      "explanation": "ラテラルムーブメント（横展開）には、Pass-the-Hash や、リモート管理の正規ツールの悪用などが用いられる。権限昇格は同じシステム内でより高い権限を得ることであり、他のシステムへ移動するラテラルムーブメントとは異なる。対策として、マイクロセグメンテーションによる内部通信の制限や、管理者アカウントの使い回しの禁止がある。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://attack.mitre.org/tactics/TA0008/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q144",
+      "order": 4,
+      "termId": "sc-vocab-153",
+      "prompt": "利用者や、端末・サーバなどのエンティティの普段の行動を機械学習などで学習しておき、通常と異なるログイン時刻や大量のデータアクセスといった振る舞いを見つけ出して、内部不正やアカウントの乗っ取りの発見に役立てる技術を何というか。",
+      "answer": "UEBA",
+      "acceptedAnswers": [
+        "UEBA",
+        "User and Entity Behavior Analytics",
+        "ユーザー・エンティティ行動分析"
+      ],
+      "explanation": "UEBA（User and Entity Behavior Analytics）は、利用者やエンティティ単位の行動の基準からの逸脱を検知するもので、アノマリ型検知の一種と位置付けられる。SIEM は主に、定義済みのルールによる相関分析で脅威を検知する基盤であり、UEBA の機能を組み込んだ製品もある。リスクベース認証は、不審なログインに追加認証を求める認証方式である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q145",
+      "order": 5,
+      "termId": "sc-vocab-175",
+      "prompt": "ベンダーに依存しない共通の方法で、脆弱性の深刻度を 0.0〜10.0 の数値で表す評価の仕組みは何か。現行の v4.0 では、基本、脅威、環境、補足の各評価基準で構成される。",
+      "answer": "CVSS",
+      "acceptedAnswers": [
+        "CVSS",
+        "共通脆弱性評価システム",
+        "Common Vulnerability Scoring System",
+        "CVSS v4.0",
+        "CVSS 4.0",
+        "CVSS v4"
+      ],
+      "explanation": "CVSS（Common Vulnerability Scoring System）は FIRST が管理しており、v3.x では基本・現状・環境の3つの評価基準で構成されていた。v4.0 では「脅威」評価基準と「補足」評価基準が設けられた。CVE は個々の脆弱性の識別子、CWE は脆弱性の種類の分類であり、深刻度を評価する CVSS とは役割が異なる。EPSS は今後悪用される確率を予測するスコアである。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.first.org/cvss/v4.0/specification-document",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q146",
+      "order": 6,
+      "termId": "sc-vocab-154",
+      "prompt": "インシデント対応において、被害の拡大を防ぐために、感染した端末をネットワークから切り離す、不正に使われたアカウントを無効にする、攻撃の通信を遮断する、といった措置を講じる段階（またはその措置）を何というか。",
+      "answer": "封じ込め",
+      "acceptedAnswers": [
+        "封じ込め",
+        "Containment",
+        "封じ込め策"
+      ],
+      "explanation": "封じ込めは、原因の除去よりも先に被害の拡大を止めることを目的とする。根絶はマルウェアの除去など原因そのものを取り除く段階、復旧はシステムを正常な状態に戻す段階である。NIST SP 800-61 は 2025年4月の Rev.3 で CSF 2.0 に沿った構成に改められたが、封じ込めという対応の考え方は引き続き用いられている。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-61r3",
+        "https://doi.org/10.6028/NIST.SP.800-61r2"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q147",
+      "order": 7,
+      "termId": "sc-vocab-177",
+      "prompt": "米国 CISA が公開している、実際に悪用されたことが確認された脆弱性の一覧（カタログ）で、脆弱性対応の優先順位付けに用いられるものは何か。",
+      "answer": "KEV",
+      "acceptedAnswers": [
+        "KEV",
+        "KEVカタログ",
+        "Known Exploited Vulnerabilities",
+        "Known Exploited Vulnerabilities Catalog"
+      ],
+      "explanation": "KEV（Known Exploited Vulnerabilities）カタログは、CISA が維持・公開している、実際に悪用が確認された脆弱性の一覧である。2026年6月10日に発行された拘束力のある運用指令 BOD 26-04 は、従来の BOD 22-01 と BOD 19-02 に代わるもので、米国の連邦文民行政機関（FCEB）に対し、KEV への掲載の有無などに基づくリスクの優先度に応じた期限付きの修正を求めている（FCEB 以外の組織には推奨にとどまる）。EPSS は、今後 30 日以内に悪用される確率を予測するスコアである。CVSS は脆弱性の技術的な深刻度の評価であり、実際に悪用されているかどうかは表さない。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q148",
+      "order": 8,
+      "termId": "sc-vocab-189",
+      "prompt": "事業の中断が発生してから、業務やシステムを復旧させるまでに許される時間として定める目標値を何というか。",
+      "answer": "RTO",
+      "acceptedAnswers": [
+        "RTO",
+        "目標復旧時間",
+        "Recovery Time Objective"
+      ],
+      "explanation": "RTO（Recovery Time Objective）は「どれだけの時間で」復旧させるかを表す。RPO は、データを「どの時点まで」遡って復旧させるかを表す目標であり、バックアップの取得間隔に関係する。RTO は BIA で特定した最大許容停止時間を超えないように設定する。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-34r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q149",
+      "order": 9,
+      "termId": "sc-vocab-168",
+      "prompt": "稼働中の Web アプリケーションに対し、外部から攻撃を模したリクエストを送り、返ってきた応答から脆弱性を見つける手法・ツールで、ソースコードを必要としないものを何というか。",
+      "answer": "DAST",
+      "acceptedAnswers": [
+        "DAST",
+        "Dynamic Application Security Testing",
+        "動的アプリケーションセキュリティテスト"
+      ],
+      "explanation": "DAST（Dynamic Application Security Testing）は、実行環境の設定に起因する問題も含めて実際の挙動から検出できるが、問題のあるコードの箇所までは特定しにくい。SAST はソースコードを実行せずに解析する手法であり、DAST と相互に補完する関係にある。ペネトレーションテストは、攻撃者の視点で実際に侵入できるかを総合的に検証するもので、ツールによる網羅的な検査とは目的が異なる。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-218",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q150",
+      "order": 10,
+      "termId": "sc-vocab-200",
+      "prompt": "システムや製品の企画・設計の段階からセキュリティを組み込み、利用者が自ら追加の対策を講じなくても安全に使える状態で提供することを目指す考え方を何というか。出荷時の既定の設定を安全なものにするという、より下流を対象とする考え方とは区別される。",
+      "answer": "セキュアバイデザイン",
+      "acceptedAnswers": [
+        "セキュアバイデザイン",
+        "セキュア・バイ・デザイン",
+        "Secure by Design",
+        "セキュリティバイデザイン",
+        "セキュリティ・バイ・デザイン"
+      ],
+      "explanation": "セキュアバイデザインは、設計という上流の段階でセキュリティを確保することを重視し、米国 CISA などが製造者に求める原則として推進している。セキュアバイデフォルトは、出荷時の既定の設定を安全なものにする考え方である。シフトレフトは、開発工程の早い段階でテストやセキュリティ対策を行う取組みを指す。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.cisa.gov/securebydesign",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q151",
+      "order": 11,
+      "termId": "sc-vocab-018",
+      "prompt": "ID 連携の標準仕様のうち、利用者を認証した IdP が、認証の結果や利用者の属性を XML で記述したアサーションにまとめて電子署名を施し、ブラウザ経由で SP に届けることで、組織やドメインをまたいだシングルサインオンを実現するものは何か。",
+      "answer": "SAML",
+      "acceptedAnswers": [
+        "SAML",
+        "SAML 2.0",
+        "Security Assertion Markup Language",
+        "SAML認証"
+      ],
+      "explanation": "SAML（Security Assertion Markup Language）は、主に企業向けの Web シングルサインオンで広く使われている。OpenID Connect も ID 連携の仕様だが、OAuth 2.0 を基盤とし、JSON 形式の JWT を ID トークンとして用いる点で異なる。シングルサインオンは機能・概念の名称であり、SAML はそれを実現する仕様の一つである。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://docs.oasis-open.org/security/saml/v2.0/saml-core-2.0-os.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q152",
+      "order": 12,
+      "termId": "sc-vocab-190",
+      "prompt": "障害や災害が起きた際に、どの時点までのデータを取り戻せればよいかを表す目標値で、許容できるデータの損失の範囲を示し、バックアップの取得間隔などを決める根拠となるものを何というか。",
+      "answer": "RPO",
+      "acceptedAnswers": [
+        "RPO",
+        "目標復旧時点",
+        "目標復旧地点",
+        "Recovery Point Objective"
+      ],
+      "explanation": "RPO（Recovery Point Objective）は「どの時点まで」を表す目標で、例えば RPO が1時間であれば、少なくとも1時間ごとにバックアップなどを取得する必要がある。RTO は、業務やシステムを復旧させるまでに許容される「時間」の目標であり、指すものが異なる。両者はともに BCP の策定時に、BIA の結果を踏まえて設定される。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-34r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q153",
+      "order": 13,
+      "termId": "sc-vocab-072",
+      "prompt": "メールソフトがメールサーバへメールを送信（投稿）する際に用いる 587 番のポートで、SMTP-AUTH による利用者の認証と組み合わせて使い、OP25B が実施されている環境でも正規の利用者がメールを送信できるようにするものを何というか。",
+      "answer": "サブミッションポート",
+      "acceptedAnswers": [
+        "サブミッションポート",
+        "Submission Port"
+      ],
+      "explanation": "サブミッションポートは、送信者を認証したうえでメールを受け付ける送信専用のポートである。25 番ポートは主にメールサーバ間の転送に使われ、OP25B によって利用者のネットワークからの外向きの通信が遮断されることがある。465 番ポートは、接続の開始時から TLS で暗号化して送信する方式（SMTPS）で用いられる。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc6409"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q154",
+      "order": 14,
+      "termId": "sc-vocab-026",
+      "prompt": "W3C が勧告として標準化した、Web サイトが公開鍵暗号に基づく資格情報をブラウザを通じて登録・利用し、パスワードを使わずに利用者を認証するための、ブラウザの API 仕様は何か。FIDO2 を構成する仕様の一つである。",
+      "answer": "WebAuthn",
+      "acceptedAnswers": [
+        "WebAuthn",
+        "Web Authentication",
+        "Web Authentication API"
+      ],
+      "explanation": "WebAuthn（Web Authentication）は、FIDO2 のうちブラウザ（Web）側の API を規定する仕様である。CTAP は、ブラウザや OS とセキュリティキーなどの外部の認証器との間の通信プロトコルである。FIDO2 は WebAuthn と CTAP を合わせた仕様群の名称であり、パスキーはこれらによって使われる資格情報の利用者向けの名称である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://www.w3.org/TR/webauthn-3/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q155",
+      "order": 15,
+      "termId": "sc-vocab-169",
+      "prompt": "検査対象のソフトウェアに、不具合を引き起こしそうな異常なデータや予測できないデータを自動生成して大量に入力し、異常終了などの挙動を監視することで、未知の脆弱性を見つけ出す検査手法を何というか。",
+      "answer": "ファジング",
+      "acceptedAnswers": [
+        "ファジング",
+        "Fuzzing",
+        "ファズテスト",
+        "ファジングテスト"
+      ],
+      "explanation": "ファジングは、開発者が想定していない入力によって不具合を引き起こすことを狙う手法で、メモリ破壊などの脆弱性の発見に効果が高い。DAST は、既知の攻撃パターンに基づくリクエストを稼働中のアプリケーションに送って検査する手法である。SAST はソースコードを実行せずに解析する手法であり、いずれも検査の考え方が異なる。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://owasp.org/www-community/Fuzzing"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q156",
+      "order": 16,
+      "termId": "sc-vocab-043",
+      "prompt": "XSS などへの対策として、HTML の < > & \" ' のように出力先の文法で特別な意味を持つ文字を、文字参照などの意味を持たない表記に置き換えて、データがタグやスクリプトとして解釈されないようにする処理を何というか。",
+      "answer": "エスケープ処理",
+      "acceptedAnswers": [
+        "エスケープ処理",
+        "エスケープ",
+        "Escape"
+      ],
+      "explanation": "エスケープ処理は、出力先が HTML、JavaScript、URL、SQL などのどれであるかによって、置き換える文字や方法が異なるため、出力先の文脈に応じて行う必要がある。サニタイジングは、危険な文字を除去・無害化する処理の総称として使われる、より広い言葉である。SQL 文の組立てでは、エスケープ処理よりも静的プレースホルダの利用が根本的な対策とされる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q157",
+      "order": 17,
+      "termId": "sc-vocab-020",
+      "prompt": "利用者が同意した範囲で、認可サーバがクライアントとなるアプリにアクセストークンを渡し、アプリはそのトークンを提示してリソースサーバ上の利用者のデータにアクセスする、という形で、利用者のパスワードを渡さずにアクセス権を委譲する認可の枠組みは何か。",
+      "answer": "OAuth 2.0",
+      "acceptedAnswers": [
+        "OAuth 2.0",
+        "OAuth",
+        "OAuth2",
+        "OAuth2.0"
+      ],
+      "explanation": "OAuth 2.0 は権限を委譲する「認可」の仕組みであり、利用者が誰であるかを証明する「認証」の仕様ではない。アクセストークンだけで利用者の認証を行おうとすると、なりすましの原因となる。認証の機能を加えた仕様が OpenID Connect であり、SAML は XML のアサーションを用いる別の ID 連携の仕様である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc6749",
+        "https://www.rfc-editor.org/rfc/rfc9700"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q158",
+      "order": 18,
+      "termId": "sc-vocab-079",
+      "prompt": "Web サーバの手前に設置して、クライアントからのリクエストを代わりに受け取り、背後にある Web サーバへ転送するサーバで、負荷分散、TLS の終端、WAF の機能やシングルサインオンの実装などに使われるものを何というか。",
+      "answer": "リバースプロキシ",
+      "acceptedAnswers": [
+        "リバースプロキシ",
+        "Reverse Proxy",
+        "リバースプロキシサーバ"
+      ],
+      "explanation": "リバースプロキシはサーバ側に置かれ、外部からのアクセスを代理で受け付ける。一般的なプロキシサーバ（フォワードプロキシ）はクライアント側に置かれ、利用者がインターネット上のサイトへアクセスする際に代理を務める点で、配置と役割が逆である。ロードバランサは負荷分散を主な目的とする装置で、リバースプロキシの機能を兼ねるものもある。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": []
+    },
+    {
+      "questionId": "sc-vocab-q159",
+      "order": 19,
+      "termId": "sc-vocab-044",
+      "prompt": "Cookie に付与する属性の一つで、通信が HTTPS で暗号化されているときに限ってブラウザがその Cookie を送るよう指定するものは何か。",
+      "answer": "Secure属性",
+      "acceptedAnswers": [
+        "Secure属性",
+        "Secure"
+      ],
+      "explanation": "Secure 属性を付けると、平文の HTTP 通信で Cookie が送信されて盗聴されることを防げる。HttpOnly 属性は JavaScript からの Cookie の参照を禁止する属性、SameSite 属性はクロスサイトのリクエストでの送信を制限する属性である。HSTS は Cookie 単位ではなく、ドメインへの接続そのものを HTTPS に強制する仕組みである。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies",
+        "https://www.rfc-editor.org/rfc/rfc6265"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q160",
+      "order": 20,
+      "termId": "sc-vocab-092",
+      "prompt": "認証局が発行するデジタル証明書によって公開鍵とその持ち主との結び付きを保証し、公開鍵暗号を安心して使えるようにするための、技術、運用、組織から成る仕組みの全体を何というか。",
+      "answer": "PKI",
+      "acceptedAnswers": [
+        "PKI",
+        "公開鍵基盤",
+        "Public Key Infrastructure"
+      ],
+      "explanation": "PKI（Public Key Infrastructure）は、認証局、登録局、証明書、失効情報（CRL や OCSP）、証明書を公開するリポジトリなどから構成される全体の仕組みである。認証局は証明書に署名して発行する機関、登録局は申請者の本人確認を行う機関であり、いずれも PKI の構成要素である。X.509 は証明書の形式を定めた規格である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc5280"
+      ]
+    }
+  ]
+}

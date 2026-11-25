@@ -1,0 +1,386 @@
+{
+  "schemaVersion": "1.0",
+  "module": "sc-vocab-writing",
+  "setNo": 6,
+  "setId": "sc-vocab-set06",
+  "questions": [
+    {
+      "questionId": "sc-vocab-q101",
+      "order": 1,
+      "termId": "sc-vocab-011",
+      "prompt": "PPP 接続で用いられる認証プロトコルのうち、認証する側が毎回異なる乱数を送り、接続を求める側がその乱数と共有の秘密からハッシュ値を計算して返すことで、パスワードを平文のまま送らずに認証するものは何か。",
+      "answer": "CHAP",
+      "acceptedAnswers": [
+        "CHAP",
+        "Challenge Handshake Authentication Protocol"
+      ],
+      "explanation": "CHAP は、チャレンジレスポンス方式を PPP 向けに具体化したプロトコルである。チャレンジレスポンス認証は方式の総称であり、PPP に限定されない。PAP は PPP の認証でパスワードを平文のまま送る方式であり、盗聴に弱い。MS-CHAPv2 は Microsoft が拡張した派生版で、PEAP の内部認証などに使われる。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc1994"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q102",
+      "order": 2,
+      "termId": "sc-vocab-185",
+      "prompt": "リスク対応を実施したあとも、なお組織に残っているリスクを何というか。経営層などのリスク所有者がその内容を把握したうえで、受け入れるかどうかを判断する必要がある。",
+      "answer": "残留リスク",
+      "acceptedAnswers": [
+        "残留リスク",
+        "残存リスク",
+        "Residual Risk"
+      ],
+      "explanation": "残留リスクは、対策を講じても完全にはなくならないリスクの「状態」を指す。対策を講じる前のリスクは固有リスクと呼ばれる。リスク保有はリスク対応の選択肢（意思決定）の一つであり、リスク受容基準は受け入れてよいかを判定する基準であって、いずれも残留リスクとは指すものが異なる。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-30r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q103",
+      "order": 3,
+      "termId": "sc-vocab-013",
+      "prompt": "認証アプリなどでワンタイムパスワードを生成する方式のうち、利用者とサーバで共有した秘密鍵と、現在時刻を一定間隔（例えば30秒）で区切った値とを入力として HMAC により値を算出するものは何か。",
+      "answer": "TOTP",
+      "acceptedAnswers": [
+        "TOTP",
+        "時刻同期方式",
+        "Time-based One-Time Password",
+        "時刻同期方式ワンタイムパスワード"
+      ],
+      "explanation": "TOTP（Time-based One-Time Password、RFC 6238）は、端末とサーバの時刻が大きくずれていないことが前提となるため、サーバは前後の時間ステップも許容して照合することが多い。HOTP は時刻ではなく、認証のたびに増えるカウンタ値を入力とする方式である。チャレンジレスポンス方式は、サーバから送られる乱数を入力とする点で異なる。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc6238"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q104",
+      "order": 4,
+      "termId": "sc-vocab-039",
+      "prompt": "Web アプリケーションが外部プログラムやシェルを呼び出す処理で利用者の入力値を適切に処理しないことを悪用し、サーバ上で攻撃者が指定した任意の OS コマンドを実行させる攻撃（またはその脆弱性）を何というか。",
+      "answer": "OSコマンドインジェクション",
+      "acceptedAnswers": [
+        "OSコマンドインジェクション",
+        "OS Command Injection",
+        "コマンドインジェクション",
+        "OSコマンドインジェクション攻撃"
+      ],
+      "explanation": "OS コマンドインジェクションでは、サーバの OS 上でコマンドが実行されるため、ファイルの改ざんやマルウェアの設置など被害が広範囲に及ぶ。対策は、シェルを経由してコマンドを起動する関数を使わないことや、引数を固定した API を使うことである。SQL インジェクションはデータベースへの問合せ文を不正に実行させる攻撃であり、ディレクトリトラバーサルはファイルパスを操作して想定外のファイルにアクセスする攻撃である。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/78.html",
+        "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q105",
+      "order": 5,
+      "termId": "sc-vocab-147",
+      "prompt": "脅威情報などを他組織に提供する際に、受け取った側がその情報をどこまで広めてよいかを、CLEAR・GREEN・AMBER・RED といった信号機に似た色のラベルで示す取決めは何か。標準は FIRST が定めている。",
+      "answer": "TLP",
+      "acceptedAnswers": [
+        "TLP",
+        "Traffic Light Protocol",
+        "TLP 2.0"
+      ],
+      "explanation": "TLP（Traffic Light Protocol）の現行版は 2.0 で、旧版の WHITE に相当するラベルは CLEAR となり、組織内に共有を限定する AMBER+STRICT も定められている。STIX は脅威情報を記述するための形式、TAXII はそれを交換するためのプロトコルであり、共有範囲の指定を担うのは TLP である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.first.org/tlp/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q106",
+      "order": 6,
+      "termId": "sc-vocab-012",
+      "prompt": "認証のたびに新しく生成され、一度使うと無効になる使い捨てのパスワード（またはそれを用いる方式）を、生成の仕組みを問わない総称で何というか。盗聴したパスワードを使い回すリプレイ攻撃に強い。",
+      "answer": "ワンタイムパスワード",
+      "acceptedAnswers": [
+        "ワンタイムパスワード",
+        "OTP",
+        "One-Time Password"
+      ],
+      "explanation": "ワンタイムパスワード（OTP）は総称であり、時刻を入力とする TOTP、カウンタを入力とする HOTP などの生成方式がある。ただし、利用者が偽サイトに入力した値をその場で中継される AitM フィッシングには対抗できない。S/KEY はハッシュ関数を繰り返し適用して生成する旧来の方式である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc4226",
+        "https://www.rfc-editor.org/rfc/rfc6238"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q107",
+      "order": 7,
+      "termId": "sc-vocab-068",
+      "prompt": "送信ドメインの管理者が、自ドメインのメールを送信してよいサーバの IP アドレスを DNS の TXT レコードで公開し、受信側が接続してきた送信サーバの IP アドレスと照らし合わせて、送信ドメインの詐称を見抜く技術は何か。",
+      "answer": "SPF",
+      "acceptedAnswers": [
+        "SPF",
+        "Sender Policy Framework"
+      ],
+      "explanation": "SPF（Sender Policy Framework）は主にエンベロープ From（MAIL FROM）のドメインについて検証するため、メールが転送されると送信元の IP アドレスが変わり、認証に失敗しやすい。DKIM は電子署名によってメールを検証する技術である。DMARC は SPF・DKIM の結果とヘッダ From との整合を確認し、失敗時の扱いを指定する仕組みである。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc7208",
+        "https://doi.org/10.6028/NIST.SP.800-177r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q108",
+      "order": 8,
+      "termId": "sc-vocab-051",
+      "prompt": "API や Web アプリケーションが、リクエストで指定された注文番号や利用者 ID などに対応するデータについて、要求者にその個々のデータへのアクセス権限があるかを確認しないため、ID の値を書き換えるだけで他人のデータを参照・変更できてしまう脆弱性を、OWASP API Security Top 10 での名称で何というか。",
+      "answer": "BOLA",
+      "acceptedAnswers": [
+        "BOLA",
+        "Broken Object Level Authorization",
+        "オブジェクトレベル認可の不備"
+      ],
+      "explanation": "BOLA（Broken Object Level Authorization）は、認証には成功した利用者が、自分に権限のない個々のデータにアクセスできてしまう「認可」の欠陥である。従来 IDOR（Insecure Direct Object Reference）と呼ばれてきた脆弱性と実務上は重なるが、CWE では IDOR をパストラバーサルなども含むより広い用語としており、OWASP API Security Top 10 での名称は BOLA である（IDOR と答えた場合は関連回答として自己判定）。認証の不備は本人確認の欠陥であり、BFLA は管理者用機能など「機能」単位の認可の欠陥である点で異なる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://owasp.org/API-Security/editions/2023/en/0xa1-broken-object-level-authorization/",
+        "https://cwe.mitre.org/data/definitions/639.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q109",
+      "order": 9,
+      "termId": "sc-vocab-015",
+      "prompt": "生体認証などの精度を表す指標のうち、正当な本人であるにもかかわらず、誤って本人ではないと判定して認証を拒否してしまう割合を何というか。",
+      "answer": "本人拒否率",
+      "acceptedAnswers": [
+        "本人拒否率",
+        "FRR",
+        "False Rejection Rate",
+        "本人拒否率（FRR）"
+      ],
+      "explanation": "本人拒否率（FRR）が高いと、本人が何度も認証をやり直すことになり、利便性が損なわれる。他人受容率（FAR）は他人を誤って本人として受け入れる割合で、安全性に関わる。判定の閾値を厳しくすると FRR は上がり FAR は下がるという関係があり、両者が等しくなる点を等価エラー率（EER）と呼ぶ。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://csrc.nist.gov/pubs/sp/800/63/b/4/final"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q110",
+      "order": 10,
+      "termId": "sc-vocab-062",
+      "prompt": "ネットワーク層で IP パケット単位に暗号化、改ざん検知、通信相手の認証を行うプロトコル群で、AH、ESP、鍵交換の IKE などから構成され、拠点間 VPN などに用いられるものは何か。",
+      "answer": "IPsec",
+      "acceptedAnswers": [
+        "IPsec",
+        "IP Security"
+      ],
+      "explanation": "IPsec は IP 層で動作するため、上位のアプリケーションやプロトコルを問わずに通信を保護できる。TLS はトランスポート層の上で、HTTPS など個々のアプリケーションの通信を保護する点で異なる。ESP や AH は IPsec を構成する個々のプロトコルの名称である。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc4301",
+        "https://doi.org/10.6028/NIST.SP.800-77r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q111",
+      "order": 11,
+      "termId": "sc-vocab-098",
+      "prompt": "ある電子データのハッシュ値に時刻情報を結び付け、時刻認証局（TSA）が署名したトークンとして発行することで、そのデータがその時刻に確かに存在し、その後に改ざんされていないことを証明する仕組みを何というか。",
+      "answer": "タイムスタンプ",
+      "acceptedAnswers": [
+        "タイムスタンプ",
+        "タイムスタンプトークン",
+        "Time-Stamp"
+      ],
+      "explanation": "タイムスタンプは、存在証明（その時刻に存在した）と完全性証明（それ以降改ざんされていない）を提供する。デジタル署名は、作成者と改ざんの有無を証明できるが、いつ作成されたかは証明できないため、署名と組み合わせて長期の証拠性を確保するのに使われる。時刻認証局はトークンを発行する主体の名称である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc3161"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q112",
+      "order": 12,
+      "termId": "sc-vocab-110",
+      "prompt": "マルウェアに感染した端末（ボット）に攻撃者が指令を送ったり、感染端末から窃取したデータを受け取ったりして、感染端末を遠隔操作するために用いるサーバを何というか。",
+      "answer": "C&Cサーバ",
+      "acceptedAnswers": [
+        "C&Cサーバ",
+        "C&Cサーバー",
+        "C2サーバ",
+        "C2サーバー",
+        "C2",
+        "Command and Controlサーバ",
+        "コマンド&コントロールサーバ"
+      ],
+      "explanation": "C&C サーバ（C2 サーバ）との通信は、プロキシや DNS のログに、一定間隔の不審な通信などとして痕跡が残ることが多く、検知の手掛かりとなる。ボットネットは C&C サーバによって制御される感染端末の集合体の名称である。踏み台は攻撃の中継に悪用される第三者の機器を指し、指令を出す側ではない。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://attack.mitre.org/tactics/TA0011/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q113",
+      "order": 13,
+      "termId": "sc-vocab-148",
+      "prompt": "米国 MITRE が、実際に観測されたサイバー攻撃を基に、攻撃者の戦術（目的）ごとにそれを達成するための技術や手順を整理し、マトリクスとして公開しているナレッジベースは何か。検知策の評価や脅威分析の共通言語として使われる。",
+      "answer": "MITRE ATT&CK",
+      "acceptedAnswers": [
+        "MITRE ATT&CK",
+        "ATT&CK",
+        "アタック",
+        "Adversarial Tactics, Techniques, and Common Knowledge"
+      ],
+      "explanation": "MITRE ATT&CK は、偵察や初期アクセス、横展開などの戦術ごとに、具体的な技術とその副技術を網羅している。サイバーキルチェーンは攻撃の流れを7つの段階に整理したモデルであり、技術の粒度まで網羅するものではない。TTP は攻撃者の戦術・技術・手順という概念の名称であり、ATT&CK はそれを体系化したナレッジベースである。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://attack.mitre.org/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q114",
+      "order": 14,
+      "termId": "sc-vocab-089",
+      "prompt": "SHA-1 の後継として NIST が定めたハッシュ関数の系統で、224・256・384・512 ビットなど出力長の異なる複数の関数をまとめたものを、系統（ファミリ）の名称で何というか。現在のデジタル署名や証明書で広く使われている。",
+      "answer": "SHA-2",
+      "acceptedAnswers": [
+        "SHA-2",
+        "SHA2"
+      ],
+      "explanation": "SHA-2 は、SHA-256 や SHA-384 などの関数をまとめたファミリの名称であり、個々の関数名とは区別する。SHA-1 は衝突を見つける攻撃が実証されており、署名用途での利用は推奨されない。SHA-3 は SHA-2 とは異なるスポンジ構造を持つ別系統の規格であり、SHA-2 の置き換えではなく選択肢を増やすために標準化された。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.FIPS.180-4"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q115",
+      "order": 15,
+      "termId": "sc-vocab-118",
+      "prompt": "窃取したパスワードでログインを繰り返し、正規の利用者のスマートフォンに多要素認証の承認を求めるプッシュ通知を大量に送り付けて、利用者が根負けや誤操作で承認するのを待って認証を突破する攻撃を何というか。",
+      "answer": "MFA疲労攻撃",
+      "acceptedAnswers": [
+        "MFA疲労攻撃",
+        "MFA Fatigue",
+        "MFA爆撃",
+        "プッシュ爆撃",
+        "MFAプッシュ爆撃"
+      ],
+      "explanation": "MFA 疲労攻撃への対策として、ログイン画面に表示された番号を認証アプリに入力させる番号照合や、通知の回数制限がある。AitM フィッシングは偽サイトで認証を中継してセッションを奪う攻撃であり、利用者に自分の意思で承認させる MFA 疲労攻撃とは仕組みが異なる。いずれもソーシャルエンジニアリングの要素を持つが、手口の名称として区別される。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1621/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q116",
+      "order": 16,
+      "termId": "sc-vocab-170",
+      "prompt": "コンテナ内で動くプロセスが、コンテナランタイムやカーネルの脆弱性、あるいは特権モードでの起動などの設定の誤りを突いてコンテナの隔離を破り、ホスト OS や同じホスト上の別のコンテナにまで到達することを何というか。",
+      "answer": "コンテナエスケープ",
+      "acceptedAnswers": [
+        "コンテナエスケープ",
+        "コンテナブレイクアウト",
+        "Container Escape"
+      ],
+      "explanation": "コンテナはホストのカーネルを共有するため、仮想マシンと比べて隔離が弱く、カーネルの脆弱性がそのまま隔離の突破につながりうる。VM エスケープはハイパーバイザによる仮想マシンの隔離を突破することで、対象が異なる。対策として、特権コンテナを使わないこと、root 以外の利用者での実行、seccomp などによるシステムコールの制限がある。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://kubernetes.io/docs/concepts/security/pod-security-standards/",
+        "https://doi.org/10.6028/NIST.SP.800-190",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q117",
+      "order": 17,
+      "termId": "sc-vocab-016",
+      "prompt": "生体認証などの精度を表す指標のうち、本人ではない他人を誤って本人であると判定して受け入れてしまう割合を何というか。安全性の観点から特に低く抑えるべき指標である。",
+      "answer": "他人受容率",
+      "acceptedAnswers": [
+        "他人受容率",
+        "FAR",
+        "False Acceptance Rate",
+        "他人受入率"
+      ],
+      "explanation": "他人受容率（FAR）が高いと、なりすましを許すことになる。本人拒否率（FRR）は本人を誤って拒否する割合で、利便性に関わる。判定の閾値を緩くすると FAR は上がり FRR は下がるため、用途に応じた閾値の調整が必要となる。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://csrc.nist.gov/pubs/sp/800/63/b/4/final"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q118",
+      "order": 18,
+      "termId": "sc-vocab-127",
+      "prompt": "Active Directory において、ドメインの複製権限を持つアカウントを悪用し、ドメインコントローラ同士がディレクトリ情報を複製する際のプロトコルを模倣することで、正規のドメインコントローラから krbtgt アカウントを含む利用者のパスワードハッシュを取得する攻撃手法を何というか。",
+      "answer": "DCSync",
+      "acceptedAnswers": [
+        "DCSync",
+        "DCSync攻撃"
+      ],
+      "explanation": "DCSync は、ドメインコントローラ上でマルウェアを実行しなくても、複製を要求するだけでパスワードハッシュを取得できる点が特徴である。この攻撃で得た krbtgt アカウントのハッシュを用いて TGT を偽造するのが、後続の攻撃であるゴールデンチケットである。Pass-the-Hash は取得したハッシュをそのまま認証に用いる手法であり、ハッシュの取得手段ではない。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1003/006/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q119",
+      "order": 19,
+      "termId": "sc-vocab-163",
+      "prompt": "ソフトウェアを構成するオープンソースのライブラリなどのコンポーネントについて、名称、バージョン、供給者、依存関係などを機械可読な形式で一覧にしたもので、脆弱性が公表された際に影響を受ける製品の特定などに用いるものは何か。",
+      "answer": "SBOM",
+      "acceptedAnswers": [
+        "SBOM",
+        "Software Bill of Materials",
+        "ソフトウェア部品表",
+        "エスボム"
+      ],
+      "explanation": "SBOM（Software Bill of Materials）の代表的な形式として、SPDX と CycloneDX がある。SLSA は、ビルドの完全性と来歴を確保するための要件を定めた枠組みであり、構成要素の一覧である SBOM とは目的が異なる。SCA は、利用しているコンポーネントを解析して既知の脆弱性やライセンスを確認する手法・ツールである。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.cisa.gov/sbom",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q120",
+      "order": 20,
+      "termId": "sc-vocab-188",
+      "prompt": "災害やサイバー攻撃などで事業が中断した場合でも、重要な業務を続ける、または許容できる時間内に再開できるよう、平常時のうちに方針、体制、手順などを取り決めておく計画を何というか。",
+      "answer": "BCP",
+      "acceptedAnswers": [
+        "BCP",
+        "事業継続計画",
+        "Business Continuity Plan"
+      ],
+      "explanation": "BCP（Business Continuity Plan）は、BIA によって特定した重要業務や目標復旧時間を基に策定される。BCM は、BCP の策定・訓練・見直しを含むマネジメント全体を指す。DR（災害復旧）は主に情報システムの復旧に焦点を当てた計画・取組みであり、事業全体の継続を対象とする BCP より範囲が狭い。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-34r1"
+      ]
+    }
+  ]
+}

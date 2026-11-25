@@ -1,12 +1,79 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "1.1",
   "module": "sc-vocab-writing",
   "totalQuestions": 200,
+  "questionsPerSet": 20,
   "sets": [
-    {"setNo":1,"id":"sc-vocab-set01","label":"第1回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set01.json"},
-    {"setNo":2,"id":"sc-vocab-set02","label":"第2回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set02.json"},
-    {"setNo":3,"id":"sc-vocab-set03","label":"第3回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set03.json"},
-    {"setNo":4,"id":"sc-vocab-set04","label":"第4回","expectedQuestions":50,"questionsUrl":"sc-vocab-questions-set04.json"}
+    {
+      "setNo": 1,
+      "id": "sc-vocab-set01",
+      "label": "第1回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set01.json"
+    },
+    {
+      "setNo": 2,
+      "id": "sc-vocab-set02",
+      "label": "第2回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set02.json"
+    },
+    {
+      "setNo": 3,
+      "id": "sc-vocab-set03",
+      "label": "第3回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set03.json"
+    },
+    {
+      "setNo": 4,
+      "id": "sc-vocab-set04",
+      "label": "第4回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set04.json"
+    },
+    {
+      "setNo": 5,
+      "id": "sc-vocab-set05",
+      "label": "第5回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set05.json"
+    },
+    {
+      "setNo": 6,
+      "id": "sc-vocab-set06",
+      "label": "第6回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set06.json"
+    },
+    {
+      "setNo": 7,
+      "id": "sc-vocab-set07",
+      "label": "第7回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set07.json"
+    },
+    {
+      "setNo": 8,
+      "id": "sc-vocab-set08",
+      "label": "第8回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set08.json"
+    },
+    {
+      "setNo": 9,
+      "id": "sc-vocab-set09",
+      "label": "第9回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set09.json"
+    },
+    {
+      "setNo": 10,
+      "id": "sc-vocab-set10",
+      "label": "第10回",
+      "expectedQuestions": 20,
+      "questionsUrl": "sc-vocab-questions-set10.json"
+    }
   ],
   "relatedAnswersUrl": "sc-vocab-related-answer-policy.json"
 }

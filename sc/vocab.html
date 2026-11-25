@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#101014">
-<title>SC用語記述｜専門用語200問トレーニング</title>
-<link rel="stylesheet" href="../assets/style.css?v=5.9.0">
-<link rel="stylesheet" href="../assets/sc-vocab.css?v=5.9.0">
+<title>SC用語記述｜20問×10回・一括採点</title>
+<link rel="stylesheet" href="../assets/style.css?v=5.10.0">
+<link rel="stylesheet" href="../assets/sc-vocab.css?v=5.10.0">
 </head>
 <body class="scv-page">
 <div class="app">
@@ -16,7 +16,7 @@
     <header class="app-header">
       <p class="app-eyebrow">IPA EXAM • SC • VOCABULARY WRITING</p>
       <h1 class="app-title">SC用語記述<span class="app-title-sub">専門用語トレーニング 200問</span></h1>
-      <p class="app-lead">説明文を読み、該当するセキュリティ用語をキーボードで入力します。4回×50問。正答の別表記にも対応し、関連回答は自分で判定できます。</p>
+      <p class="app-lead">説明文を読み、該当するセキュリティ用語をキーボードで入力します。10回×20問。20問に回答してから一括採点します。別表記・関連回答にも対応しています。</p>
       <p id="data-status" class="scv-status" aria-live="polite">問題データを読み込んでいます…</p>
     </header>
     <section class="panel mastery-panel" aria-labelledby="mastery-heading">
@@ -35,7 +35,7 @@
     </section>
     <section class="panel" aria-labelledby="set-heading">
       <div class="panel-head"><h2 class="panel-title" id="set-heading">出題回</h2><p class="panel-note">複数選択可</p><button type="button" id="toggle-sets" class="btn-ghost btn-small">すべて選択</button></div>
-      <p class="panel-desc">各回50問。回次ボタンを<strong>3秒長押し</strong>すると、その回の進捗だけをリセットできます。</p>
+      <p class="panel-desc">各回20問。回次ボタンを<strong>3秒長押し</strong>すると、その回の進捗だけをリセットできます。</p>
       <div class="chip-group" id="set-options" role="group" aria-labelledby="set-heading"></div>
     </section>
     <section class="panel" aria-labelledby="stage-heading">
@@ -60,7 +60,6 @@
       <div class="panel-head"><h2 class="panel-title" id="count-heading">出題問数</h2><p class="panel-note" id="count-availability">対象 0問</p></div>
       <div class="chip-group" role="radiogroup" aria-labelledby="count-heading">
         <input type="radio" name="count" id="count-all" value="all" checked><label class="chip chip-wide" for="count-all">対象すべて<span class="chip-count" id="count-all-num">0</span></label>
-        <input type="radio" name="count" id="count-50" value="50"><label class="chip" for="count-50">50問</label>
         <input type="radio" name="count" id="count-20" value="20"><label class="chip" for="count-20">20問</label>
         <input type="radio" name="count" id="count-10" value="10"><label class="chip" for="count-10">10問</label>
         <input type="radio" name="count" id="count-5" value="5"><label class="chip" for="count-5">5問</label>
@@ -76,33 +75,32 @@
     </section>
     <div id="start-error" class="scv-alert" role="alert" hidden></div>
     <button type="button" class="btn-primary btn-block" id="start-btn" disabled>演習を開始する</button>
+    <div id="resume-area" class="scv-resume" hidden><p id="resume-label"></p><button type="button" class="btn-secondary btn-block" id="resume-btn">途中から再開する</button></div>
     <p class="scv-disclaimer">IPA非公式のオリジナル問題です。独立査読を経たRC1教材を使用していますが、参考URLの一部は未検証です。問題文の対象範囲に合わない関連語を自動正解にはしません。</p>
   </main>
   <main id="screen-quiz" class="screen" hidden>
     <div class="scv-quiz-top"><div><p class="quiz-meta"><span id="question-meta"></span><span id="question-stage" class="stage-tag"></span></p><p id="question-counter" class="quiz-counter"></p></div><button type="button" id="exit-quiz" class="btn-ghost btn-small">中断して戻る</button></div>
-    <div class="progress" id="progress-bar" role="progressbar" aria-label="今回の演習進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
+    <p id="answered-counter" class="scv-answered-counter" aria-live="polite">入力済み 0 / 20問</p>
+    <div class="progress" id="progress-bar" role="progressbar" aria-label="今回の解答入力進捗" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="progress-fill"></div></div>
     <article class="panel quiz-panel">
       <p class="scv-eyebrow" id="question-label"></p>
       <h2 id="question-text" tabindex="-1" class="question-text"></h2>
       <form id="answer-form" autocomplete="off">
         <label for="answer-input" class="scv-input-label">用語を入力してください</label>
         <input id="answer-input" class="scv-answer-input" type="text" maxlength="160" inputmode="text" enterkeyhint="done" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="例：専門用語・略称・英語名">
-        <p class="quiz-hint">大文字・小文字、全角・半角、空白や記号の違いは採点時に吸収します。入力してEnter、または「解答する」を押してください。</p>
-        <div class="scv-action-row"><button type="submit" id="submit-answer" class="btn-primary">解答する</button><button type="button" id="skip-answer" class="btn-secondary">わからない・スキップ</button></div>
+        <p class="quiz-hint">回答は途中保存され、前の問題に戻って編集できます。Enterまたは「次の問題へ」で進みます。<strong>採点は最後にまとめて</strong>行います。</p>
+        <div class="scv-action-row"><button type="button" id="prev-question" class="btn-secondary">前の問題へ</button><button type="submit" id="next-question" class="btn-primary">次の問題へ</button></div>
+        <button type="button" id="to-review" class="btn-ghost scv-review-link">解答一覧を確認</button>
       </form>
-      <section id="feedback" class="scv-feedback" aria-live="polite" hidden>
-        <h3 id="feedback-heading"></h3>
-        <p id="feedback-your-answer"></p>
-        <p id="feedback-correct-answer"></p>
-        <div id="related-decision" class="scv-related-decision" hidden>
-          <p>関連する用語です。設問の指定と解説を確認して、今回の回答を自己判定してください。</p>
-          <div class="scv-action-row"><button type="button" class="btn-secondary" id="related-accept">正解として記録</button><button type="button" class="btn-secondary" id="related-reject">ミスとして記録</button></div>
-        </div>
-        <div class="scv-explanation"><h4>解説</h4><p id="feedback-explanation"></p></div>
-        <details class="scv-sources"><summary>参考資料</summary><ul id="feedback-sources"></ul></details>
-      </section>
-      <button type="button" id="next-btn" class="btn-primary btn-block scv-next" hidden>次の問題へ</button>
     </article>
+  </main>
+  <main id="screen-review" class="screen" hidden>
+    <header class="result-head"><p class="app-eyebrow">ANSWER REVIEW</p><h2 class="panel-title-lg">解答一覧・一括採点</h2></header>
+    <section class="panel"><p id="review-summary" class="panel-desc"></p>
+      <p class="scv-review-note">各問を選ぶと回答を修正できます。未回答の問題は一括採点時にミス扱いです。</p>
+      <ol id="review-list" class="scv-review-list"></ol>
+      <div class="scv-action-row"><button type="button" class="btn-secondary" id="review-back">解答に戻る</button><button type="button" class="btn-primary" id="grade-all">全問採点する</button></div>
+    </section>
   </main>
   <main id="screen-result" class="screen" hidden>
     <header class="result-head"><p class="app-eyebrow">RESULT</p><h2 class="panel-title-lg">演習結果</h2></header>
@@ -112,6 +110,6 @@
   </main>
   <footer class="app-footer"><p>SC専門用語200問 • 記述式トレーニング</p><p>非公式教材。誤りや曖昧な用語を発見した場合は参考資料をご確認ください。</p></footer>
 </div>
-<script src="../assets/sc-vocab.js?v=5.9.0" defer></script>
+<script src="../assets/sc-vocab.js?v=5.10.0" defer></script>
 </body>
 </html>

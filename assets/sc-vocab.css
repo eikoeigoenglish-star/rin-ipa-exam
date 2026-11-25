@@ -58,3 +58,23 @@
  .scv-page .scv-action-row .btn-primary,.scv-page .scv-action-row .btn-secondary { width:100%; flex:auto; }
 }
 @media(prefers-reduced-motion:reduce){ .scv-page .scv-answer-input { transition:none; } }
+
+/* 20-question grouped examinations: no answer disclosure before batch grading. */
+.scv-page .scv-resume { margin:14px 0 0; padding:15px; border:1px solid var(--line-strong);border-radius:12px;background:var(--surface-2); }
+.scv-page .scv-resume p {margin:0 0 12px;color:var(--gold-bright);font-size:.89rem;}
+.scv-page .scv-answered-counter {color:var(--gold-bright);font-weight:700;font-size:.85rem;margin:8px 0 12px;}
+.scv-page .scv-review-link {margin-top:16px;display:block;width:100%;}
+.scv-page .scv-review-note {color:var(--text-dim);font-size:.87rem;margin:12px 0 18px;line-height:1.7;}
+.scv-page .scv-review-list {list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0;margin:16px 0 22px;}
+.scv-page .scv-review-item {min-width:0;}
+.scv-page .scv-review-button {width:100%;border:1px solid var(--line-strong);border-radius:10px;background:var(--surface-2);color:var(--text);text-align:left;cursor:pointer;padding:13px 14px;font:inherit;display:flex;flex-direction:column;gap:6px;}
+.scv-page .scv-review-button:hover {border-color:var(--gold-bright);}
+.scv-page .scv-review-item.is-answered .scv-review-button {border-left:4px solid var(--ok);}
+.scv-page .scv-review-number {font-weight:700;font-size:.9rem;}
+.scv-page .scv-review-state {color:var(--text-dim);font-size:.83rem;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:100%;}
+.scv-page .scv-self-decision {margin:12px 0;border:1px solid #57718c;background:#182735;border-radius:10px;padding:12px;}
+.scv-page .scv-self-decision p {font-size:.87rem;line-height:1.7;}
+.scv-page .scv-result-sources {margin:10px 0 0;padding-left:22px;}
+.scv-page .scv-result-sources li {font-size:.82rem;margin:6px 0;}
+.scv-page .scv-result-sources a {color:#9ac3f2;}
+@media(max-width:640px) { .scv-page .scv-review-list {grid-template-columns:1fr;} }

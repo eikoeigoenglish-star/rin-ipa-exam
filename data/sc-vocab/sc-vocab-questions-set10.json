@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "1.0",
+  "module": "sc-vocab-writing",
+  "setNo": 10,
+  "setId": "sc-vocab-set10",
+  "questions": [
+    {
+      "questionId": "sc-vocab-q181",
+      "order": 1,
+      "termId": "sc-vocab-173",
+      "prompt": "ソフトウェアの作成者や配布元が、実行ファイルやスクリプトにデジタル署名を付けておき、利用者がそのソフトウェアの発行元が本物であることと、配布後に改ざんされていないことを確かめられるようにする仕組みを何というか。",
+      "answer": "コード署名",
+      "acceptedAnswers": [
+        "コード署名",
+        "コードサイニング",
+        "Code Signing"
+      ],
+      "explanation": "コード署名は、ソフトウェアの発行元と完全性を証明するものであり、ソフトウェアに脆弱性やマルウェアが含まれていないことまでは保証しない。署名に使う秘密鍵が窃取されると、正規の署名が付いたマルウェアが作られるおそれがあるため、HSM などで鍵を厳重に管理する必要がある。サーバ証明書は Web サーバの真正性を証明するもので、対象が異なる。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.CSWP.01262018"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q182",
+      "order": 2,
+      "termId": "sc-vocab-080",
+      "prompt": "ネットワークを、サーバ、仮想マシン、コンテナといったワークロード単位の細かな区画に分割し、内部どうしの通信を必要最小限に制御することで、侵入された後の横展開を防ぐ手法を何というか。",
+      "answer": "マイクロセグメンテーション",
+      "acceptedAnswers": [
+        "マイクロセグメンテーション",
+        "Microsegmentation"
+      ],
+      "explanation": "マイクロセグメンテーションは、データセンタ内部の東西方向の通信を細かく制御する点が特徴で、ゼロトラストを実現する手段の一つとして位置付けられる。VLAN による従来のセグメント分割は、ネットワーク単位の粗い分割である。DMZ は外部公開サーバを置くための区画であり、内部の通信を細かく分割するものではない。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-207"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q183",
+      "order": 3,
+      "termId": "sc-vocab-195",
+      "prompt": "システムの処理や利用者の操作について、いつ、誰が、何を行ったかを時系列でたどり、事後に検証できるようにした記録で、監査や不正調査の際の証拠として用いられるものを何というか。",
+      "answer": "監査証跡",
+      "acceptedAnswers": [
+        "監査証跡",
+        "Audit Trail",
+        "オーディットトレイル"
+      ],
+      "explanation": "監査証跡は、改ざんされないように保護し、必要な期間保存しておくことが重要である。監査証拠は、監査人が監査意見の根拠として入手する情報全般を指し、監査証跡はその基となる処理や操作の記録である。Chain of Custody は、フォレンジックスで証拠そのものの取扱いの経緯を記録することであり、対象が異なる。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.meti.go.jp/policy/netsecurity/sys-kansa/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q184",
+      "order": 4,
+      "termId": "sc-vocab-093",
+      "prompt": "PKI において、公開鍵とその持ち主との対応関係を審査に基づいて保証し、自身の秘密鍵で署名したデジタル証明書を発行するとともに、効力を取り消した証明書の情報を公開する機関を何というか。",
+      "answer": "認証局",
+      "acceptedAnswers": [
+        "認証局",
+        "CA",
+        "Certificate Authority",
+        "認証機関"
+      ],
+      "explanation": "認証局（CA）は証明書に署名して発行する機関であり、その信頼性は上位の認証局による証明書の連鎖によって保証される。登録局（RA）は、申請者の本人確認や審査を行い、認証局に発行を依頼する機関で、署名は行わない。時刻認証局（TSA）は、タイムスタンプを発行する別の機関である。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.rfc-editor.org/rfc/rfc5280"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q185",
+      "order": 5,
+      "termId": "sc-vocab-030",
+      "prompt": "管理者権限を持つ特権アカウントについて、利用時の貸出しと承認、パスワードの自動変更や秘匿、操作セッションの記録・監視、必要なときだけの一時的な権限付与などを行い、特権の悪用や乱用を防ぐ管理の仕組みを何というか。",
+      "answer": "PAM",
+      "acceptedAnswers": [
+        "PAM",
+        "特権アクセス管理",
+        "Privileged Access Management",
+        "特権ID管理"
+      ],
+      "explanation": "PAM（Privileged Access Management）は、攻撃者が最終的に狙う特権アカウントの保護に特化した仕組みである。IAM はすべての利用者の ID とアクセス権を管理する広い概念で、PAM はそのうち特権アカウントを対象とする。なお、Linux などの認証の仕組みである Pluggable Authentication Modules（PAM）とは別物である。",
+      "category": "認証・認可・アクセス制御",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-53r5",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q186",
+      "order": 6,
+      "termId": "sc-vocab-088",
+      "prompt": "暗号学的ハッシュ関数に求められる性質のうち、特定の入力を与えられるのではなく、同じハッシュ値になる異なる2つの入力の組を、どのような組でもよいので見つけ出すことが計算上困難であるという性質を何というか。",
+      "answer": "衝突発見困難性",
+      "acceptedAnswers": [
+        "衝突発見困難性",
+        "衝突耐性",
+        "強衝突耐性",
+        "Collision Resistance"
+      ],
+      "explanation": "衝突発見困難性（衝突耐性）が破られると、同じハッシュ値を持つ2つの文書を作り、一方への署名を他方の署名として悪用するといった攻撃が可能になる。第二原像計算困難性は、「与えられた」入力と同じハッシュ値になる別の入力を見つけることの困難さで、入力が指定されている点が異なる。原像計算困難性は、ハッシュ値から元の入力を求めることの困難さである。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-107r1"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q187",
+      "order": 7,
+      "termId": "sc-vocab-053",
+      "prompt": "WAF などの検査方式のうち、正常な通信のパターンをあらかじめ定義しておき、それに合致しない通信はすべて異常とみなして遮断する方式を何というか。未知の攻撃も防げるが、定義の作成と保守の負荷が大きく、誤検知も起きやすい。",
+      "answer": "ポジティブモデル",
+      "acceptedAnswers": [
+        "ポジティブモデル",
+        "ポジティブセキュリティモデル",
+        "ホワイトリスト方式",
+        "許可リスト方式",
+        "許可リスト型"
+      ],
+      "explanation": "ポジティブモデルは、許可するものを定義する許可リスト型の考え方である。ネガティブモデルは、既知の攻撃パターンを定義して合致した通信を遮断する方式で、導入しやすいが未知の攻撃は防げない。「ホワイトリスト方式」という呼び方は、近年は「許可リスト」への言い換えが進んでいる。",
+      "category": "Webアプリケーションの脆弱性",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://owasp.org/www-community/Web_Application_Firewall"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q188",
+      "order": 8,
+      "termId": "sc-vocab-115",
+      "prompt": "他のサービスから流出した ID とパスワードの組の一覧を使って、別のサービスへのログインを次々と試みる攻撃を何というか。複数のサービスで同じパスワードを使い回している利用者が被害を受ける。",
+      "answer": "パスワードリスト攻撃",
+      "acceptedAnswers": [
+        "パスワードリスト攻撃",
+        "リスト型攻撃",
+        "クレデンシャルスタッフィング",
+        "Credential Stuffing",
+        "リスト型アカウントハッキング"
+      ],
+      "explanation": "パスワードリスト攻撃は、実在する認証情報の組を試すため、ログインの成功率が高く、試行回数も少ないので検知されにくい。ブルートフォース攻撃は考えられるパスワードを総当たりで試す攻撃、パスワードスプレー攻撃はよく使われるパスワードを多数のアカウントに試す攻撃である。対策として、パスワードの使い回しをしないことと、多要素認証の導入がある。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1110/004/",
+        "https://cheatsheetseries.owasp.org/cheatsheets/Credential_Stuffing_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q189",
+      "order": 9,
+      "termId": "sc-vocab-078",
+      "prompt": "ネットワークに接続しようとする端末について、認証に加えて、OS の修正プログラムやマルウェア対策ソフトの状態などがセキュリティポリシーに適合しているかを確認し、適合しない端末の接続を拒否したり隔離したりする仕組みを何というか。隔離用のネットワークを設ける方式に限らない、この種の接続制御の総称を答えよ。",
+      "answer": "NAC",
+      "acceptedAnswers": [
+        "NAC",
+        "ネットワークアクセス制御",
+        "Network Access Control"
+      ],
+      "explanation": "NAC（Network Access Control）は、端末の状態まで確認して接続の可否を決める仕組みの総称である。IEEE 802.1X は、NAC を実現する手段のうち認証の部分を担う規格である。検疫ネットワークは、不適合の端末を隔離して修正させる NAC の一形態であり、総称ではない。",
+      "category": "ネットワーク・通信セキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q190",
+      "order": 10,
+      "termId": "sc-vocab-131",
+      "prompt": "攻撃者が自前のマルウェアを持ち込まずに、PowerShell や WMI のように侵入先の環境にもともと備わっている正規のツールや機能を使って攻撃を進める手法で、正規の管理作業と見分けにくく、検知を逃れやすいものを何というか。",
+      "answer": "LotL",
+      "acceptedAnswers": [
+        "LotL",
+        "LOTL",
+        "Living off the Land",
+        "環境寄生型攻撃",
+        "Living off the Land攻撃"
+      ],
+      "explanation": "LotL（Living off the Land）は、正規ツールの悪用という「手法」に着目した名称である。ファイルレスマルウェアは、ディスクにファイルを残さずメモリ上で動作するマルウェアのことで、LotL と重なることが多いが、着目点が異なる。悪用される正規の実行ファイルは LOLBins と呼ばれ、手法全体の名称とは区別する。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1218/"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q191",
+      "order": 11,
+      "termId": "sc-vocab-102",
+      "prompt": "暗号鍵の生成・保管・利用を、耐タンパ性を備えた専用のハードウェアの内部で行い、秘密鍵を外部に取り出させることなく署名や復号などの暗号処理を実行する装置で、認証局やクラウドの鍵管理サービスの基盤として使われるものを何というか。",
+      "answer": "HSM",
+      "acceptedAnswers": [
+        "HSM",
+        "Hardware Security Module",
+        "ハードウェアセキュリティモジュール"
+      ],
+      "explanation": "HSM（Hardware Security Module）は、物理的な攻撃を受けると鍵を消去するなどの耐タンパ性を持ち、FIPS 140 などの認証を受けた製品が多い。TPM は個々の PC などに組み込まれる小型のセキュリティチップであり、サーバ用途の高性能な専用装置である HSM とは規模と用途が異なる。KMS は、内部で HSM を利用して暗号鍵のライフサイクルを管理するサービスである。",
+      "category": "暗号技術・PKI・証明書",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.FIPS.140-3"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q192",
+      "order": 12,
+      "termId": "sc-vocab-150",
+      "prompt": "外部から切り離された仮想環境などの保護された領域で、疑わしいファイルやプログラムを試しに実行し、どのような動作をするかを観察してマルウェアかどうかを見極める仕組み（またはプログラムの動作範囲を制限する仕組み）を何というか。",
+      "answer": "サンドボックス",
+      "acceptedAnswers": [
+        "サンドボックス",
+        "Sandbox"
+      ],
+      "explanation": "サンドボックスによる解析に対し、仮想環境であることを検知すると不正な動作を控える回避機能を持つマルウェアも存在する。ハニーポットは、攻撃者をおびき寄せて手口を観察するおとりのシステムであり、検体を隔離環境で実行して調べるサンドボックスとは目的が異なる。ビヘイビア法は、実行時の振る舞いを監視してマルウェアを検知する手法の名称である。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q193",
+      "order": 13,
+      "termId": "sc-vocab-125",
+      "prompt": "プログラムが確保したメモリ領域の大きさを超えるデータを書き込ませて隣接するメモリ領域を上書きし、プログラムの異常終了や、戻りアドレスの書換えによる任意のコードの実行を引き起こす攻撃（またはその脆弱性）を何というか。",
+      "answer": "バッファオーバーフロー",
+      "acceptedAnswers": [
+        "バッファオーバーフロー",
+        "バッファオーバフロー",
+        "Buffer Overflow",
+        "BOF",
+        "バッファオーバーフロー攻撃"
+      ],
+      "explanation": "バッファオーバーフローには、スタック領域を狙うものとヒープ領域を狙うものがある。緩和策として、ASLR（アドレス空間配置のランダム化）、DEP（データ領域の実行禁止）、スタックカナリア（戻りアドレスの書換え検知）がある。整数オーバーフローは、数値の表現範囲を超える演算によって起こる不具合であり、バッファオーバーフローの原因となることもあるが、別の問題である。",
+      "category": "マルウェア・攻撃手法",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/120.html",
+        "https://cwe.mitre.org/data/definitions/787.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q194",
+      "order": 14,
+      "termId": "sc-vocab-155",
+      "prompt": "検知システムのアラートを待つのではなく、攻撃者がすでに内部に侵入しているという仮説を立て、ログや端末のデータを能動的に調べて、検知をすり抜けた脅威の痕跡を探し出す活動を何というか。",
+      "answer": "脅威ハンティング",
+      "acceptedAnswers": [
+        "脅威ハンティング",
+        "スレットハンティング",
+        "Threat Hunting"
+      ],
+      "explanation": "脅威ハンティングでは、MITRE ATT&CK などを参照して攻撃者の手法から仮説を立てることが多い。SOC の監視は、アラートを起点とする受動的な活動であり、仮説を起点とする能動的な脅威ハンティングとは出発点が異なる。IoC を使った照合は、既知の痕跡を探すもので、脅威ハンティングの手段の一つとして用いられる。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "advanced",
+      "referenceUrls": []
+    },
+    {
+      "questionId": "sc-vocab-q195",
+      "order": 15,
+      "termId": "sc-vocab-165",
+      "prompt": "標的の組織を直接攻撃するのではなく、対策が手薄な取引先や業務委託先、あるいは標的が利用しているソフトウェアの開発元や配布経路などを侵害し、そこを経由して標的を攻撃する手法の総称を何というか。",
+      "answer": "サプライチェーン攻撃",
+      "acceptedAnswers": [
+        "サプライチェーン攻撃",
+        "Supply Chain Attack",
+        "サプライチェーンリスク攻撃"
+      ],
+      "explanation": "サプライチェーン攻撃には、取引先のネットワークを経由する型と、ソフトウェアの更新プログラムやライブラリに不正なコードを混入させる型がある。水飲み場攻撃は、標的が閲覧する Web サイトを改ざんして待ち伏せる攻撃である。依存関係かく乱攻撃は、ソフトウェアのサプライチェーンを狙う個別の手口の名称であり、総称ではない。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://attack.mitre.org/techniques/T1195/",
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q196",
+      "order": 16,
+      "termId": "sc-vocab-151",
+      "prompt": "マルウェア対策ソフトの検出手法のうち、プログラムを実際に動作させ、重要なファイルの改ざんや不審な通信の発生など、マルウェアに特徴的な振る舞いを監視して検出する手法を何というか。",
+      "answer": "ビヘイビア法",
+      "acceptedAnswers": [
+        "ビヘイビア法",
+        "振る舞い検知",
+        "ビヘイビア検知"
+      ],
+      "explanation": "ビヘイビア法は、未知のマルウェアも検出しうるが、正規のプログラムを誤検出することもある。パターンマッチング方式は、既知の検体の特徴的なコードと照合する手法であり、未知の検体は検出できない。静的ヒューリスティック法は、プログラムを実行せずにコードを解析して不審な命令の有無を調べる手法で、実際に動作させるビヘイビア法とは異なる。",
+      "category": "ログ分析・検知・インシデント対応",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.ipa.go.jp/shiken/syllabus/minaoshi/rcu1hd000001g5rk-att/syllabus_sc_ver0_1.pdf"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q197",
+      "order": 17,
+      "termId": "sc-vocab-179",
+      "prompt": "複数のプロセスやスレッドが共有資源に同時にアクセスする際に、処理の実行順序やタイミングによって結果が変わってしまう状態を何というか。セキュリティ上は、ファイルの権限を検査してから使用するまでの間に対象をすり替えられるといった脆弱性につながる。",
+      "answer": "レースコンディション",
+      "acceptedAnswers": [
+        "レースコンディション",
+        "競合状態",
+        "Race Condition"
+      ],
+      "explanation": "レースコンディション（競合状態）を悪用する典型例が、検査と使用の時間差を突く TOCTOU（Time Of Check to Time Of Use）であり、シンボリックリンクによるファイルのすり替えなどに用いられる。デッドロックは、複数の処理が互いに資源の解放を待ち合って停止する状態であり、結果が不定になるレースコンディションとは異なる。対策は、排他制御によって検査と使用を不可分に行うことである。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "advanced",
+      "referenceUrls": [
+        "https://cwe.mitre.org/data/definitions/362.html",
+        "https://cwe.mitre.org/data/definitions/367.html"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q198",
+      "order": 18,
+      "termId": "sc-vocab-196",
+      "prompt": "アクセス制御の機能を持つコンピュータに対し、他人の ID やパスワードを無断で入力して使う行為や、脆弱性を突いてアクセス制御をすり抜ける行為を禁止するとともに、他人の ID・パスワードの不正な取得や提供などの助長行為も処罰の対象とする日本の法律を、一般的な略称で何というか。",
+      "answer": "不正アクセス禁止法",
+      "acceptedAnswers": [
+        "不正アクセス禁止法",
+        "不正アクセス行為の禁止等に関する法律"
+      ],
+      "explanation": "不正アクセス禁止法（不正アクセス行為の禁止等に関する法律）は、実際に被害が発生していなくても、アクセス制御を突破する行為そのものを処罰する。フィッシングサイトを設けて ID・パスワードの入力を求める行為も、同法の処罰の対象である。コンピュータウイルスの作成や提供は、刑法の不正指令電磁的記録に関する罪によって処罰される。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "basic",
+      "referenceUrls": [
+        "https://laws.e-gov.go.jp/law/411AC0000000128"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q199",
+      "order": 19,
+      "termId": "sc-vocab-180",
+      "prompt": "攻撃者と同じような手法を用いて実際にシステムやネットワークへの侵入を試み、脆弱性が実際に悪用できるか、侵入された場合に機密情報の取得などの目標までどこまで到達できるかを検証するテストを何というか。",
+      "answer": "ペネトレーションテスト",
+      "acceptedAnswers": [
+        "ペネトレーションテスト",
+        "侵入テスト",
+        "ペンテスト",
+        "Penetration Test",
+        "Penetration Testing"
+      ],
+      "explanation": "ペネトレーションテストは、特定の目標の達成可能性を攻撃者の視点で検証するものである。脆弱性診断は、システムの脆弱性を網羅的に洗い出すことが主な目的であり、検証の観点が異なる。レッドチーム演習は、組織の検知・対応能力まで含めて、より実戦に近い形で評価する取組みである。",
+      "category": "クラウド・開発・サプライチェーンセキュリティ",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://doi.org/10.6028/NIST.SP.800-115"
+      ]
+    },
+    {
+      "questionId": "sc-vocab-q200",
+      "order": 20,
+      "termId": "sc-vocab-199",
+      "prompt": "国際的なクレジットカードブランドが共同で設立した評議会が策定した、クレジットカードの会員データを安全に取り扱うためのセキュリティ基準で、カード情報を保存・処理・伝送する事業者に適用されるものを何というか。",
+      "answer": "PCI DSS",
+      "acceptedAnswers": [
+        "PCI DSS",
+        "PCIDSS",
+        "Payment Card Industry Data Security Standard"
+      ],
+      "explanation": "PCI DSS（Payment Card Industry Data Security Standard）は、ネットワークの防御、カード会員データの保護、アクセス制御、監視とテストなどについて具体的な要件を定めている。現行は v4.x 系である。ISMS は業種を問わない情報セキュリティマネジメントの規格であり、カード会員データの保護に特化した具体的な要件を定める PCI DSS とは性格が異なる。トークナイゼーションは、カード番号を代替の値に置き換えて、基準の対象範囲を縮小する手法である。",
+      "category": "セキュリティ管理・リスク管理・監査",
+      "difficulty": "standard",
+      "referenceUrls": [
+        "https://www.pcisecuritystandards.org/"
+      ]
+    }
+  ]
+}
